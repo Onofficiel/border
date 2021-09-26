@@ -161,6 +161,14 @@ let browser = {
             browser.addTab({ url: browser.verifyProtocol(decodeURI(window.location.hash.substring(1))), current: true });
         else
             browser.addTab({ current: true });
+
+        searchbar.addEventListener("keyup", (event) => {
+            if (event.key === "Enter") {
+                document.querySelector('.tab.current').dataset.url = searchbar.value;
+                browser.reloadTab();
+                searchbar.blur();
+            }
+        });
     }
 }
 
