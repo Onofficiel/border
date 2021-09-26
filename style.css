@@ -102,6 +102,6 @@
 .title, .close-btn, #search-button, #add-button, .history-btn {
     cursor: pointer;
 }
-.title, .close-btn, #search-button, #add-button, .history-btn, #searchbar {
+.close-btn, #search-button, #add-button, .history-btn, #searchbar {
     font-size: 15px;
 }
