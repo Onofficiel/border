@@ -32,6 +32,30 @@ let browser = {
         </body>
         </html>
         `,
+        about: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>New Tab</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+        </head>
+        <body style="width: 100vw; height: 100vh; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white; background: indigo">
+                    
+                    <h1>About Border.</h1>
+                    <p>
+                    Border is an iframe Web browser developped by <a style="color: white;" href="github.com/Onofficiel">Onofficiel</a><br> accessible on all platforms.<br>Because of the iframe system some website won't work in this browser (like Google.com),<br>but you can always use bing.
+                    <br><br>Thanks to <a style="color: white;" href="https://billygoat891.tk">billygoat891</a> for hosting the project on windows96.
+                    </p>
+
+                    <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">© Onofficiel - 2021 - All rights reserved</p>
+        </body>
+        </html>
+        `,
         404: `
         <!DOCTYPE html>
         <html lang="en">
