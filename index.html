@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Border</title>
+</head>
+
+<body>
+
+    <div id="root">
+        <div id="tabs-menu">
+            <div id="tabs-container">
+
+            </div>
+            <div id="add-button" onclick="browser.addTab({current: true})">
+                <h2>+</h2>
+            </div>
+        </div>
+
+        <div id="menu">
+            <input id="searchbar">
+
+            </input>
+            <div id="search-button" onclick="document.querySelector('.tab.current').dataset.url = searchbar.value; browser.reloadTab()">
+                <h2>⇾</h2>
+            </div>
+        </div>
+        <iframe id="view"></iframe>
+    </div>
+
+    <script src="app.js">
+    </script>
+</body>
+
+</html>
