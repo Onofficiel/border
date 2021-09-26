@@ -157,6 +157,9 @@ let browser = {
         searchbar.value = tab.dataset.url;
     },
     boot: () => {
+        if (window.location.hash)
+            browser.addTab({ url: decodeURI(window.location.href), current: true });
+
         browser.addTab({ current: true });
     }
 }
