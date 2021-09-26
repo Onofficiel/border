@@ -98,17 +98,17 @@ let browser = {
         </html>
         `
     },
-    verifyProtocol: (tab) => {
-        if (/^\S*:/i.test(tab.dataset.url)) {
+    verifyProtocol: (url) => {
+        if (/^\S*:/i.test(url)) {
             for (let i = 0; i < Object.keys(browser.protocols).length; i++) {
                 const protocol = Object.keys(browser.protocols)[i];
-                if (tab.dataset.url === "border://" + protocol) {
+                if (url === "border://" + protocol) {
                     return encodeURI("data:text/html," + browser.protocols[protocol]);
                 }
             }
-            return tab.dataset.url;
+            return url;
         } else {
-            return "https://" + tab.dataset.url;
+            return "https://" + url;
         }
     },
     addTab: (tab) => {
@@ -129,7 +129,7 @@ let browser = {
             browser.setCurrent(tabDiv);
         });
 
-        tabDiv.querySelector(".title").innerText = browser.verifyProtocol(tabDiv).length <= 30 ? browser.verifyProtocol(tabDiv).split("/")[2] : browser.verifyProtocol(tabDiv).substring(14, length - 1) + "...";
+        tabDiv.querySelector(".title").innerText = browser.verifyProtocol(tabDiv.dataset.url).length <= 30 ? browser.verifyProtocol(tabDiv.dataset.url).split("/")[2] : browser.verifyProtocol(tabDiv.dataset.url).substring(14, length - 1) + "...";
 
         tabDiv.querySelector(".close-btn").addEventListener("click", () => {
             document.querySelector("#tabs-container").removeChild(tabDiv);
@@ -143,8 +143,8 @@ let browser = {
     reloadTab: () => {
         let tab = document.querySelector('.tab.current');
         searchbar.value = tab.dataset.url;
-        tab.querySelector(".title").innerText = browser.verifyProtocol(tab).length <= 30 ? browser.verifyProtocol(tab).split("/")[2] : browser.verifyProtocol(tab).substring(14, length - 1) + "...";
-        view.src = browser.verifyProtocol(tab);
+        tab.querySelector(".title").innerText = browser.verifyProtocol(tab.dataset.url).length <= 30 ? browser.verifyProtocol(tab.dataset.url).split("/")[2] : browser.verifyProtocol(tab.dataset.url).substring(14, length - 1) + "...";
+        view.src = browser.verifyProtocol(tab.dataset.url);
     },
     setCurrent: (tab) => {
         for (let e = 0; e < HTMLtabs.length; e++) {
@@ -152,15 +152,15 @@ let browser = {
                 HTMLtabs[e].classList.remove("current");
         }
         tab.classList.add("current");
-        tab.querySelector(".title").innerText = browser.verifyProtocol(tab).length <= 30 ? browser.verifyProtocol(tab).split("/")[2] : browser.verifyProtocol(tab).substring(14, length - 1) + "...";
-        view.src = browser.verifyProtocol(tab);
+        tab.querySelector(".title").innerText = browser.verifyProtocol(tab.dataset.url).length <= 30 ? browser.verifyProtocol(tab.dataset.url).split("/")[2] : browser.verifyProtocol(tab.dataset.url).substring(14, length - 1) + "...";
+        view.src = browser.verifyProtocol(tab.dataset.url);
         searchbar.value = tab.dataset.url;
     },
     boot: () => {
         if (window.location.hash)
-            browser.addTab({ url: decodeURI(window.location.href), current: true });
-
-        browser.addTab({ current: true });
+            browser.addTab({ url: browser.verifyProtocol(decodeURI(window.location.hash.substring(1))), current: true });
+        else
+            browser.addTab({ current: true });
     }
 }
 
