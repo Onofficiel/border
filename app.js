@@ -84,7 +84,7 @@ let browser = {
             }
             return tab.dataset.url;
         } else {
-            return "http://" + tab.dataset.url;
+            return "https://" + tab.dataset.url;
         }
     },
     addTab: (tab) => {
