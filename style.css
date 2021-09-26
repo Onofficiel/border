@@ -67,7 +67,7 @@
     justify-content: center;
     align-items: center;
 }
-#search-button {
+#search-button, .history-btn {
     display: flex;
     color: var(--bg);
     justify-content: center;
@@ -89,7 +89,7 @@
     border: none;
     margin: 10px;
     padding: 10px;
-    width: 80%;
+    width: 100%;
     border-radius: 999px;
     color: var(--bg);
 }
@@ -99,6 +99,6 @@
     height: 100%;
     border: none;
 }
-.title, .close-btn, #search-button, #add-button {
+.title, .close-btn, #search-button, #add-button, .history-btn {
     cursor: pointer;
 }
