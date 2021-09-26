@@ -169,6 +169,11 @@ let browser = {
                 searchbar.blur();
             }
         });
+        
+        setInterval(() => {
+            if (HTMLtabs.length <= 0)
+            browser.addTab({ current: true });
+        }, 10);
     }
 }
 
