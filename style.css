@@ -50,7 +50,7 @@
     margin: 15px 10px;
     background: var(--bg);
     transition: all 0.2s ease;
-    overflow: scroll;
+    overflow: hidden;
 }
 #add-button {
     display: flex;
