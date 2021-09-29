@@ -105,9 +105,8 @@ let browser = {
 
             for (let i = 0; i < Object.keys(browser.protocols).length; i++) {
                 const protocol = Object.keys(browser.protocols)[i];
-                let regex = new RegExp("^border:\/*" + protocol);
 
-                if (regex.test(url)) {
+                if (RegExp("^border:\/*" + protocol).test(url)) {
                     return encodeURI("data:text/html," + browser.protocols[protocol]);
                 }
             }
