@@ -13,8 +13,8 @@
 <body>
 
     <div id="root">
-        <div id="tabs-menu">
-            <div id="tabs-container">
+        <div id="tab-menu">
+            <div id="tab-container">
 
             </div>
             <div id="add-button" onclick="browser.addTab({current: true})">
@@ -25,15 +25,17 @@
         <div id="menu">
             <div class="history-btn" onclick="window.history.back();"><</div>
             <div class="history-btn" onclick="window.history.forward();">></div>
-            <div class="history-btn" onclick="view.src = view.src">↺</div>
+            <div class="history-btn" onclick="browser.reloadTab()">↺</div>
             <input id="searchbar">
 
             </input>
-            <div id="search-button" onclick="document.querySelector('.tab.current').dataset.url = searchbar.value; browser.reloadTab()">
+            <div id="search-button" onclick="document.querySelector('.tab.current').dataset.url = document.querySelector('#searchbar').value; browser.reloadTab()">
                 <h2>⇾</h2>
             </div>
         </div>
-        <iframe id="view"></iframe>
+        <div id="view-container">
+
+        </div>
     </div>
 
     <script src="app.js">

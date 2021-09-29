@@ -1,11 +1,12 @@
-let HTMLtabs = document.querySelectorAll(".tab");
-setInterval(() => {
-    HTMLtabs = document.querySelectorAll(".tab");
-}, 10);
-let view = document.querySelector("#view");
-let searchbar = document.querySelector("#searchbar");
-
 let browser = {
+    cfg: {
+        tabNb: 0,
+        currentTab: 0,
+        tabId: [],
+        version: 1.2,
+        bgColor: "",
+        txtColor: "",
+    },
     protocols: {
         newtab: `
         <!DOCTYPE html>
@@ -52,7 +53,7 @@ let browser = {
                     <br><br>Thanks to <a style="color: white;" href="https://billygoat891.tk">billygoat891</a> for hosting the project on windows96.
                     </p>
 
-                    <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">© Onofficiel - 2021 - All rights reserved</p>
+                    <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.2 | © Onofficiel - 2021 - All rights reserved</p>
         </body>
         </html>
         `,
@@ -68,7 +69,7 @@ let browser = {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
         </head>
-        <body style="width: 100vw; height: 100vh; display: flex; justify-content: flex-start; align-items: center; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white; background: darkred">
+        <body style="width: 100vw; height: 100vh; display: flex; justify-content: flex-start; align-items: center; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white; background: rgb(247, 37, 58)">
                     <div id="centered">
                         <h1>404</h1>
                         <p>
@@ -90,7 +91,7 @@ let browser = {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
         </head>
-        <body style="width: 100vw; height: 100vh; display: flex; justify-content: flex-start; align-items: center; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white; background: indigo">
+        <body style="width: 100vw; height: 100vh; display: flex; justify-content: flex-start; align-items: center; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white; background: rgb(255, 204, 77)">
                     <div id="centered">
                         <img src="https://hotemoji.com/images/dl/t/woozy-face-emoji-by-twitter.png">
                     </div>
@@ -99,10 +100,14 @@ let browser = {
         `
     },
     verifyProtocol: (url) => {
+
         if (/^\S*:/i.test(url)) {
+
             for (let i = 0; i < Object.keys(browser.protocols).length; i++) {
                 const protocol = Object.keys(browser.protocols)[i];
-                if (url === "border://" + protocol) {
+                let regex = new RegExp("^border:\/*" + protocol);
+
+                if (regex.test(url)) {
                     return encodeURI("data:text/html," + browser.protocols[protocol]);
                 }
             }
@@ -110,53 +115,109 @@ let browser = {
         } else {
             return "https://" + url;
         }
+
     },
     addTab: (tab) => {
-        let tabDiv = document.createElement("div");
-        tabDiv.classList.add("tab");
-        tabDiv.innerHTML = "<div class='title'></div><div class='close-btn'>×</div>";
 
+        if (!tab)
+            throw new Error("You have to add an object for creating a tab.");
         if (!tab.url)
             tab.url = "border://newtab";
 
 
-        tabDiv.dataset.url = tab.url;
 
+        // Create an html tab div
+        let tabElement = document.createElement("div");
+        tabElement.classList.add("tab");
+        tabElement.dataset.id = browser.generateId();
+        tabElement.dataset.url = tab.url;
+        tabElement.innerHTML = "<div class='title'>Name Undefined</div><div class='close-btn'>×</div>";
 
-
-        browser.setCurrent(tabDiv);
-        tabDiv.addEventListener("click", () => {
-            browser.setCurrent(tabDiv);
+        tabElement.addEventListener("click", () => {
+            browser.setCurrent(tabElement.dataset.id);
         });
 
-        tabDiv.querySelector(".title").innerText = browser.verifyProtocol(tabDiv.dataset.url).length <= 30 ? browser.verifyProtocol(tabDiv.dataset.url).split("/")[2] : browser.verifyProtocol(tabDiv.dataset.url).substring(14, length - 1) + "...";
-
-        tabDiv.querySelector(".close-btn").addEventListener("click", () => {
-            document.querySelector("#tabs-container").removeChild(tabDiv);
-
+        tabElement.querySelector(".close-btn").addEventListener("click", () => {
+            browser.removeTab(tabElement.dataset.id);
         });
 
-        document.querySelector("#tabs-container").appendChild(tabDiv);
+        document.querySelector("#tab-container").appendChild(tabElement);
+        // <
 
+        // Create an html view tab
+        let viewElement = document.createElement("iframe");
+        viewElement.classList.add("view");
+        viewElement.dataset.id = tabElement.dataset.id;
+
+        document.querySelector("#view-container").appendChild(viewElement);
+        // <
+
+        // After Ctreated Action
+        if (tab.current)
+            browser.setCurrent(tabElement.dataset.id);
+        browser.reloadTab();
+        // <
+
+        browser.cfg.tabNb++;
+        browser.cfg.tabId.push(tabElement.dataset.id);
+
+    },
+    removeTab: (id) => {
+
+        if (id !== undefined) {
+            document.querySelector("#tab-container").removeChild(document.querySelector('.tab[data-id~="' + id + '"]'));
+            document.querySelector("#view-container").removeChild(document.querySelector('.view[data-id~="' + id + '"]'));
+        }
+
+        browser.cfg.tabNb--;
+        browser.cfg.tabId.splice(browser.cfg.tabId.indexOf(id), 1);
+
+    },
+    setCurrent: (id) => {
+
+        try {
+            for (let i = 0; i < document.querySelector("#tab-container").querySelectorAll(".tab").length; i++) {
+                document.querySelector("#tab-container").querySelectorAll(".tab")[i].classList.remove("current");
+            }
+            document.querySelector('.tab[data-id~="' + id + '"]').classList.add("current");
+
+            for (let i = 0; i < document.querySelector("#view-container").querySelectorAll(".view").length; i++) {
+                document.querySelector("#view-container").querySelectorAll(".view")[i].classList.remove("current");
+            }
+            document.querySelector('.view[data-id~="' + id + '"]').classList.add("current");
+
+            document.querySelector("#searchbar").value = document.querySelector(".tab.current").dataset.url;
+        } catch { }
 
     },
     reloadTab: () => {
-        let tab = document.querySelector('.tab.current');
-        searchbar.value = tab.dataset.url;
-        tab.querySelector(".title").innerText = browser.verifyProtocol(tab.dataset.url).length <= 30 ? browser.verifyProtocol(tab.dataset.url).split("/")[2] : browser.verifyProtocol(tab.dataset.url).substring(14, length - 1) + "...";
-        view.src = browser.verifyProtocol(tab.dataset.url);
+
+        document.querySelector("#searchbar").value = document.querySelector(".tab.current").dataset.url;
+        document.querySelector("#view-container").querySelector(".view.current").src = browser.verifyProtocol(document.querySelector("#tab-container").querySelector(".tab.current").dataset.url);
+        document.querySelector(".tab.current").querySelector(".title").innerText = browser.verifyProtocol(document.querySelector(".tab.current").dataset.url).length <= 30 ? browser.verifyProtocol(document.querySelector(".tab.current").dataset.url).split("/")[2] : browser.verifyProtocol(document.querySelector(".tab.current").dataset.url).substring(14, length - 1) + "...";
+    
     },
-    setCurrent: (tab) => {
-        for (let e = 0; e < HTMLtabs.length; e++) {
-            if (HTMLtabs[e].classList.contains("current"))
-                HTMLtabs[e].classList.remove("current");
+    generateId: () => {
+
+        let id = "";
+        for (let i = 0; i < 4; i++) {
+            id += Math.floor(Math.random() * 10);
         }
-        tab.classList.add("current");
-        tab.querySelector(".title").innerText = browser.verifyProtocol(tab.dataset.url).length <= 30 ? browser.verifyProtocol(tab.dataset.url).split("/")[2] : browser.verifyProtocol(tab.dataset.url).substring(14, length - 1) + "...";
-        view.src = browser.verifyProtocol(tab.dataset.url);
-        searchbar.value = tab.dataset.url;
+
+        if (browser.cfg.tabId.length >= 9999)
+            throw new Error("Cannot generate ID");
+        for (const tabId in browser.cfg.tabId) {
+            if (tabId === id)
+                return browser.generateId();
+        }
+        return parseInt(id);
+
     },
     boot: () => {
+
+        document.querySelector(":root").style.setProperty('--bg', browser.cfg.bgColor);
+        document.querySelector(":root").style.setProperty('--txt', browser.cfg.txtColor);
+
         if (window.location.hash)
             browser.addTab({ url: browser.verifyProtocol(decodeURI(window.location.hash.substring(1))), current: true });
         else
@@ -169,11 +230,12 @@ let browser = {
                 searchbar.blur();
             }
         });
-        
+
         setInterval(() => {
-            if (HTMLtabs.length <= 0)
-            browser.addTab({ current: true });
+            if (document.querySelector("#tab-container").querySelectorAll(".tab").length <= 0)
+                browser.addTab({ current: true });
         }, 10);
+
     }
 }
 
