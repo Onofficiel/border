@@ -315,7 +315,7 @@ class Border extends WApplication {
                 </head>
                 <body style="width: 100vw; height: 100vh; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white;">
                             
-                            <h1>Border v1.6.1 changelog.</h1>
+                            <h1>Border v1.7 changelog.</h1>
                             <ul>
                                 <li>Border is now in 2022 !</li>
                                 <li>Added a bookmark system</li>
