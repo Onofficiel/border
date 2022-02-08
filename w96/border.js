@@ -273,7 +273,7 @@ class Border extends WApplication {
         cfg: {
           tabNb: 0,
           tabId: [],
-          version: "1.6.1",
+          version: 1.7,
         },
         protocols: {
           newtab: `
@@ -323,7 +323,7 @@ class Border extends WApplication {
                                 <li>You can now browse your files from Border with the "file://" protocol !</li>
                             </ul>
         
-                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.6.1 | © Onofficiel - 2022 - All rights reserved</p>
+                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.7 | © Onofficiel - 2022 - All rights reserved</p>
                 </body>
                 </html>
                 `,
@@ -347,7 +347,7 @@ class Border extends WApplication {
                             <br><br>Thanks to <a style="color: white;" href="https://billygoat891.tk">billygoat891</a> for hosting the project on windows96.
                             </p>
         
-                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.6.1 | © Onofficiel - 2022 - All rights reserved</p>
+                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.7 | © Onofficiel - 2022 - All rights reserved</p>
                 </body>
                 </html>
                 `,
