@@ -21,6 +21,7 @@ body {
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 a {
@@ -39,6 +40,7 @@ a {
 
 .hero-subtitle {
   font-size: 2em;
+  margin-bottom: 25px;
 }
 
 .hero-text-container>a {
@@ -46,7 +48,11 @@ a {
   color: var(--bg);
   background-color: var(--text1);
   padding: 10px;
-  margin: 10px 5px 0 0;
+  margin: 5px 5px 0 0;
   font-family: "Lexend", Arial, Helvetica, sans-serif;
   border-radius: 30px;
+}
+
+.hero-image {
+  transform: translateX(80px);
 }
