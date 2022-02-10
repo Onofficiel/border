@@ -25,7 +25,6 @@ class Border extends WApplication {
     const isStyleFileExisting = await w96.FS.exists(
       "c:/user/appdata/Border/style.css"
     );
-
     const isConfigFolderExisting = await w96.FS.exists(
       "c:/user/appdata/Border"
     );
@@ -331,10 +330,7 @@ class Border extends WApplication {
                             
                             <h1>Border v1.7.1 changelog.</h1>
                             <ul>
-                                <li>Border is now in 2022 !</li>
-                                <li>Added a bookmark system</li>
-                                <li>Updated the code for v3 API</li>
-                                <li>You can now browse your files from Border with the "file://" protocol !</li>
+                                <li>Theme system added</li>
                             </ul>
         
                             <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.7.1 | © Onofficiel - 2022 - All rights reserved</p>
@@ -489,7 +485,7 @@ class Border extends WApplication {
           body.querySelector("#border-view-container").appendChild(viewElement);
           // <
 
-          // After Ctreated Action
+          // After Created Action
           if (tab.current) browser.setCurrent(tabElement.dataset.id);
           browser.reloadTab();
           // <
@@ -540,9 +536,10 @@ class Border extends WApplication {
             );
         },
         reloadTab: () => {
-          body.querySelector("#border-searchbar").value = body.querySelector(
-            ".border-tab.border-current"
-          ).dataset.url;
+          body.querySelector("#border-searchbar").value =
+            browser.verifyProtocol(
+              body.querySelector(".border-tab.border-current").dataset.url
+            )[0];
           body
             .querySelector("#border-view-container")
             .querySelector(".border-view.border-current").src =
