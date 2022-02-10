@@ -19,6 +19,13 @@ class Border extends WApplication {
     const isBookmarksFileExisting = await w96.FS.exists(
       "c:/user/appdata/Border/bookmarks.json"
     );
+    const isThemeFolderExisting = await w96.FS.exists(
+      "c:/user/appdata/Border/themes"
+    );
+    const isStyleFileExisting = await w96.FS.exists(
+      "c:/user/appdata/Border/style.css"
+    );
+
     const isConfigFolderExisting = await w96.FS.exists(
       "c:/user/appdata/Border"
     );
@@ -40,11 +47,175 @@ class Border extends WApplication {
         JSON.stringify([])
       );
     }
+    if (!isThemeFolderExisting) {
+      await w96.FS.mkdir("c:/user/appdata/Border/themes");
+    }
+    if (!isStyleFileExisting) {
+      await w96.FS.writestr(
+        "c:/user/appdata/Border/themes/default.css",
+        `@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+#border-root>* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+#border-root {
+    width: 100%;
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    font-family: 'Lexend', sans-serif;
+}
+
+#border-menu,
+#border-tab-menu {
+    width: 100%;
+    height: 60px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background: var(--border-primary);
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+#border-tab-menu {
+    background: var(--border-secondary);
+}
+
+#border-tab-container::-webkit-scrollbar {
+  display: none;
+}
+
+#border-tab-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-overflow-style: none; /* IE 11 */
+        overflow: auto;
+    scrollbar-width: none; /* Firefox 64 */
+}
+
+.border-tab {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: var(--border-secondary);
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 150px;
+    min-width: 200px;
+    border-radius: 20px;
+    height: 80%;
+    margin: 15px 10px;
+    background: var(--border-primary);
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+.border-view {
+    display: none;
+}
+
+#border-add-button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: var(--border-secondary);
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    border-radius: 50px;
+    min-height: 40px;
+    min-width: 40px;
+    margin: 15px 10px;
+    background: var(--border-primary);
+}
+#border-add-button>h2 {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+#border-search-button, .border-history-btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: var(--border-primary);
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    border-radius: 50px;
+    min-height: 35px;
+    min-width: 35px;
+    margin: 15px 10px;
+    background: var(--border-secondary);
+}
+
+.border-tab.border-current {
+    border-radius: 20px 20px 0 0;
+    margin: 11px 10px 0;
+}
+.border-view.border-current {
+    display: block;
+}
+
+#border-searchbar {
+    border: none;
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 999px;
+    color: var(--border-primary);
+    background: var(--border-secondary);
+}
+
+#border-view-container, .border-view {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: var(--border-primary);
+}
+.border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn {
+    cursor: pointer;
+}
+.border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, #border-searchbar {
+    font-size: 15px;
+}`
+      );
+    }
     if (!isConfigFileExisting) {
       await w96.FS.writestr(
         "c:/user/appdata/Border/config.json",
         JSON.stringify({
           theme: {
+            currentTheme: "default",
             primary: "#4b0082",
             secondary: "#ffffff",
           },
@@ -67,6 +238,9 @@ class Border extends WApplication {
       let bookmarksJSON = JSON.parse(
         await w96.FS.readstr("c:/user/appdata/Border/bookmarks.json")
       );
+      let styleCSS = await w96.FS.readstr(
+        `c:/user/appdata/Border/themes/${configJSON.theme.currentTheme}.css`
+      );
 
       // Border main window
       const wnd = this.createWindow(
@@ -74,167 +248,7 @@ class Border extends WApplication {
           title: "Border",
           body: `
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
-
-            :root {
-                --border-primary: indigo;
-                --border-secondary: #fff;
-            }
-            
-            #border-root>* {
-                padding: 0;
-                margin: 0;
-                -webkit-box-sizing: border-box;
-                        box-sizing: border-box;
-            }
-            
-            #border-root {
-                width: 100%;
-                height: 100vh;
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                    -ms-flex-direction: column;
-                        flex-direction: column;
-                font-family: 'Lexend', sans-serif;
-            }
-            
-            #border-menu,
-            #border-tab-menu {
-                width: 100%;
-                height: 60px;
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                background: var(--border-primary);
-                display: flex;
-                -webkit-box-align: center;
-                    -ms-flex-align: center;
-                        align-items: center;
-            }
-            
-            #border-tab-menu {
-                background: var(--border-secondary);
-            }
-
-            #border-tab-container::-webkit-scrollbar {
-              display: none;
-            }
-            
-            #border-tab-container {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                height: 100%;
-                -webkit-box-align: center;
-                    -ms-flex-align: center;
-                        align-items: center;
-                -ms-overflow-style: none; /* IE 11 */
-                    overflow: auto;
-                scrollbar-width: none; /* Firefox 64 */
-            }
-            
-            .border-tab {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                color: var(--border-secondary);
-                -webkit-box-pack: space-evenly;
-                    -ms-flex-pack: space-evenly;
-                        justify-content: space-evenly;
-                -webkit-box-align: center;
-                    -ms-flex-align: center;
-                        align-items: center;
-                width: 150px;
-                min-width: 200px;
-                border-radius: 20px;
-                height: 80%;
-                margin: 15px 10px;
-                background: var(--border-primary);
-                -webkit-transition: all 0.2s ease;
-                -o-transition: all 0.2s ease;
-                transition: all 0.2s ease;
-                overflow: hidden;
-            }
-            .border-view {
-                display: none;
-            }
-            
-            #border-add-button {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                color: var(--border-secondary);
-                -webkit-box-pack: center;
-                    -ms-flex-pack: center;
-                        justify-content: center;
-                -webkit-box-align: center;
-                    -ms-flex-align: center;
-                        align-items: center;
-                border-radius: 50px;
-                min-height: 40px;
-                min-width: 40px;
-                margin: 15px 10px;
-                background: var(--border-primary);
-            }
-            #border-add-button>h2 {
-                -webkit-box-pack: center;
-                    -ms-flex-pack: center;
-                        justify-content: center;
-                -webkit-box-align: center;
-                    -ms-flex-align: center;
-                        align-items: center;
-            }
-            #border-search-button, .border-history-btn {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                color: var(--border-primary);
-                -webkit-box-pack: center;
-                    -ms-flex-pack: center;
-                        justify-content: center;
-                -webkit-box-align: center;
-                    -ms-flex-align: center;
-                        align-items: center;
-                border-radius: 50px;
-                min-height: 35px;
-                min-width: 35px;
-                margin: 15px 10px;
-                background: var(--border-secondary);
-            }
-            
-            .border-tab.border-current {
-                border-radius: 20px 20px 0 0;
-                margin: 11px 10px 0;
-            }
-            .border-view.border-current {
-                display: block;
-            }
-            
-            #border-searchbar {
-                border: none;
-                margin: 10px;
-                padding: 10px;
-                width: 100%;
-                border-radius: 999px;
-                color: var(--border-primary);
-                background: var(--border-secondary);
-            }
-            
-            #border-view-container, .border-view {
-                width: 100%;
-                height: 100%;
-                border: none;
-                background: var(--border-primary);
-            }
-            .border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn {
-                cursor: pointer;
-            }
-            .border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, #border-searchbar {
-                font-size: 15px;
-            }
+            ${styleCSS}
             </style>
             <div class="appbar"></div>
             <div id="border-root">
@@ -273,7 +287,7 @@ class Border extends WApplication {
         cfg: {
           tabNb: 0,
           tabId: [],
-          version: 1.7,
+          version: "1.7.1",
         },
         protocols: {
           newtab: `
@@ -315,7 +329,7 @@ class Border extends WApplication {
                 </head>
                 <body style="width: 100vw; height: 100vh; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white;">
                             
-                            <h1>Border v1.7 changelog.</h1>
+                            <h1>Border v1.7.1 changelog.</h1>
                             <ul>
                                 <li>Border is now in 2022 !</li>
                                 <li>Added a bookmark system</li>
@@ -323,7 +337,7 @@ class Border extends WApplication {
                                 <li>You can now browse your files from Border with the "file://" protocol !</li>
                             </ul>
         
-                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.7 | © Onofficiel - 2022 - All rights reserved</p>
+                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.7.1 | © Onofficiel - 2022 - All rights reserved</p>
                 </body>
                 </html>
                 `,
@@ -347,7 +361,7 @@ class Border extends WApplication {
                             <br><br>Thanks to <a style="color: white;" href="https://billygoat891.tk">billygoat891</a> for hosting the project on windows96.
                             </p>
         
-                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.7 | © Onofficiel - 2022 - All rights reserved</p>
+                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.7.1 | © Onofficiel - 2022 - All rights reserved</p>
                 </body>
                 </html>
                 `,
@@ -911,6 +925,40 @@ class Border extends WApplication {
 
       appbar.addRoot("Bookmarks", bookmarkList);
 
+      const themes = await w96.FS.readdir("c:/user/appdata/Border/themes");
+
+      const themeList = [];
+      themes.forEach((name) => {
+        name = name.split(".")[0].split("/").slice(-1).toString();
+        themeList.push({
+          type: "normal",
+          label: name,
+          onclick: async () => {
+            console.log(name);
+            configJSON.theme.currentTheme = name;
+            await w96.FS.writestr(
+              "c:/user/appdata/Border/config.json",
+              JSON.stringify(configJSON)
+            );
+            alert("Restart to apply the theme.");
+          },
+        });
+      });
+      themeList.push(
+        {
+          type: "separator",
+        },
+        {
+          type: "normal",
+          label: "Go To The Theme Folder",
+          onclick: () => {
+            w96.sys.execCmd("explorer", ["c:/user/appdata/Border/themes"]);
+          },
+        }
+      );
+
+      appbar.addRoot("Themes", themeList);
+
       body.querySelector(".appbar").replaceWith(appbar.getMenuDiv());
 
       wnd.show();
@@ -1069,6 +1117,7 @@ class Border extends WApplication {
         if (n >= page.length) {
           let json = JSON.stringify({
             theme: {
+              currentTheme: configJSON.theme.currentTheme,
               primary: settings.primary,
               secondary: settings.secondary,
             },
