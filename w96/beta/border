@@ -429,7 +429,6 @@ class Border extends WApplication {
           },
         ],
         verifyProtocol: (url) => {
-          console.log(url);
           if (/^\S*:/i.test(url)) {
             for (let i = 0; i < Object.keys(browser.protocols).length; i++) {
               const protocol = Object.keys(browser.protocols)[i];
@@ -536,10 +535,21 @@ class Border extends WApplication {
             );
         },
         reloadTab: () => {
-          body.querySelector("#border-searchbar").value =
-            browser.verifyProtocol(
+          if (
+            !browser.verifyProtocol(
               body.querySelector(".border-tab.border-current").dataset.url
-            )[0];
+            )[1]
+          ) {
+            body.querySelector("#border-searchbar").value =
+              browser.verifyProtocol(
+                body.querySelector(".border-tab.border-current").dataset.url
+              )[0];
+          } else {
+            body.querySelector("#border-searchbar").value = body.querySelector(
+              ".border-tab.border-current"
+            ).dataset.url;
+          }
+
           body
             .querySelector("#border-view-container")
             .querySelector(".border-view.border-current").src =
@@ -931,7 +941,6 @@ class Border extends WApplication {
           type: "normal",
           label: name,
           onclick: async () => {
-            console.log(name);
             configJSON.theme.currentTheme = name;
             await w96.FS.writestr(
               "c:/user/appdata/Border/config.json",
