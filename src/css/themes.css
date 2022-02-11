@@ -39,6 +39,8 @@ body>h2 {
 .tile {
   min-height: 200;
   min-width: 200;
+  max-height: 500;
+  max-width: 500;
 
   margin: 10px;
   padding: 20px;
