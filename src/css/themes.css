@@ -53,22 +53,31 @@ body>h2 {
   border-radius: 20px;
 }
 
-.tile>.text-container {
+.tile>.container {
   color: var(--bg);
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   flex: 1.5;
+
+  padding-right: 20px;
 }
 
-.tile>.text-container>.title {
+.tile.text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tile>.container>.text-container>.title {
+  display: block;
   font-size: 1.8em;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.tile>.text-container>.description {
+.tile>.container>.text-container>.description {
   font-size: 1em;
 }
 
@@ -80,4 +89,19 @@ body>h2 {
   background-position: center center;
 
   border-radius: 10px;
+
+  width: auto;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+.tile>.container>.download {
+  display: inline-block;
+  color: var(--bg);
+  text-decoration: none;
+  text-align: center;
+  background-color: var(--text1);
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 30px;
 }
