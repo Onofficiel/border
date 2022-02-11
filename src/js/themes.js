@@ -11,6 +11,7 @@ fetch("./src/data/themes.json")
       <div class="container">  
         <div class="text-container">
           <span class="title">${theme.title}</span>
+          <span class="author">By ${theme.author}</span>
           <span class="description">${theme.description}</span>
         </div>
         <a class="download" download href="${theme.url}">Download</a>

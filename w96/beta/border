@@ -347,6 +347,8 @@ class Border extends WApplication {
                                 <li>The search bar now show correctly "https://" if necessary.</li>
                                 <li>The Home Page has been changed.</li>
                                 <li>Scrollable tab bug fixed. (delete the default.css file in the theme folder.)</li>
+                                <li>Added feature: Start your URL with a ! to search on bing.</li>
+                                <li>Keyboard shorcuts added</li>
                             </ul>
         
                             <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.7.1 | © Onofficiel - 2022 - All rights reserved</p>
@@ -421,6 +423,13 @@ class Border extends WApplication {
         },
         keybinds: [
           {
+            keys: ["Alt", "l"],
+            description: "Focus the searchbar",
+            exec: () => {
+              body.querySelector("#border-searchbar").focus();
+            },
+          },
+          {
             keys: ["Alt", "t"],
             description: "Open a new tab",
             exec: () => {
@@ -445,6 +454,13 @@ class Border extends WApplication {
           },
         ],
         verifyProtocol: (url) => {
+          if (url.startsWith("!")) {
+            const handledValue = encodeURI(
+              "https://www.bing.com/search?q=" +
+                url.substring(1).replace(" ", "+")
+            );
+            return [handledValue, false];
+          }
           if (/^\S*:/i.test(url)) {
             for (let i = 0; i < Object.keys(browser.protocols).length; i++) {
               const protocol = Object.keys(browser.protocols)[i];
