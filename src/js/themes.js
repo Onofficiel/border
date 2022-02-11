@@ -1,6 +1,5 @@
 const container = document.querySelector("#tile-container");
 const search = document.querySelector("#search");
-const tiles = document.querySelectorAll(".tile");
 
 fetch("./src/data/themes.json")
   .then((r) => {
@@ -13,11 +12,13 @@ fetch("./src/data/themes.json")
       tile.innerHTML = `
       <div class="container">  
         <div class="text-container">
-          <span class="title">${theme.title}</span>
+          <span class="title">${theme.name}</span>
           <span class="author">By ${theme.author}</span>
           <span class="description">${theme.description}</span>
         </div>
-        <a class="download" download href="${theme.url}">Download</a>
+        <a class="download" download="${theme.name.toLowerCase()}.css" href="${
+        theme.url
+      }">Download</a>
       </div>
 
         <div
@@ -29,13 +30,28 @@ fetch("./src/data/themes.json")
       container.appendChild(tile);
     });
 
-    // search.addEventListener("keydown", () => {
-    if (!search.value) {
-    }
-    tiles.forEach((tile) => {
+    search.addEventListener("keyup", () => {
+      const tiles = document.querySelectorAll(".tile");
+
+      document.querySelector("h1").innerText = search.value || "Themes";
+
+      tiles.forEach((tile) => {
+        tile.style.display = "flex";
+      });
+
+      if (!search.value) return;
+
       data.forEach((theme) => {
-        console.log("Ok", theme.title);
+        if (!theme.name.toLowerCase().startsWith(search.value.toLowerCase())) {
+          tiles.forEach((tile) => {
+            if (
+              tile.querySelector(".container>.text-container>.title")
+                .innerText === theme.name
+            ) {
+              tile.style.display = "none";
+            }
+          });
+        }
       });
     });
-    // });
   });
