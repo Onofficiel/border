@@ -59,7 +59,7 @@ body>h2 {
   display: flex;
   flex-direction: column;
 
-  flex: 2;
+  flex: 1.5;
 }
 
 .tile>.text-container>.title {
@@ -77,4 +77,7 @@ body>h2 {
 
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
+
+  border-radius: 10px;
 }
