@@ -1,4 +1,7 @@
 const container = document.querySelector("#tile-container");
+const search = document.querySelector("#search");
+const tiles = document.querySelectorAll(".tile");
+
 fetch("./src/data/themes.json")
   .then((r) => {
     return r.json();
@@ -25,4 +28,14 @@ fetch("./src/data/themes.json")
 
       container.appendChild(tile);
     });
+
+    // search.addEventListener("keydown", () => {
+    if (!search.value) {
+    }
+    tiles.forEach((tile) => {
+      data.forEach((theme) => {
+        console.log("Ok", theme.title);
+      });
+    });
+    // });
   });

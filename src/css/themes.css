@@ -31,6 +31,26 @@ body>h2 {
   color: var(--text2);
 }
 
+#search {
+  position: fixed;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-family: "Lexend", Arial, Helvetica, sans-serif;
+  color: var(--bg);
+  font-size: 1em;
+  padding: 15px 20px;
+  width: calc(100% - (50px * 2));
+  border-radius: 30px;
+  border: none;
+}
+
+#search::placeholder {
+  color: var(--bg);
+  font-size: 1em;
+}
+
 #tile-container {
   display: flex;
   flex-wrap: wrap;
@@ -117,6 +137,7 @@ body>h2 {
 }
 
 .tile>.container>.download:hover {
+  padding: 5px;
   color: var(--text1);
   background-color: #fff0;
   border: solid 5px var(--text1);
