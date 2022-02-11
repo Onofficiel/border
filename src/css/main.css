@@ -84,6 +84,11 @@ a {
   align-items: center;
 }
 
+.navbar>img {
+  height: 1.5em;
+  width: auto;
+}
+
 .navbar>ul {
   display: flex;
   flex-direction: row;
@@ -92,4 +97,14 @@ a {
 .navbar>ul>li {
   list-style: none;
   margin-left: 20px;
+}
+
+.navbar>ul>li>a {
+  color: var(--text2);
+  transition: all .2s ease;
+}
+
+
+.navbar>ul>li>a:hover {
+  color: var(--text1);
 }
