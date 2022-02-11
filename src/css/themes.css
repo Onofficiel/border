@@ -76,6 +76,12 @@ body>h2 {
   display: block;
   font-size: 1.8em;
   font-weight: bold;
+}
+
+.tile>.container>.text-container>.author {
+  display: block;
+  font-size: 0.8em;
+  font-style: italic;
   margin-bottom: 10px;
 }
 
@@ -106,4 +112,12 @@ body>h2 {
   padding: 10px;
   margin-top: 10px;
   border-radius: 30px;
+  border: solid 0 var(--text1);
+  transition: all .2s ease;
+}
+
+.tile>.container>.download:hover {
+  color: var(--text1);
+  background-color: #fff0;
+  border: solid 5px var(--text1);
 }
