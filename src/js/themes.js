@@ -1,4 +1,4 @@
-fetch("../data/themes.json")
+fetch("../src/data/themes.json")
   .then((r) => {
     return r.json();
   })
