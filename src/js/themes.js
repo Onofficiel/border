@@ -18,7 +18,7 @@ fetch("./src/data/themes.json")
 
         <div
           class="image"
-          style="background: url('${theme.image}');"
+          style="background-image: url('${theme.image}');"
         ></div>
       `;
 
