@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+*, *::after, *::before {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:root {
+  --text1: #ffffff;
+  --text2: #cfc4d6;
+  --bg: #4b0082;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text1);
+  font-family: "Lexend", Arial, Helvetica, sans-serif;
+
+  padding: 50px;
+}
+
+body>h1 {
+  font-size: 5em;
+}
+
+body>h2 {
+  font-size: 1.5em;
+  margin-bottom: 25px;
+  color: var(--text2);
+}
