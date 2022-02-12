@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+#border-root>* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+#border-root {
+    width: 100%;
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    font-family: 'Lexend', sans-serif;
+}
+
+#border-menu,
+#border-tab-menu {
+    width: 100%;
+    height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background: var(--border-primary);
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-left: 5px;
+            
+}
+
+#border-tab-menu {
+    background: var(--border-secondary);
+}
+
+#border-tab-container::-webkit-scrollbar {
+  display: none;
+}
+
+#border-tab-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-overflow-style: none; /* IE 11 */
+        overflow-x: auto;
+        overflow-y: hidden;
+    scrollbar-width: none; /* Firefox 64 */
+}
+
+.border-tab {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: var(--border-secondary);
+    -webkit-box-pack: space-between;
+        -ms-flex-pack: space-between;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    min-width: 100px;
+    height: 80%;
+    margin: 11px 0 0;
+    padding: 0 30px;
+    background: var(--border-primary);
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+}
+.border-view {
+    display: none;
+}
+
+#border-add-button {
+    font-size: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: var(--border-secondary);
+    font-weight: bolder;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    transform: translate(-5px, 5px);
+    min-height: 10px;
+    min-width: 30px;
+    background: var(--border-primary);
+    clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
+    transition: all .2s ease;
+}
+#border-add-button>h2 {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.border-history-btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: var(--border-secondary);
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 0 10px;
+    font-size: 20px;
+}
+
+#border-search-button {
+    display: none;
+}
+
+.border-tab.border-current {
+    transform: translateY(3px);
+}
+
+.border-view.border-current {
+    display: block;
+}
+
+#border-searchbar {
+    border: none;
+    margin: 10px;
+    padding: 5px 10px;
+    width: 100%;
+    border-radius: 2px;
+    color: var(--border-primary);
+    background: #fff;
+}
+
+#border-view-container, .border-view {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: var(--border-primary);
+}
+.border-title, .border-close-btn, #border-add-button, .border-history-btn {
+    cursor: pointer;
+}
+.border-title, .border-close-btn, #border-searchbar {
+    font-size: 15px;
+}

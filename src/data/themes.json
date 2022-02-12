@@ -1,9 +1,16 @@
 [
   {
     "name": "Sharpic",
-    "author": "Border Team",
+    "author": "The Border Team",
     "description": "This theme is the default one without the rounded corners.",
     "image": "./theme-assets/img/sharpic.png",
     "url": "./theme-assets/css/sharpic.css"
+  },
+  {
+    "name": "Chrobe",
+    "author": "The Border Team",
+    "description": "A retro chrome theme.",
+    "image": "./theme-assets/img/chrobe.png",
+    "url": "./theme-assets/css/chrobe.css"
   }
 ]
