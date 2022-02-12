@@ -54,160 +54,200 @@ class Border extends WApplication {
         "c:/user/appdata/Border/themes/default.css",
         `@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
 
-#border-root>* {
-    padding: 0;
-    margin: 0;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-}
+        #border-root>* {
+          padding: 0;
+          margin: 0;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+        
+        #border-root>.w96-menubar {
+          background-color: var(--border-primary);
+          color: var(--border-secondary);
+        }
+        
+        #border-root {
+          width: 100%;
+          height: 100vh;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+          flex-direction: column;
+          font-family: 'Lexend', sans-serif;
+        }
+        
+        #border-menu,
+        #border-titlebar {
+          width: 100%;
+          height: 60px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          flex-direction: row;
+          background: var(--border-primary);
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+        }
 
-#border-root {
-    width: 100%;
-    height: 100vh;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    font-family: 'Lexend', sans-serif;
-}
-
-#border-menu,
-#border-tab-menu {
-    width: 100%;
-    height: 60px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    background: var(--border-primary);
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-}
-
-#border-tab-menu {
-    background: var(--border-secondary);
-}
-
-#border-tab-container::-webkit-scrollbar {
-  display: none;
-}
-
-#border-tab-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -ms-overflow-style: none; /* IE 11 */
-        overflow-x: auto;
-        overflow-y: hidden;
-    scrollbar-width: none; /* Firefox 64 */
-}
-
-.border-tab {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    color: var(--border-secondary);
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    width: 150px;
-    min-width: 200px;
-    border-radius: 20px;
-    height: 80%;
-    margin: 15px 10px;
-    background: var(--border-primary);
-    -webkit-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-    overflow: hidden;
-}
-.border-view {
-    display: none;
-}
-
-#border-add-button {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    color: var(--border-secondary);
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    border-radius: 50px;
-    min-height: 40px;
-    min-width: 40px;
-    margin: 15px 10px;
-    background: var(--border-primary);
-}
-#border-add-button>h2 {
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-}
-#border-search-button, .border-history-btn {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    color: var(--border-primary);
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    border-radius: 50px;
-    min-height: 35px;
-    min-width: 35px;
-    margin: 15px 10px;
-    background: var(--border-secondary);
-}
-
-.border-tab.border-current {
-    border-radius: 20px 20px 0 0;
-    margin: 11px 10px 0;
-}
-.border-view.border-current {
-    display: block;
-}
-
-#border-searchbar {
-    border: none;
-    margin: 10px;
-    padding: 10px;
-    width: 100%;
-    border-radius: 999px;
-    color: var(--border-primary);
-    background: var(--border-secondary);
-}
-
-#border-view-container, .border-view {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: var(--border-primary);
-}
-.border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn {
-    cursor: pointer;
-}
-.border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, #border-searchbar {
-    font-size: 15px;
-}`
+        #border-titlebar {
+          background: var(--border-secondary);
+        }
+        
+        #border-tab-menu {
+          height: 100%;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          flex: 1;
+          overflow-x: auto;
+        }
+        
+        
+        #border-ctrl-btn-container {
+          width: 100px;
+          height: 100%;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          justify-content: space-evenly;
+          color: var(--border-primary);
+        }
+        
+        #border-tab-container::-webkit-scrollbar {
+          display: none;
+        }
+        
+        #border-tab-container {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          height: 100%;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -ms-overflow-style: none;
+          /* IE 11 */
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          /* Firefox 64 */
+        }
+        
+        .border-tab {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          color: var(--border-secondary);
+          -webkit-box-pack: space-evenly;
+          -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          width: 150px;
+          min-width: 200px;
+          border-radius: 20px;
+          height: 80%;
+          margin: 15px 10px;
+          background: var(--border-primary);
+          -webkit-transition: all 0.2s ease;
+          -o-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+          overflow: hidden;
+        }
+        
+        .border-view {
+          display: none;
+        }
+        
+        #border-add-button {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          color: var(--border-secondary);
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          margin-left: 10px;
+          border-radius: 50px;
+          min-height: 40px;
+          min-width: 40px;
+          background: var(--border-primary);
+        }
+        
+        #border-add-button>h2 {
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+        }
+        
+        #border-search-button, .border-history-btn {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          color: var(--border-primary);
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          border-radius: 50px;
+          min-height: 35px;
+          min-width: 35px;
+          background: var(--border-secondary);
+          margin: 0 8px;
+        }
+        
+        .border-tab.border-current {
+          border-radius: 20px 20px 0 0;
+          transform: translateY(8px);
+        }
+        
+        .border-view.border-current {
+          display: block;
+        }
+        
+        #border-searchbar {
+          border: none;
+          margin: 10px;
+          padding: 10px;
+          width: 100%;
+          border-radius: 999px;
+          color: var(--border-primary);
+          background: var(--border-secondary);
+        }
+        
+        #border-view-container, .border-view {
+          width: 100%;
+          height: 100%;
+          border: none;
+          background: var(--border-primary);
+        }
+        
+        .border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, .border-ctrl-btn {
+          cursor: pointer;
+        }
+        
+        .border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, #border-searchbar, .border-ctrl-btn {
+          font-size: 15px;
+        }`
       );
     }
     if (!isConfigFileExisting) {
@@ -247,31 +287,39 @@ class Border extends WApplication {
         {
           title: "Border",
           body: `
-            <style>
-            ${styleCSS}
-            </style>
-            <div class="appbar"></div>
-            <div id="border-root">
-                <div id="border-tab-menu">
-                    <div id="border-tab-container">
-
-                    </div>
-                    <div id="border-add-button">+</div>
-                </div>
-
-                <div id="border-menu">
-                    <div class="border-history-btn"><</div>
-                    <div class="border-history-btn">></div>
-                    <div class="border-history-btn">↺</div>
-                    <input id="border-searchbar">
-
-                    </input>
-                    <div id="border-search-button">⇾</div>
-                </div>
-                <div id="border-view-container">
-
-                </div>
+          <style>
+          ${styleCSS}
+        </style>
+        <div id="border-root">
+          <div id="border-titlebar">
+            <div id="border-tab-menu">
+              <div id="border-tab-container">
+        
+              </div>
+              <div id="border-add-button">+</div>
             </div>
+            <div id="border-ctrl-btn-container">
+              <div class="border-minimize border-ctrl-btn">🗕</div>
+              <div class="border-maximize border-ctrl-btn">🞐</div>
+              <div class="border-close border-ctrl-btn">🗙</div>
+            </div>
+          </div>
+        
+          <div id="border-menu" class="nodrag">
+            <div class="border-history-btn"><</div>
+            <div class="border-history-btn">></div>
+            <div class="border-history-btn">↺</div>
+        
+            <input id="border-searchbar" placeholder="Enter an URL..."></input>
+        
+            <div id="border-search-button">⇾</div>
+          </div>
+            <div class="appbar nodrag"></div>
+        
+            <div id="border-view-container" class="nodrag">
+        
+            </div>
+          </div>
             `,
           initialHeight: configJSON.window.height,
           initialWidth: configJSON.window.width,
@@ -489,6 +537,7 @@ class Border extends WApplication {
 
           // Create an html tab div
           let tabElement = document.createElement("div");
+          tabElement.draggable = true;
           tabElement.classList.add("border-tab");
           tabElement.dataset.id = browser.generateId();
           tabElement.dataset.url = tab.url;
@@ -996,6 +1045,13 @@ class Border extends WApplication {
       );
 
       appbar.addRoot("Themes", themeList);
+
+      wnd.wndObject
+        .querySelectorAll("[class|='titlebar']")
+        .forEach((elem) => elem.remove());
+      wnd.wndObject
+        .querySelector(".window-html-content")
+        .classList.remove("nodrag");
 
       body.querySelector(".appbar").replaceWith(appbar.getMenuDiv());
 
