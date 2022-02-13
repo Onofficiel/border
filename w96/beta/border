@@ -641,6 +641,16 @@ class Border extends WApplication {
                 .querySelector("#border-tab-container")
                 .querySelector(".border-tab.border-current").dataset.url
             )[0];
+
+          body
+            .querySelector("#border-view-container")
+            .querySelector(".border-view.border-current")
+            .addEventListener("load", () => {
+              body
+                .querySelector("#border-view-container")
+                .querySelector(".border-view.border-current")
+                .contentWindow.postMessage("__FromBorder__", "*");
+            });
           body.querySelector("#border-searchbar").blur();
 
           if (

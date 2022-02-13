@@ -15,7 +15,7 @@
         window.addEventListener("message", function (e) {
           const data = e.data;
           msg.innerHTML = data;
-        });
+        }, {once: true});
       } else {
         msg.innerHTML = "Not iframed...";
       }
