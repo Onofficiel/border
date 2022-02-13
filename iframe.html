@@ -12,10 +12,17 @@
     <script>
       const msg = document.querySelector("#message");
       if (window.location !== window.parent.location) {
-        window.addEventListener("message", function (e) {
-          const data = e.data;
-          msg.innerHTML = data;
-        }, {once: true});
+        window.addEventListener(
+          "message",
+          function (test) {
+            if (test.data === "__FromBorder__") {
+              window.addEventListener("message", function (e) {
+                msg.innerHTML = e.test;
+              });
+            }
+          },
+          { once: true }
+        );
       } else {
         msg.innerHTML = "Not iframed...";
       }
