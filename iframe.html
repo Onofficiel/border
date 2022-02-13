@@ -7,10 +7,11 @@
     <title>Iframe</title>
   </head>
   <body>
-    <span>Message : </span><span id="message">Loading...</span>
+    <span>Logs : </span><br />
+    <span id="logs"></span>
 
     <script>
-      const msg = document.querySelector("#message");
+      const msg = document.querySelector("#logs");
       if (window.location !== window.parent.location) {
         let once = false;
         window.addEventListener("message", verifyBorder);
@@ -27,7 +28,7 @@
               "*"
             );
           } else if (once) {
-            msg.innerHTML = e.data;
+            msg.innerHTML += `(${e.source}) [${Date.now()}]: ${e.data}<br>`;
           }
         }
       }
