@@ -7,7 +7,7 @@
     <title>Iframe</title>
   </head>
   <body>
-    <span>Message : </span><span id="message"></span>
+    <span>Message : </span><span id="message">Sorry You're not using Border...</span>
 
     <script>
       const msg = document.querySelector("#message");
@@ -17,14 +17,10 @@
           function (test) {
             if (test.data === "__FromBorder__") {
               msg.innerHTML = "You're using Border !";
-            } else {
-              msg.innerHTML = "Sorry You're not using Border...";
             }
           },
           { once: true }
         );
-      } else {
-        msg.innerHTML = "Sorry You're not using Border...";
       }
     </script>
   </body>
