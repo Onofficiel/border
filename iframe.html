@@ -17,9 +17,6 @@
           function (test) {
             if (test.data === "__FromBorder__") {
               msg.innerHTML = "You're using Border !";
-              window.addEventListener("message", function (e) {
-                msg.innerHTML = e.test;
-              });
             } else {
               msg.innerHTML = "Sorry You're not using Border...";
             }
