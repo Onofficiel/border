@@ -568,7 +568,7 @@ class Border extends WApplication {
 
               function execute() {
                 iframe.contentWindow.postMessage(
-                  "Border say " + JSON.stringify(e.data),
+                  "Border say " + e.data.script,
                   "*"
                 );
               }
