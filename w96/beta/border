@@ -558,7 +558,7 @@ class Border extends WApplication {
                       whitelistJSON.push(iframe.src);
                       await w96.FS.writestr(
                         "c:/user/appdata/Border/whitelist.json",
-                        whitelistJSON
+                        JSON.stringify(whitelistJSON)
                       );
                       execute();
                     }
@@ -567,7 +567,10 @@ class Border extends WApplication {
               } else execute();
 
               function execute() {
-                iframe.contentWindow.postMessage("Border say ", e.data.script);
+                iframe.contentWindow.postMessage(
+                  "Border say " + JSON.stringify(e.data),
+                  "*"
+                );
               }
             });
           });
