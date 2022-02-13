@@ -7,20 +7,29 @@
     <title>Iframe</title>
   </head>
   <body>
-    <span>Message : </span><span id="message">Sorry You're not using Border...</span>
+    <span>Message : </span><span id="message">Loading...</span>
 
     <script>
       const msg = document.querySelector("#message");
       if (window.location !== window.parent.location) {
-        window.addEventListener(
-          "message",
-          function (test) {
-            if (test.data === "__FromBorder__") {
-              msg.innerHTML = "You're using Border !";
-            }
-          },
-          { once: true }
-        );
+        let usingBorder = false;
+        window.addEventListener("message", verifyBorder);
+
+        function verifyBorder(e) {
+          console.log(e);
+          if (e.data === "__FromBorder__") {
+            window.removeEventListener("message", verifyBorder);
+            usingBorder = true;
+
+            msg.innerHTML = "You're using Border !";
+          }
+        }
+
+        setTimeout(() => {
+          if (!usingBorder) msg.innerHTML = "You're not using Border...";
+        }, 3000);
+      } else {
+        msg.innerHTML = "You're not using Border...";
       }
     </script>
   </body>
