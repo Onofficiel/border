@@ -19,12 +19,14 @@
               window.addEventListener("message", function (e) {
                 msg.innerHTML = e.test;
               });
+            } else {
+              msg.innerHTML = "Sorry You're not using Border...";
             }
           },
           { once: true }
         );
       } else {
-        msg.innerHTML = "Not iframed...";
+        msg.innerHTML = "Sorry You're not using Border...";
       }
     </script>
   </body>
