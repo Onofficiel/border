@@ -25,6 +25,9 @@ class Border extends WApplication {
     const isStyleFileExisting = await w96.FS.exists(
       "c:/user/appdata/Border/style.css"
     );
+    const isWhitelistFileExisting = await w96.FS.exists(
+      "c:/user/appdata/Border/whitelist.json"
+    );
     const isConfigFolderExisting = await w96.FS.exists(
       "c:/user/appdata/Border"
     );
@@ -250,6 +253,12 @@ class Border extends WApplication {
         }`
       );
     }
+    if (!isWhitelistFileExisting) {
+      await w96.FS.writestr(
+        "c:/user/appdata/Border/whitelist.json",
+        JSON.stringify([])
+      );
+    }
     if (!isConfigFileExisting) {
       await w96.FS.writestr(
         "c:/user/appdata/Border/config.json",
@@ -278,6 +287,9 @@ class Border extends WApplication {
       );
       let bookmarksJSON = JSON.parse(
         await w96.FS.readstr("c:/user/appdata/Border/bookmarks.json")
+      );
+      let whitelistJSON = JSON.parse(
+        await w96.FS.readstr("c:/user/appdata/Border/whitelist.json")
       );
       let styleCSS = await w96.FS.readstr(
         `c:/user/appdata/Border/themes/${configJSON.theme.currentTheme}.css`
@@ -531,6 +543,35 @@ class Border extends WApplication {
             return ["https://" + url, false];
           }
         },
+        handleScript: (iframe) => {
+          iframe.addEventListener("load", () => {
+            iframe.contentWindow.postMessage("__FromBorder__", "*");
+
+            window.addEventListener("message", (e) => {
+              if (!e.data.BORDER_EXEC) return;
+
+              if (!whitelistJSON.includes(iframe.src)) {
+                w96.ui.MsgBoxSimple.confirm(
+                  "This website want to access script system. Authorize ?",
+                  async (ok) => {
+                    if (ok) {
+                      whitelistJSON.push(iframe.src);
+                      await w96.FS.writestr(
+                        "c:/user/appdata/Border/whitelist.json",
+                        whitelistJSON
+                      );
+                      execute();
+                    }
+                  }
+                );
+              } else execute();
+
+              function execute() {
+                iframe.contentWindow.postMessage("Border say ", e.data.script);
+              }
+            });
+          });
+        },
         addTab: (tab) => {
           if (!tab)
             throw new Error("You have to add an object for creating a tab.");
@@ -642,15 +683,11 @@ class Border extends WApplication {
                 .querySelector(".border-tab.border-current").dataset.url
             )[0];
 
-          body
-            .querySelector("#border-view-container")
-            .querySelector(".border-view.border-current")
-            .addEventListener("load", () => {
-              body
-                .querySelector("#border-view-container")
-                .querySelector(".border-view.border-current")
-                .contentWindow.postMessage("__FromBorder__", "*");
-            });
+          browser.handleScript(
+            body
+              .querySelector("#border-view-container")
+              .querySelector(".border-view.border-current")
+          );
           body.querySelector("#border-searchbar").blur();
 
           if (
