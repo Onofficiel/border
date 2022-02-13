@@ -62,7 +62,7 @@ class Border extends WApplication {
         }
         
         #border-root>.w96-menubar {
-          background-color: var(--border-primary);
+          background: var(--border-primary);
           color: var(--border-secondary);
         }
         
@@ -296,15 +296,15 @@ class Border extends WApplication {
               <div id="border-tab-container">
         
               </div>
-              <div id="border-add-button">+</div>
+              <div id="border-add-button" class="nodrag">+</div>
             </div>
             <div id="border-ctrl-btn-container">
-              <div class="border-minimize border-ctrl-btn">🗕</div>
-              <div class="border-maximize border-ctrl-btn">🞐</div>
-              <div class="border-close border-ctrl-btn">🗙</div>
+              <div class="border-minimize border-ctrl-btn nodrag">🗕</div>
+              <div class="border-maximize border-ctrl-btn nodrag">🞐</div>
+              <div class="border-close border-ctrl-btn nodrag">🗙</div>
             </div>
           </div>
-        
+
           <div id="border-menu" class="nodrag">
             <div class="border-history-btn"><</div>
             <div class="border-history-btn">></div>
@@ -314,7 +314,7 @@ class Border extends WApplication {
         
             <div id="border-search-button">⇾</div>
           </div>
-            <div class="appbar nodrag"></div>
+            <div class="appbar"></div>
         
             <div id="border-view-container" class="nodrag">
         
@@ -539,6 +539,7 @@ class Border extends WApplication {
           let tabElement = document.createElement("div");
           tabElement.draggable = true;
           tabElement.classList.add("border-tab");
+          tabElement.classList.add("nodrag");
           tabElement.dataset.id = browser.generateId();
           tabElement.dataset.url = tab.url;
           tabElement.innerHTML =
@@ -783,6 +784,7 @@ class Border extends WApplication {
       browser.boot();
 
       const appbar = new w96.ui.MenuBar();
+      appbar.menuElement.classList.add("nodrag");
 
       await appbar.addRoot("File", [
         {
@@ -1046,14 +1048,29 @@ class Border extends WApplication {
 
       appbar.addRoot("Themes", themeList);
 
+      // delete the default titlebar
       wnd.wndObject
         .querySelectorAll("[class|='titlebar']")
-        .forEach((elem) => elem.remove());
+        .forEach((elem) => (elem.style.display = "none"));
       wnd.wndObject
         .querySelector(".window-html-content")
         .classList.remove("nodrag");
 
       body.querySelector(".appbar").replaceWith(appbar.getMenuDiv());
+
+      // give the behavior to the new titlebar
+      body
+        .querySelector(".border-minimize")
+        .addEventListener("click", () => wnd.toggleMinimize());
+      body
+        .querySelector(".border-maximize")
+        .addEventListener("click", () => wnd.toggleMaximize());
+      body
+        .querySelector(".border-close")
+        .addEventListener("click", () => wnd.close());
+      body
+        .querySelector("#border-titlebar")
+        .addEventListener("dblclick", () => wnd.toggleMaximize());
 
       wnd.show();
     }
