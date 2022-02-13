@@ -1049,9 +1049,7 @@ class Border extends WApplication {
 
       appbar.addRoot("Themes", themeList);
 
-      console.log(">", configJSON.customTitlebar);
-      if (configJSON.customTitlebar) {
-        console.log("ok!");
+      if (configJSON.window.customTitlebar) {
         // delete the default titlebar
         wnd.wndObject
           .querySelectorAll("[class|='titlebar']")
