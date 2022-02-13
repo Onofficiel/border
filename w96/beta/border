@@ -551,7 +551,7 @@ class Border extends WApplication {
               if (!e.data.BORDER_EXEC) return;
 
               if (!whitelistJSON.includes(iframe.src)) {
-                w96.ui.MsgBoxSimple.confirm(
+                return w96.ui.MsgBoxSimple.confirm(
                   "This website want to access script system. Authorize ?",
                   async (ok) => {
                     if (ok) {
