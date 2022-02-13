@@ -550,12 +550,12 @@ class Border extends WApplication {
             window.addEventListener("message", (e) => {
               if (!e.data.BORDER_EXEC) return;
 
-              if (!whitelistJSON.includes(iframe.src)) {
+              if (!whitelistJSON.includes(e.origin)) {
                 return w96.ui.MsgBoxSimple.confirm(
                   "This website want to access script system. Authorize ?",
                   async (ok) => {
                     if (ok) {
-                      whitelistJSON.push(iframe.src);
+                      whitelistJSON.push(e.origin);
                       await w96.FS.writestr(
                         "c:/user/appdata/Border/whitelist.json",
                         JSON.stringify(whitelistJSON)
