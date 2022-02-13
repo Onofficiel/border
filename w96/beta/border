@@ -260,6 +260,7 @@ class Border extends WApplication {
             secondary: "#ffffff",
           },
           window: {
+            customTitlebar: true,
             height: 550,
             width: 650,
           },
@@ -1048,29 +1049,35 @@ class Border extends WApplication {
 
       appbar.addRoot("Themes", themeList);
 
-      // delete the default titlebar
-      wnd.wndObject
-        .querySelectorAll("[class|='titlebar']")
-        .forEach((elem) => (elem.style.display = "none"));
-      wnd.wndObject
-        .querySelector(".window-html-content")
-        .classList.remove("nodrag");
+      console.log(">", configJSON.customTitlebar);
+      if (configJSON.customTitlebar) {
+        console.log("ok!");
+        // delete the default titlebar
+        wnd.wndObject
+          .querySelectorAll("[class|='titlebar']")
+          .forEach((elem) => (elem.style.display = "none"));
+        wnd.wndObject
+          .querySelector(".window-html-content")
+          .classList.remove("nodrag");
+
+        // give the behavior to the new titlebar
+        body
+          .querySelector(".border-minimize")
+          .addEventListener("click", () => wnd.toggleMinimize());
+        body
+          .querySelector(".border-maximize")
+          .addEventListener("click", () => wnd.toggleMaximize());
+        body
+          .querySelector(".border-close")
+          .addEventListener("click", () => wnd.close());
+        body
+          .querySelector("#border-titlebar")
+          .addEventListener("dblclick", () => wnd.toggleMaximize());
+      } else {
+        body.querySelector("#border-ctrl-btn-container").style.display = "none";
+      }
 
       body.querySelector(".appbar").replaceWith(appbar.getMenuDiv());
-
-      // give the behavior to the new titlebar
-      body
-        .querySelector(".border-minimize")
-        .addEventListener("click", () => wnd.toggleMinimize());
-      body
-        .querySelector(".border-maximize")
-        .addEventListener("click", () => wnd.toggleMaximize());
-      body
-        .querySelector(".border-close")
-        .addEventListener("click", () => wnd.close());
-      body
-        .querySelector("#border-titlebar")
-        .addEventListener("dblclick", () => wnd.toggleMaximize());
 
       wnd.show();
     }
@@ -1161,7 +1168,8 @@ class Border extends WApplication {
           content: `
             <h1>Size of the window</h1>
             <b>Height : </b><input class="border-setup-height-input" type="number" value="${configJSON.window.height}"></input>px<br>
-            <b>Width : </b><input class="border-setup-width-input" type="number" value="${configJSON.window.width}"></input>px
+            <b>Width : </b><input class="border-setup-width-input" type="number" value="${configJSON.window.width}"></input>px<br>
+            <b>Use the custom titlebar : </b><input class="border-setup-titlebar-input" type="checkbox" checked="${configJSON.window.customTitlebar}"></input>
             `,
           save: [
             {
@@ -1171,6 +1179,10 @@ class Border extends WApplication {
             {
               name: "width",
               value: ".border-setup-width-input",
+            },
+            {
+              name: "customTitlebar",
+              value: ".border-setup-titlebar-input",
             },
           ],
         },
@@ -1233,6 +1245,7 @@ class Border extends WApplication {
               secondary: settings.secondary,
             },
             window: {
+              customTitlebar: settings.customTitlebar,
               height: settings.height,
               width: settings.width,
             },
