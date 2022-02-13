@@ -42,5 +42,20 @@
       alt="Border App Image"
       class="hero-image"
     />
+
+    <script>
+      if (window.location !== window.parent.location) {
+        window.addEventListener("message", verifyBorder);
+
+        function verifyBorder(e) {
+          console.log(e);
+          if (e.data === "__FromBorder__") {
+            window.removeEventListener("message", verifyBorder);
+
+            document.querySelector(".hero-subtitle").innerHTML += " <sub>(Otherwise you wouldn't be using it right now !)</sub>";
+          }
+        }
+      }
+    </script>
   </body>
 </html>
