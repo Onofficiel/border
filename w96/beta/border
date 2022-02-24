@@ -544,36 +544,40 @@ class Border extends WApplication {
           }
         },
         handleScript: (iframe) => {
-          iframe.addEventListener("load", () => {
-            iframe.contentWindow.postMessage("__FromBorder__", "*");
+          iframe.addEventListener(
+            "load",
+            () => {
+              iframe.contentWindow.postMessage("__FromBorder__", "*");
 
-            window.addEventListener("message", (e) => {
-              if (!e.data.BORDER_EXEC) return;
+              window.addEventListener("message", (e) => {
+                if (!e.data.BORDER_EXEC) return;
 
-              if (!whitelistJSON.includes(e.origin)) {
-                return w96.ui.MsgBoxSimple.confirm(
-                  "This website want to access script system. Authorize ?",
-                  async (ok) => {
-                    if (ok) {
-                      whitelistJSON.push(e.origin);
-                      await w96.FS.writestr(
-                        "c:/user/appdata/Border/whitelist.json",
-                        JSON.stringify(whitelistJSON)
-                      );
-                      execute();
+                if (!whitelistJSON.includes(e.origin)) {
+                  return w96.ui.MsgBoxSimple.confirm(
+                    "This website want to access script system. Authorize ?",
+                    async (ok) => {
+                      if (ok) {
+                        whitelistJSON.push(e.origin);
+                        await w96.FS.writestr(
+                          "c:/user/appdata/Border/whitelist.json",
+                          JSON.stringify(whitelistJSON)
+                        );
+                        execute();
+                      }
                     }
-                  }
-                );
-              } else execute();
+                  );
+                } else execute();
 
-              function execute() {
-                iframe.contentWindow.postMessage(
-                  "Border say " + e.data.script,
-                  "*"
-                );
-              }
-            });
-          });
+                function execute() {
+                  iframe.contentWindow.postMessage(
+                    "Border say " + e.data.script,
+                    "*"
+                  );
+                }
+              });
+            },
+            { once: true }
+          );
         },
         addTab: (tab) => {
           if (!tab)
