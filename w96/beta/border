@@ -348,7 +348,7 @@ class Border extends WApplication {
         cfg: {
           tabNb: 0,
           tabId: [],
-          version: "1.8",
+          version: "1.9",
         },
         protocols: {
           newtab: `
@@ -371,7 +371,7 @@ class Border extends WApplication {
                 <p>
                     For searching just type it in the search bar and click the arrow button.
                 </p>
-                <input type="text" id="search" placeholder="Search on Bing..." style="padding: 10px 15px; width: 80%; border-radius: 30px; border: none;">
+                <input type="text" id="search" placeholder="Search on Google..." style="padding: 10px 15px; width: 80%; border-radius: 30px; border: none;">
               </div>
             </div>
             <script>
@@ -402,17 +402,13 @@ class Border extends WApplication {
                 </head>
                 <body style="width: 100vw; height: 100vh; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white;">
                             
-                            <h1>Border v1.8 changelog.</h1>
+                            <h1>Border v1.9 changelog.</h1>
                             <ul>
-                                <li>Theme system added.</li>
-                                <li>The search bar now show correctly "https://" if necessary.</li>
-                                <li>The Home Page has been changed.</li>
-                                <li>Scrollable tab bug fixed. (delete the default.css file in the theme folder.)</li>
-                                <li>Added feature: Start your URL with a ! to search on bing.</li>
-                                <li>Keyboard shorcuts added</li>
+                              <li>Changed search engine from Bing to Google.</li>
+                              <li>You can now reorder tabs by right clicking.</li>
                             </ul>
         
-                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.8 | © Onofficiel - 2022 - All rights reserved</p>
+                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.9 | © Onofficiel - 2022 - All rights reserved</p>
                 </body>
                 </html>
                 `,
@@ -436,7 +432,7 @@ class Border extends WApplication {
                             <br><br>Thanks to <a style="color: white;" href="https://billygoat891.tk">billygoat891</a> for hosting the project on windows96.
                             </p>
         
-                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.8 | © Onofficiel - 2022 - All rights reserved</p>
+                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.9 | © Onofficiel - 2022 - All rights reserved</p>
                 </body>
                 </html>
                 `,
@@ -515,9 +511,10 @@ class Border extends WApplication {
           },
         ],
         verifyProtocol: (url) => {
+          if (url.startsWith("//")) return "https://" + url.substring(2);
           if (url.startsWith("!")) {
             const handledValue = encodeURI(
-              "https://www.bing.com/search?q=" +
+              "https://google.com/search?igu=1&q=" +
                 url.substring(1).replace(" ", "+")
             );
             return [handledValue, false];
@@ -531,7 +528,10 @@ class Border extends WApplication {
                   encodeURI("data:text/html," + browser.protocols[protocol]),
                   protocol,
                 ];
-              } else if (url.startsWith("file://")) {
+              } else if (
+                url.startsWith("file://") ||
+                url.startsWith("https://rel3.windows96.net/_/")
+              ) {
                 return [
                   encodeURI("https://rel3.windows96.net/_/" + url.substring(7)),
                   url.substring(7),
@@ -569,10 +569,10 @@ class Border extends WApplication {
                 } else execute();
 
                 function execute() {
-                  iframe.contentWindow.postMessage(
+                  /* iframe.contentWindow.postMessage(
                     "Border say " + e.data.script,
                     "*"
-                  );
+                  ); */
                 }
               });
             },
@@ -596,6 +596,50 @@ class Border extends WApplication {
 
           tabElement.addEventListener("click", () => {
             browser.setCurrent(tabElement.dataset.id);
+          });
+
+          tabElement.addEventListener("contextmenu", (e) => {
+            const tabIndex = Array.prototype.indexOf.call(
+              tabElement.parentNode.children,
+              tabElement
+            );
+
+            const ctxm = new w96.ui.ContextMenu([
+              {
+                type: "normal",
+                label: "Move Left",
+                onclick: () => {
+                  if (tabIndex === 0) return;
+
+                  body
+                    .querySelectorAll(".border-tab")
+                    [tabIndex - 1].insertAdjacentElement(
+                      "beforebegin",
+                      tabElement
+                    );
+                },
+              },
+              {
+                type: "normal",
+                label: "Move Right",
+                onclick: () => {
+                  if (
+                    tabIndex ===
+                    body.querySelectorAll(".border-tab").length - 1
+                  )
+                    return;
+
+                  body
+                    .querySelectorAll(".border-tab")
+                    [tabIndex + 1].insertAdjacentElement(
+                      "afterend",
+                      tabElement
+                    );
+                },
+              },
+            ]);
+
+            ctxm.renderMenu(e.clientX, e.clientY);
           });
 
           tabElement
