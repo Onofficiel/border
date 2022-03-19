@@ -380,7 +380,7 @@ class Border extends WApplication {
 
               search.addEventListener("keydown", (e) => {
                 if (e.code === "Enter") {
-                  handledValue = encodeURI("https://www.bing.com/search?q=" + search.value.replace(" ", "+"))
+                  handledValue = encodeURI("https://google.com/search?igu=1&q=" + search.value.replace(" ", "+"))
                   location.href = handledValue;
                 }
               })
