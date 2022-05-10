@@ -1,0 +1,1463 @@
+//!wrt $BSPEC:{"icn":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGDSURBVHgBlVNRTsJAEJ3ZBb+5gQ1wAI5QToCewJpAkfhhOEHLCYxf1WIC3oAbwA2s3xJTTyC/hu6Os6WNLVqRlzQ7s9vOvH3zisBwmw8+IHpQAAFsBMDiU6nJPB7FUAFRyggjBFyZJyvinEi5dKzAqipQKyZaJOPH9WiV526bmRF6dSlnnHYPM9hDuB76CMCMwHasWePoAgak6d2sdbH1+1ZgH1XAbU49EHhhYkS4EayH2wyfi5pUFhi0AgeQfA5jTTQmUJfM5wkQOpkmKWpVBZCkxy/HQqlu+D3G+bAVnvJq99uBbQT/lcGVoYhgEeiX+z0PJEB3KXUtOn9eYXcoPn4wU3qThY3KAqarcSI/Z/smklKmomqhV2Yta8C0eFRZd4wIyDZOHLTCCSraoMSecScfx7nhSgUE4i23SGMyRt7BYiPNQOJuhyASWp3nh7WcDouS37JnRmW6APHYSgJAFL4NF+WtAvrtqS2Ilub+ILbd6et1BAdQEjFJaunf+N+PDb4AsJCURrY67Y4AAAAASUVORK5CYII=","cpr":"WeDontCareInc","dsc":"A simple yet customisable multi tab browser !","frn":"Test App","ver":1}
+
+const icon16 =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGDSURBVHgBlVNRTsJAEJ3ZBb+5gQ1wAI5QToCewJpAkfhhOEHLCYxf1WIC3oAbwA2s3xJTTyC/hu6Os6WNLVqRlzQ7s9vOvH3zisBwmw8+IHpQAAFsBMDiU6nJPB7FUAFRyggjBFyZJyvinEi5dKzAqipQKyZaJOPH9WiV526bmRF6dSlnnHYPM9hDuB76CMCMwHasWePoAgak6d2sdbH1+1ZgH1XAbU49EHhhYkS4EayH2wyfi5pUFhi0AgeQfA5jTTQmUJfM5wkQOpkmKWpVBZCkxy/HQqlu+D3G+bAVnvJq99uBbQT/lcGVoYhgEeiX+z0PJEB3KXUtOn9eYXcoPn4wU3qThY3KAqarcSI/Z/smklKmomqhV2Yta8C0eFRZd4wIyDZOHLTCCSraoMSecScfx7nhSgUE4i23SGMyRt7BYiPNQOJuhyASWp3nh7WcDouS37JnRmW6APHYSgJAFL4NF+WtAvrtqS2Ilub+ILbd6et1BAdQEjFJaunf+N+PDb4AsJCURrY67Y4AAAAASUVORK5CYII=";
+const icon32 =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALYSURBVHgBtVddchJBEO7eySYp8yA3cE3is+YGcIPcIElVQFM+QE4gnEB8sDBLqoAThJxAPIH4bCR7A/HFsiQzbc8iYWY3C+wu+aqo3fntj56vu2cRDFT2fIIVQIADJBj8VXe9bnAWQA44kAEIVASk+qYQt5Xd9jvIgUwEbDZUZxLvISM2EkcIhogwjHdDgX9F5KdBosYkxv6o3ICUQLNhaYCo4Y9e15MWVvYv6kBouZ+cyUH7+9shpEDmI/BvmBzSubWZcquQErk0wCSa7MLBrM3uOzz2OoU0e+QWoQLZM5oFF357kAK5CQg598C0w30FKbABOSFdUUA1b/ORdDgiqqyPgI/kuv2j0l20PpcHyrt+lc/gc2wASXvhMCSz598eey0P1k1AZ0DOE00rHzwML8yYe5dHsC4CYfrlDGj2sbvHYY0A6CI/46tUs/ziY0wfqTUQujNu/MOOdOvN4GQ863vD85QjrlgUM6MFUK5O2SVzbWoPbAlhFx+kBgutZhrX+MRV0h9VDsw8we/F0/1WMRcBFvzh7F27PMyIC4BSnphtQeIoM4FTr2UXIaDesjXaE5FsWcxMgIRjK15OVio8RPTFaHqQlYADyiKwiVs/ISfSacAR1j/+Q/JglWWI+NJoBtaWkAKTiavT63jOB5eWXx22yjh3AvUtM4EuhxovuPeCDqukDDeDDltbuE4/MwENiTJy7VLdyu5FLTpP3wv0XZE9dmx0B9HilHgl4xe+elvq/b/AeUp8B4Q4AiTss4t/8Zk/U9NiZIlWoSxd3pwNzL7EVKzdy+opRvsJEj8dvCkxDGdgbENqRI0vJLAuaNEypRPOmP2Hxh+PAOGQb6nXO3ebzWidSCTgSPk8OkEJh6sZXkW6+zz3HBKwDdvjRUZN4KJBHcOuEF8tMfEHyxPlllY1sAwLw5BjuPOYxpcSCEsp3afOYN3GlxLQpdRRsqTrPp/52o1r/ANXSBfJd38jrAAAAABJRU5ErkJggg==";
+
+class BorderApp extends WApplication {
+    constructor() {
+        super();
+    }
+
+    async main(argv) {
+        super.main(argv);
+
+        class Border {
+
+            // Variable declaration
+            #tabNb = 0;
+            #tabId = [];
+
+            #configJSON = JSON.parse(
+                await w96.FS.readstr("c:/user/appdata/Border/config.json")
+            );
+            #bookmarksJSON = JSON.parse(
+                await w96.FS.readstr("c:/user/appdata/Border/bookmarks.json")
+            );
+            #whitelistJSON = JSON.parse(
+                await w96.FS.readstr("c:/user/appdata/Border/whitelist.json")
+            );
+            #styleCSS = await w96.FS.readstr(
+                `c:/user/appdata/Border/themes/${this.#configJSON.theme.currentTheme}.css`
+            );
+
+            version = "1.10";
+
+            protocols = {
+                newtab: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Tab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Lexend'; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; font-family: 'Lexend', sans-serif; color: white;">
+<div id="centered" style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
+  <img style="margin-bottom: 30px;" src="data:image/png;base64,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">
+  <input type="text" id="search" placeholder="Search on Google..." style="padding: 10px 15px; width: 450px; border-radius: 30px; border: none;">
+</div>
+<script>
+  const search = document.getElementById("search");
+  console.log(search);
+
+  search.addEventListener("keydown", (e) => {
+    if (e.code === "Enter") {
+      handledValue = encodeURI("https://google.com/search?igu=1&q=" + search.value.replace(" ", "+"))
+      location.href = handledValue;
+    }
+  })
+</script>
+</body>
+</html>
+    `,
+                changelog: `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Tab</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+    </head>
+    <body style="width: 100vw; height: 100vh; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white;">
+                
+                <h1>Border v1.10 changelog.</h1>
+                <ul>
+                  <li>All the UI has been redesigned.</li>
+                  <li>No more text icon. Border use SVG icons now.</li>
+                </ul>
+
+                <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.10 | © Onofficiel - 2022 - All rights reserved</p>
+    </body>
+    </html>
+    `,
+                about: `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Tab</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+    </head>
+    <body style="width: 100vw; height: 100vh; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white;">
+                
+                <h1>About Border.</h1>
+                <p>
+                Border is an iframe Web browser developped by Onofficiel<br>
+                accessible on all platforms.<br>
+                Because of the iframe system some website won't work in this browser (like youtube.com).
+                </p>
+
+                <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.10 | © Onofficiel - 2022 - All rights reserved</p>
+    </body>
+    </html>
+    `,
+                404: `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>404</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+    </head>
+    <body style="width: 100vw; height: 100vh; display: flex; justify-content: flex-start; align-items: center; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white; background: rgb(247, 37, 58)">
+                <div id="centered">
+                    <h1>404</h1>
+                    <p>
+                        Not found.
+                    </p>
+                </div>
+    </body>
+    </html>
+    `,
+                woozy: `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wooooooooooooooooooooooooozy</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+    </head>
+    <body style="width: 100vw; height: 100vh; display: flex; justify-content: flex-start; align-items: center; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white; background: rgb(255, 204, 77)">
+                <div id="centered">
+                    <img src="https://hotemoji.com/images/dl/t/woozy-face-emoji-by-twitter.png">
+                </div>
+    </body>
+    </html>
+    `,
+            }
+            keybinds = [
+                {
+                    keys: ["Alt", "l"],
+                    description: "Focus the searchbar",
+                    exec: () => {
+                        body.querySelector("#border-searchbar").focus();
+                    },
+                },
+                {
+                    keys: ["Alt", "t"],
+                    description: "Open a new tab",
+                    exec: () => {
+                        this.addTab({ current: true });
+                    },
+                },
+                {
+                    keys: ["Alt", "w"],
+                    description: "Close the current tab",
+                    exec: () => {
+                        this.removeTab(
+                            body.querySelector(".border-tab.border-current").dataset.id
+                        );
+                    },
+                },
+                {
+                    keys: ["Alt", "a"],
+                    description: "Open an about tab",
+                    exec: () => {
+                        this.addTab({ current: true, url: "border://about" });
+                    },
+                },
+            ]
+
+            #handleURI(url) {
+                if (url.startsWith("//")) return "https://" + url.substring(2);
+                if (url.startsWith("!")) {
+                    const handledValue = encodeURI(
+                        "https://google.com/search?igu=1&q=" +
+                        url.substring(1).replace(" ", "+")
+                    );
+                    return [handledValue, false];
+                }
+                if (/^\S*:/i.test(url)) {
+                    for (let i = 0; i < Object.keys(this.protocols).length; i++) {
+                        const protocol = Object.keys(this.protocols)[i];
+
+                        if (RegExp("^border:/*" + protocol).test(url)) {
+                            return [
+                                encodeURI("data:text/html," + this.protocols[protocol]),
+                                protocol,
+                            ];
+                        } else if (
+                            url.startsWith("file://") ||
+                            url.startsWith("https://rel3.windows96.net/_/")
+                        ) {
+                            return [
+                                encodeURI("https://rel3.windows96.net/_/" + url.substring(7)),
+                                url.substring(7),
+                            ];
+                        }
+                    }
+                    return [url, false];
+                } else {
+                    return ["https://" + url, false];
+                }
+            }
+            #handleScript(iframe) {
+                iframe.addEventListener(
+                    "load",
+                    () => {
+                        iframe.contentWindow.postMessage("__FromBorder__", "*");
+
+                        window.addEventListener("message", (e) => {
+                            if (!e.data.BORDER_EXEC) return;
+
+                            if (!this.#whitelistJSON.includes(e.origin)) {
+                                return w96.ui.MsgBoxSimple.confirm(
+                                    "This website want to access script system. Authorize ?",
+                                    async (ok) => {
+                                        if (ok) {
+                                            this.#whitelistJSON.push(e.origin);
+                                            await w96.FS.writestr(
+                                                "c:/user/appdata/Border/whitelist.json",
+                                                JSON.stringify(this.#whitelistJSON)
+                                            );
+                                            execute();
+                                        }
+                                    }
+                                );
+                            } else execute();
+
+                            function execute() {
+                                /* iframe.contentWindow.postMessage(
+                                  "Border say " + e.data.script,
+                                  "*"
+                                ); */
+                            }
+                        });
+                    },
+                    { once: true }
+                );
+            }
+
+            // BORDER API
+            addTab(tab) {
+                if (!tab)
+                    throw new Error("You have to add an object for creating a tab.");
+                if (!tab.url) tab.url = this.#configJSON.browser.defaultPage;
+
+                // Create an html tab div
+                let tabElement = document.createElement("div");
+                tabElement.draggable = true;
+                tabElement.classList.add("border-tab");
+                tabElement.classList.add("nodrag");
+                tabElement.dataset.id = this.generateId();
+                tabElement.dataset.url = tab.url;
+                tabElement.innerHTML =
+                    `
+<div class='border-title'>Name Undefined</div>
+<div class='border-close-btn'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 43 43" fill="none">
+        <path class="border-svg-icon-close" d="M28.2843 21.2132L42.4264 7.07107L35.3553 1.19209e-06L21.2132 14.1421L7.07107 0L1.19209e-06 7.07107L14.1421 21.2132L0 35.3553L7.07107 42.4264L21.2132 28.2843L35.3553 42.4264L42.4264 35.3553L28.2843 21.2132Z" fill="#66239A"/>
+    </svg>
+</div>
+`;
+
+                tabElement.addEventListener("click", () => {
+                    this.setCurrent(tabElement.dataset.id);
+                });
+
+                tabElement.addEventListener("contextmenu", (e) => {
+                    const tabIndex = Array.prototype.indexOf.call(
+                        tabElement.parentNode.children,
+                        tabElement
+                    );
+
+                    const ctxm = new w96.ui.ContextMenu([
+                        {
+                            type: "normal",
+                            label: "Move Left",
+                            onclick: () => {
+                                if (tabIndex === 0) return;
+
+                                body
+                                    .querySelectorAll(".border-tab")
+                                [tabIndex - 1].insertAdjacentElement(
+                                    "beforebegin",
+                                    tabElement
+                                );
+                            },
+                        },
+                        {
+                            type: "normal",
+                            label: "Move Right",
+                            onclick: () => {
+                                if (
+                                    tabIndex ===
+                                    body.querySelectorAll(".border-tab").length - 1
+                                )
+                                    return;
+
+                                body
+                                    .querySelectorAll(".border-tab")
+                                [tabIndex + 1].insertAdjacentElement(
+                                    "afterend",
+                                    tabElement
+                                );
+                            },
+                        },
+                    ]);
+
+                    ctxm.renderMenu(e.clientX, e.clientY);
+                });
+
+                tabElement
+                    .querySelector(".border-close-btn")
+                    .addEventListener("click", () => {
+                        this.removeTab(tabElement.dataset.id);
+                    });
+
+                body.querySelector("#border-tab-container").appendChild(tabElement);
+                // <
+
+                // Create an html view tab
+                let viewElement = document.createElement("iframe");
+                viewElement.classList.add("border-view");
+                viewElement.dataset.id = tabElement.dataset.id;
+
+                body.querySelector("#border-view-container").appendChild(viewElement);
+                // <
+
+                // After Created Action
+                if (tab.current) this.setCurrent(tabElement.dataset.id);
+                this.reloadTab();
+                // <
+
+                browser.cfg.tabNb++;
+                browser.cfg.tabId.push(tabElement.dataset.id);
+            }
+
+            setCurrent(id) {
+                try {
+                    for (let tab of body
+                        .querySelector("#border-tab-container")
+                        .querySelectorAll(".border-tab")) {
+                        tab.classList.remove("border-current");
+                    }
+                    body
+                        .querySelector('.border-tab[data-id~="' + id + '"]')
+                        .classList.add("border-current");
+
+                    for (let view of body
+                        .querySelector("#border-view-container")
+                        .querySelectorAll(".border-view")) {
+                        view.classList.remove("border-current");
+                    }
+                    body
+                        .querySelector('.border-view[data-id~="' + id + '"]')
+                        .classList.add("border-current");
+
+                    body.querySelector("#border-searchbar").value = body.querySelector(
+                        ".border-tab.border-current"
+                    ).dataset.url;
+                } catch { }
+            }
+
+            removeTab(id) {
+                if (!id) throw new Error("Specify a correct ID");
+
+                browser.cfg.tabNb--;
+                browser.cfg.tabId.splice(browser.cfg.tabId.indexOf(id), 1);
+
+                body
+                    .querySelector("#border-tab-container")
+                    .removeChild(
+                        body.querySelector('.border-tab[data-id~="' + id + '"]')
+                    );
+                body
+                    .querySelector("#border-view-container")
+                    .removeChild(
+                        body.querySelector('.border-view[data-id~="' + id + '"]')
+                    );
+            }
+
+            reloadTab() {
+                if (
+                    !this.#handleURI(
+                        body.querySelector(".border-tab.border-current").dataset.url
+                    )[1]
+                ) {
+                    body.querySelector("#border-searchbar").value =
+                        this.#handleURI(
+                            body.querySelector(".border-tab.border-current").dataset.url
+                        )[0];
+                } else {
+                    body.querySelector("#border-searchbar").value = body.querySelector(
+                        ".border-tab.border-current"
+                    ).dataset.url;
+                }
+
+                body
+                    .querySelector("#border-view-container")
+                    .querySelector(".border-view.border-current").src =
+                    this.#handleURI(
+                        body
+                            .querySelector("#border-tab-container")
+                            .querySelector(".border-tab.border-current").dataset.url
+                    )[0];
+
+                this.#handleScript(
+                    body
+                        .querySelector("#border-view-container")
+                        .querySelector(".border-view.border-current")
+                );
+                body.querySelector("#border-searchbar").blur();
+
+                if (
+                    this.#handleURI(
+                        body.querySelector(".border-tab.border-current").dataset.url
+                    )[1]
+                ) {
+                    body
+                        .querySelector(".border-tab.border-current")
+                        .querySelector(".border-title").innerText =
+                        this.#handleURI(
+                            body.querySelector(".border-tab.border-current").dataset.url
+                        )[1];
+                } else
+                    body
+                        .querySelector(".border-tab.border-current")
+                        .querySelector(".border-title").innerText = browser
+                            .verifyProtocol(
+                                body.querySelector(".border-tab.border-current").dataset.url
+                            )[0]
+                            .split("/")[2];
+            }
+
+            generateId() {
+                let id = "";
+                for (let i = 0; i < 4; i++) {
+                    id += Math.floor(Math.random() * 10);
+                }
+
+                if (browser.cfg.tabId.length >= 9999)
+                    throw new Error("Cannot generate ID");
+                for (const tabId in browser.cfg.tabId) {
+                    if (tabId === id) return this.generateId();
+                }
+                return parseInt(id);
+            }
+
+            async constructor() {
+                const isConfigFileExisting = await w96.FS.exists(
+                    "c:/user/appdata/Border/config.json"
+                );
+                const isBookmarksFileExisting = await w96.FS.exists(
+                    "c:/user/appdata/Border/bookmarks.json"
+                );
+                const isThemeFolderExisting = await w96.FS.exists(
+                    "c:/user/appdata/Border/themes"
+                );
+                const isStyleFileExisting = await w96.FS.exists(
+                    "c:/user/appdata/Border/themes/default.css"
+                );
+                const isWhitelistFileExisting = await w96.FS.exists(
+                    "c:/user/appdata/Border/whitelist.json"
+                );
+                const isConfigFolderExisting = await w96.FS.exists(
+                    "c:/user/appdata/Border"
+                );
+
+                // creating default config file
+                if (!isConfigFolderExisting) {
+                    await w96.FS.mkdir("c:/user/appdata/Border");
+                    await w96.FS.writestr(
+                        "c:/user/appdata/Border/.meta",
+                        JSON.stringify({
+                            description:
+                                "This is the Border's Data folder.\n\nIt's unsafe to edit files here if you don't know what you do !\n\nUse the Border Setup Program instead !",
+                        })
+                    );
+                }
+                if (!isBookmarksFileExisting) {
+                    await w96.FS.writestr(
+                        "c:/user/appdata/Border/bookmarks.json",
+                        JSON.stringify([])
+                    );
+                }
+                if (!isThemeFolderExisting) {
+                    await w96.FS.mkdir("c:/user/appdata/Border/themes");
+                }
+                if (!isStyleFileExisting) {
+                    await w96.FS.writestr(
+                        "c:/user/appdata/Border/themes/default.css",
+                        `@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+                #border-root>* {
+                padding: 0;
+                margin: 0;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                }
+
+                #border-root>.w96-menubar {
+                background: var(--border-primary);
+                color: var(--border-secondary);
+                }
+
+                #border-root {
+                width: 100%;
+                height: 100vh;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                font-family: 'Lexend', sans-serif;
+                }
+
+                #border-menu,
+                #border-titlebar {
+                width: 100%;
+                height: 60px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                flex-direction: row;
+                background: var(--border-primary);
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                }
+
+                #border-titlebar {
+                background: var(--border-secondary);
+                }
+
+                #border-tab-menu {
+                height: 100%;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                flex: 1;
+                overflow-x: auto;
+                }
+
+
+                #border-ctrl-btn-container {
+                width: 100px;
+                height: 100%;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                justify-content: space-evenly;
+                }
+
+                #border-tab-container::-webkit-scrollbar {
+                display: none;
+                }
+
+                #border-tab-container {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                height: 100%;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -ms-overflow-style: none;
+                /* IE 11 */
+                overflow-x: auto;
+                overflow-y: hidden;
+                scrollbar-width: none;
+                /* Firefox 64 */
+                }
+
+                .border-tab {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                color: var(--border-secondary);
+                -webkit-box-pack: space-evenly;
+                -ms-flex-pack: space-evenly;
+                justify-content: space-evenly;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                width: 150px;
+                min-width: 200px;
+                border-radius: 20px;
+                height: 80%;
+                margin: 15px 10px;
+                background: var(--border-primary);
+                -webkit-transition: all 0.2s ease;
+                -o-transition: all 0.2s ease;
+                transition: all 0.2s ease;
+                overflow: hidden;
+                }
+
+                .border-view {
+                display: none;
+                }
+
+                #border-add-button {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                color: var(--border-secondary);
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                margin-left: 10px;
+                border-radius: 50px;
+                min-height: 40px;
+                min-width: 40px;
+                background: var(--border-primary);
+                }
+
+                #border-add-button>h2 {
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                }
+
+                #border-search-button, .border-history-btn {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                color: var(--border-primary);
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                border-radius: 50px;
+                min-height: 35px;
+                min-width: 35px;
+                background: var(--border-secondary);
+                margin: 0 8px;
+                }
+
+                .border-tab.border-current {
+                border-radius: 20px 20px 0 0;
+                transform: translateY(8px);
+                }
+
+                .border-view.border-current {
+                display: block;
+                }
+
+                #border-searchbar {
+                border: none;
+                margin: 10px;
+                padding: 10px;
+                width: 100%;
+                border-radius: 999px;
+                color: var(--border-primary);
+                background: var(--border-secondary);
+                }
+
+                #border-view-container, .border-view {
+                width: 100%;
+                height: 100%;
+                border: none;
+                background: var(--border-primary);
+                }
+
+                .border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, .border-ctrl-btn {
+                cursor: pointer;
+                }
+
+                .border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, #border-searchbar, .border-ctrl-btn {
+                font-size: 15px;
+                }
+
+                path[class *= "border-svg-icon"], .border-ctrl-btn>svg>path {
+                fill: var(--border-primary);
+                }
+
+                path.border-svg-icon-close, path.border-svg-icon-add {
+                fill: var(--border-secondary);
+                }`
+                    );
+                }
+                if (!isWhitelistFileExisting) {
+                    await w96.FS.writestr(
+                        "c:/user/appdata/Border/whitelist.json",
+                        JSON.stringify([])
+                    );
+                }
+                if (!isConfigFileExisting) {
+                    await w96.FS.writestr(
+                        "c:/user/appdata/Border/config.json",
+                        JSON.stringify({
+                            theme: {
+                                currentTheme: "default",
+                                primary: "#4e2493",
+                                secondary: "#ffe5fb",
+                            },
+                            window: {
+                                customTitlebar: true,
+                                height: 550,
+                                width: 650,
+                            },
+                            browser: {
+                                defaultPage: "border://newtab",
+                                enableShortcuts: true,
+                            },
+                        })
+                    );
+
+                    await this.#createSetupWnd();
+                } else this.#main();
+            }
+
+            /* Creating the Border Setup Program */
+            async #createSetupWnd() {
+                let wnd = new w96.StandardWindow({
+                    title: "Setup Border",
+                    icon: icon16,
+                    bodyClass: "border-setup-wnd",
+                    taskbar: true,
+                    initialHeight: 400,
+                    initialWidth: 600,
+                });
+
+                let setupBody = wnd.getBodyContainer();
+
+                setupBody.innerHTML = `
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+.border-setup-body {
+    background: #66239A;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+    font-family: Lexend, sans-serif;
+    font-size: .7rem;
+}
+.border-setup-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #fff;
+    font-size: .7rem;
+}
+.border-setup-back, .border-setup-next {
+    padding: 5px;
+    color: #66239A;
+    background: #fff;
+}
+</style>
+<div class="border-setup-body">
+    <div class="border-setup-container">
+        <img height="150" style="margin-right: 20px;" src="data:image/png;base64,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">
+        <div class="border-setup-content">
+            <div class="border-setup-panel"></div>
+        </div>
+    </div>
+    <div class="border-setup-button-container">
+        <button class="border-setup-back">Back</button>
+        <button class="border-setup-next">Next</button>
+    </div>
+</div>
+`;
+
+                let currentPage = 0;
+                let settings = {};
+
+                let page = [
+                    {
+                        content: `
+            <h1>Welcome to the Border Setup Program !</h1>
+            Click next to start the configuration of Border or back to use the default one.
+            `,
+                    },
+                    {
+                        content: `
+            <h1>Theme of Border</h1>
+            <b>Primary : </b><input class="border-setup-primary-input" type="color" value="${this.#configJSON.theme.primary}"></input><br>
+            <b>Secondary : </b><input class="border-setup-secondary-input" type="color" value="${this.#configJSON.theme.secondary}"></input>
+            `,
+                        save: [
+                            {
+                                name: "primary",
+                                value: ".border-setup-primary-input",
+                            },
+                            {
+                                name: "secondary",
+                                value: ".border-setup-secondary-input",
+                            },
+                        ],
+                    },
+                    {
+                        content: `
+            <h1>Size of the window</h1>
+            <b>Height : </b><input class="border-setup-height-input" type="number" value="${this.#configJSON.window.height}"></input>px<br>
+            <b>Width : </b><input class="border-setup-width-input" type="number" value="${this.#configJSON.window.width}"></input>px<br>
+            <b>Use the custom titlebar : </b><input class="border-setup-titlebar-input" type="checkbox" checked="${this.#configJSON.window.customTitlebar}"></input>
+            `,
+                        save: [
+                            {
+                                name: "height",
+                                value: ".border-setup-height-input",
+                            },
+                            {
+                                name: "width",
+                                value: ".border-setup-width-input",
+                            },
+                            {
+                                name: "customTitlebar",
+                                value: ".border-setup-titlebar-input",
+                            },
+                        ],
+                    },
+                    {
+                        content: `
+            <h1>Others</h1>
+            <b>Default page : </b><input class="border-setup-default-input" type="url" value="${this.#configJSON.browser.defaultPage}"></input><br>
+            <b>Enable shortcuts ? </b><input class="border-setup-shortcuts-input" type="checkbox" checked="${this.#configJSON.browser.enableShortcuts}"></input><br>
+            <b>Create a Border shortcut on your desktop ? </b><input class="border-setup-desktop-input" type="checkbox" checked="true"></input>
+            `,
+                        save: [
+                            {
+                                name: "defaultPage",
+                                value: ".border-setup-default-input",
+                            },
+                            {
+                                name: "enableShortcuts",
+                                value: ".border-setup-shortcuts-input",
+                            },
+                            {
+                                name: "createDesktopShortcut",
+                                value: ".border-setup-desktop-input",
+                            },
+                        ],
+                    },
+                    {
+                        content: `
+            <h1>So here we are !</h1>
+            <div class="border-setup-get-settings"></div>
+            `,
+                    },
+                ];
+
+                setupBody
+                    .querySelector(".border-setup-back")
+                    .addEventListener("click", () => {
+                        goto(--currentPage);
+                    });
+
+                setupBody
+                    .querySelector(".border-setup-next")
+                    .addEventListener("click", () => {
+                        if (!!page[currentPage].save) {
+                            for (let data of page[currentPage].save) {
+                                settings[data.name] =
+                                    setupBody.querySelector(data.value).type === "checkbox"
+                                        ? setupBody.querySelector(data.value).checked
+                                        : setupBody.querySelector(data.value).value;
+                            }
+                        }
+                        goto(++currentPage);
+                    });
+
+                const goto = (n) => {
+                    if (n >= page.length) {
+                        let json = JSON.stringify({
+                            theme: {
+                                currentTheme: this.#configJSON.theme.currentTheme,
+                                primary: settings.primary,
+                                secondary: settings.secondary,
+                            },
+                            window: {
+                                customTitlebar: settings.customTitlebar,
+                                height: settings.height,
+                                width: settings.width,
+                            },
+                            browser: {
+                                defaultPage: settings.defaultPage,
+                                enableShortcuts: settings.enableShortcuts,
+                            },
+                        });
+
+                        if (settings.createDesktopShortcut) {
+                            w96.shell.mkShortcut(
+                                "c:/user/desktop/Border.link",
+                                icon32,
+                                "border"
+                            );
+                        }
+
+                        w96.FS.writestr("c:/user/appdata/Border/config.json", json).then(
+                            () => {
+                                alert("Configuration done !");
+                                w96.sys.execCmd("border");
+                                return wnd.close();
+                            }
+                        );
+                    }
+
+                    if (n < 0) {
+                        w96.sys.execCmd("border");
+                        return wnd.close();
+                    }
+
+                    setupBody.querySelector(".border-setup-panel").innerHTML =
+                        page[n].content;
+
+                    document
+                        .querySelectorAll(".border-setup-get-settings")
+                        .forEach((item) => {
+                            let settingsData = "";
+                            for (let key of Object.keys(settings)) {
+                                settingsData += key + ": " + settings[key] + "<br/>";
+                            }
+                            item.innerHTML = settingsData;
+                        });
+
+                    currentPage = n;
+                };
+                goto(0);
+
+                wnd.show();
+            }
+
+            async #main() {
+                // Create Border main window
+                const wnd = this.createWindow(
+                    {
+                        title: "Border",
+                        body:
+                            `
+                    <style>
+                        ${this.#styleCSS}
+                    </style>
+                    <div id="border-root">
+                    <div id="border-titlebar">
+                        <div id="border-tab-menu">
+                        <div id="border-tab-container">
+                    
+                        </div>
+                        <div id="border-add-button" class="nodrag">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 44 44" fill="none">
+                                <path class="border-svg-icon-add" d="M27 17V0H17V17H0V27H17V44H27V27H44V17H27Z" fill="#66239A"/>
+                            </svg>
+                        </div>
+                        </div>
+                        <div id="border-ctrl-btn-container">
+                        <div class="border-minimize border-ctrl-btn nodrag">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 45 45" fill="none">
+                                <path d="M22.5 30L45 7.5L37.5 0L22.5 15L7.49998 1.31134e-06L0 7.5L22.5 30Z" fill="#66239A"/>
+                                <path d="M9.83506e-07 35H45V45H9.83506e-07V35Z" fill="#66239A"/>
+                            </svg>
+                        </div>
+                        <div class="border-maximize border-ctrl-btn nodrag">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 45 45" fill="none">
+                                <path clip-rule="evenodd" d="M35 10H10V35H35V10ZM0 0V45H45V0H0Z" fill="#66239A" fill-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="border-close border-ctrl-btn nodrag">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 43 43" fill="none">
+                                <path d="M28.2843 21.2132L42.4264 7.07107L35.3553 1.19209e-06L21.2132 14.1421L7.07107 0L1.19209e-06 7.07107L14.1421 21.2132L0 35.3553L7.07107 42.4264L21.2132 28.2843L35.3553 42.4264L42.4264 35.3553L28.2843 21.2132Z" fill="#66239A"/>
+                            </svg>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div id="border-menu" class="nodrag">
+                        <div class="border-history-btn border-history-back">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="7.25" height="10.75" viewBox="0 0 29 43" fill="none">
+                                <path class="border-svg-icon" d="M0 21.2132L21.2131 42.4264L28.2842 35.3553L14.1421 21.2132L28.2842 7.07104L21.2131 0L0 21.2132Z" fill="#66239A"/>
+                            </svg>
+                        </div>
+                        <div class="border-history-btn border-history-forward">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="7.25" height="10.75" viewBox="0 0 29 43" fill="none">
+                                <path class="border-svg-icon" d="M29 21.7868L7.78687 0.573607L0.715823 7.64468L14.8579 21.7868L0.715821 35.929L7.78687 43L29 21.7868Z" fill="#66239A"/>
+                            </svg>
+                        </div>
+                        <div class="border-history-btn border-history-refresh">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11.25" height="11.25" viewBox="0 0 45 45" fill="none">
+                                <path class="border-svg-icon" d="M45 20V0L38.4099 6.59011C35.2632 3.44343 31.2541 1.30051 26.8895 0.432343C22.525 -0.435825 18.001 0.00975001 13.8896 1.71272C9.77828 3.41569 6.26427 6.29957 3.79193 9.99968C1.3196 13.6998 0 18.0499 0 22.5C0 26.9501 1.3196 31.3002 3.79193 35.0003C6.26427 38.7004 9.77828 41.5843 13.8896 43.2873C18.001 44.9903 22.525 45.4358 26.8895 44.5677C31.2541 43.6995 35.2632 41.5566 38.4099 38.4099L31.3388 31.3388C29.5907 33.087 27.3634 34.2775 24.9386 34.7598C22.5139 35.2421 20.0005 34.9946 17.7165 34.0485C15.4324 33.1024 13.4801 31.5003 12.1066 29.4446C10.7331 27.389 10 24.9723 10 22.5C10 20.0277 10.7331 17.611 12.1066 15.5554C13.4801 13.4998 15.4324 11.8976 17.7165 10.9515C20.0005 10.0054 22.5139 9.75788 24.9386 10.2402C27.3634 10.7225 29.5907 11.913 31.3388 13.6612L25 20H45Z" fill="#66239A"/>
+                            </svg>
+                        </div>
+                    
+                        <input id="border-searchbar" placeholder="Enter an URL..."></input>
+                    
+                        <div id="border-search-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10.75" viewBox="0 0 40 43" fill="none">
+                                <path class="border-svg-icon" d="M18.071 0L39.2842 21.2132L18.071 42.4264L11 35.3553L20.3552 26H0V16H19.929L11 7.07108L18.071 0Z" fill="#66239A"/>
+                            </svg>
+                        </div>
+                    </div>
+                        <div class="appbar"></div>
+                    
+                        <div id="border-view-container" class="nodrag">
+                    
+                        </div>
+                    </div>
+                    `,
+                        initialHeight: this.#configJSON.window.height,
+                        initialWidth: this.#configJSON.window.width,
+                        taskbar: true,
+                        icon: icon16,
+                    },
+                    true
+                );
+
+                const body = wnd.getBodyContainer();
+
+                const appbar = new w96.ui.MenuBar();
+                appbar.menuElement.classList.add("nodrag");
+
+                await appbar.addRoot("File", [
+                    {
+                        type: "normal",
+                        label: "New Tab",
+                        onclick: () => {
+                            this.addTab({ current: true });
+                        },
+                    },
+                    {
+                        type: "normal",
+                        label: "Close Current Tab",
+                        onclick: () => {
+                            this.removeTab(
+                                body.querySelector(".border-tab.border-current").dataset.id
+                            );
+                        },
+                    },
+                    {
+                        type: "separator",
+                    },
+                    {
+                        type: "normal",
+                        label: "Restart",
+                        onclick: () => {
+                            wnd.close();
+                            w96.sys.execCmd("border");
+                        },
+                    },
+                    {
+                        type: "normal",
+                        label: "Exit",
+                        onclick: () => wnd.close(),
+                    },
+                ]);
+
+                appbar.addRoot("View", [
+                    {
+                        type: "normal",
+                        label: "Reload",
+                        onclick: () => {
+                            this.reloadTab();
+                        },
+                    },
+                    {
+                        type: "separator",
+                    },
+                    {
+                        type: "normal",
+                        label: "Back",
+                        onclick: () => {
+                            window.history.back();
+                        },
+                    },
+                    {
+                        type: "normal",
+                        label: "Forward",
+                        onclick: () => {
+                            window.history.forward();
+                        },
+                    },
+                ]);
+
+                appbar.addRoot("Tools", [
+                    {
+                        type: "normal",
+                        label: "Edit Config",
+                        onclick: async () => {
+                            await this.#createSetupWnd();
+                            wnd.close();
+                        },
+                    },
+                    {
+                        type: "normal",
+                        label: "Create Shortcut",
+                        onclick: () => {
+                            w96.shell.mkShortcut(
+                                "c:/user/desktop/" +
+                                browser
+                                    .verifyProtocol(
+                                        body.querySelector(".border-tab.border-current").dataset.url
+                                    )[0]
+                                    .split("/")[2] +
+                                ".link",
+                                icon32,
+                                "border " +
+                                body.querySelector(".border-tab.border-current").dataset.url
+                            );
+                        },
+                    },
+                    {
+                        type: "normal",
+                        label: "Add This Site To Bookmarks",
+                        onclick: async () => {
+                            this.#bookmarksJSON.push({
+                                name: this.#handleURI(
+                                    body.querySelector(".border-tab.border-current").dataset.url
+                                )[0],
+                                url: this.#handleURI(
+                                    body.querySelector(".border-tab.border-current").dataset.url
+                                )[0],
+                            });
+                            await w96.FS.writestr(
+                                "c:/user/appdata/Border/bookmarks.json",
+                                JSON.stringify(this.#bookmarksJSON)
+                            );
+                            alert("Restart Border to access the bookmark");
+                        },
+                    },
+                ]);
+
+                appbar.addRoot("Help", [
+                    {
+                        type: "normal",
+                        label: "About",
+                        onclick: () =>
+                            w96.ui.MsgBoxSimple.info(
+                                "About Border for Windows 96",
+                                '<span class="bold-noaa">Border</span><br>Version ' +
+                                browser.cfg.version +
+                                '<br><br>Powered by <a href="https://onofficiel.github.io/border/">Border Web</a>',
+                                "OK"
+                            ).dlg.setSize(320, 140),
+                    },
+                    {
+                        type: "normal",
+                        label: "Send Feedback",
+                        onclick: async () => {
+                            let loader = w96.ui.MsgBoxSimple.idleProgress(
+                                "Border Feedback",
+                                "Connecting to the feedback server..."
+                            );
+
+                            if (!w96.net.p3.connected) await w96.net.p3.connect();
+
+                            let socket = w96.net.p3.createConnection(
+                                "onofficiel.l51drui0hb.ppp:1234"
+                            );
+
+                            const tryConnect = () => {
+                                socket.connect().catch((err) => {
+                                    loader.closeDialog();
+                                    w96.ui.MsgBoxSimple.confirm(
+                                        "Cannot connect to the feedback server : " +
+                                        err +
+                                        ".\nRetry ?",
+                                        (ok) => {
+                                            if (ok) {
+                                                tryConnect();
+                                                loader = w96.ui.MsgBoxSimple.idleProgress(
+                                                    "Border Feedback",
+                                                    "Connecting to the feedback server..."
+                                                );
+                                            }
+                                        }
+                                    );
+                                });
+                            };
+
+                            socket.on("connect", () => {
+                                loader.closeDialog();
+                                w96.ui.MsgBoxSimple.prompt(
+                                    "Border Feedback",
+                                    'Write here to us : ( the message can\'t contain ">>" )',
+                                    "",
+                                    (msg) => {
+                                        if (msg) socket.send(["text", "feedback>>" + msg]);
+                                    }
+                                );
+                            });
+
+                            socket.on("message", (msg) => {
+                                alert(msg[1]);
+                            });
+
+                            tryConnect();
+                        },
+                    },
+                    {
+                        type: "separator",
+                    },
+                    {
+                        type: "normal",
+                        label: "See Keyboard Shortcuts",
+                        onclick: () => {
+                            let list =
+                                "Do shortcuts are actived ? " + this.#configJSON.browser.enableShortcuts
+                                    ? "yes"
+                                    : "no" + "<br>";
+
+                            for (const keybind in this.keybinds) {
+                                if (Object.hasOwnProperty.call(this.keybinds, keybind)) {
+                                    const element = this.keybinds[keybind];
+
+                                    list += `<b>${element.description + " : "}</b>${element.keys
+                                        .reverse()
+                                        .join(" + ")}<br>`;
+                                }
+                            }
+
+                            w96.ui.MsgBoxSimple.info(
+                                "Border Keyboard Shortcuts",
+                                '<span class="bold-noaa">Border Keyboard Shortcuts :</span><br><br> ' +
+                                list,
+                                "OK"
+                            ).dlg.setSize(320, 140);
+                        },
+                    },
+                    {
+                        type: "normal",
+                        label: "Open A Changelog Tab",
+                        onclick: () => {
+                            this.addTab({ current: true, url: "border://changelog" });
+                        },
+                    },
+                ]);
+
+                const bookmarkList = [];
+                this.#bookmarksJSON.forEach(({ name, url }) => {
+                    bookmarkList.push({
+                        type: "normal",
+                        label: name,
+                        onclick: () => {
+                            this.addTab({ current: true, url });
+                        },
+                    });
+                });
+
+                appbar.addRoot("Bookmarks", bookmarkList);
+
+                const themes = await w96.FS.readdir("c:/user/appdata/Border/themes");
+
+                const themeList = [];
+                themes.forEach((name) => {
+                    name = name.split(".")[0].split("/").slice(-1).toString();
+                    themeList.push({
+                        type: "normal",
+                        label: name,
+                        onclick: async () => {
+                            this.#configJSON.theme.currentTheme = name;
+                            await w96.FS.writestr(
+                                "c:/user/appdata/Border/config.json",
+                                JSON.stringify(this.#configJSON)
+                            );
+                            alert("Restart to apply the theme.");
+                        },
+                    });
+                });
+                themeList.push(
+                    {
+                        type: "separator",
+                    },
+                    {
+                        type: "normal",
+                        label: "Go To The Theme Folder",
+                        onclick: () => {
+                            w96.sys.execCmd("explorer", ["c:/user/appdata/Border/themes"]);
+                        },
+                    }
+                );
+
+                appbar.addRoot("Themes", themeList);
+
+                if (this.#configJSON.window.customTitlebar) {
+                    // delete the default titlebar
+                    wnd.wndObject
+                        .querySelectorAll("[class|='titlebar']")
+                        .forEach((elem) => (elem.style.display = "none"));
+                    wnd.wndObject
+                        .querySelector(".window-html-content")
+                        .classList.remove("nodrag");
+
+                    // give the behavior to the new titlebar
+                    body
+                        .querySelector(".border-minimize")
+                        .addEventListener("click", () => wnd.toggleMinimize());
+                    body
+                        .querySelector(".border-maximize")
+                        .addEventListener("click", () => wnd.toggleMaximize());
+                    body
+                        .querySelector(".border-close")
+                        .addEventListener("click", () => wnd.close());
+                    body
+                        .querySelector("#border-titlebar")
+                        .addEventListener("dblclick", () => wnd.toggleMaximize());
+                } else {
+                    body.querySelector("#border-ctrl-btn-container").style.display = "none";
+                }
+
+                body.querySelector(".appbar").replaceWith(appbar.getMenuDiv());
+
+                wnd.show();
+
+                // boot
+                document
+                    .querySelector(":root")
+                    .style.setProperty("--border-primary", this.#configJSON.theme.primary);
+                document
+                    .querySelector(":root")
+                    .style.setProperty(
+                        "--border-secondary",
+                        this.#configJSON.theme.secondary
+                    );
+
+                let h = body.querySelectorAll(".border-history-btn");
+
+                h[0].addEventListener("click", () => {
+                    window.history.back();
+                    this.reloadTab();
+                });
+                h[1].addEventListener("click", () => {
+                    window.history.forward();
+                    this.reloadTab();
+                });
+                h[2].addEventListener(
+                    "click",
+                    () =>
+                    (body.querySelector(".border-view.border-current").src =
+                        body.querySelector(".border-view.border-current").src)
+                );
+
+                body
+                    .querySelector("#border-add-button")
+                    .addEventListener("click", () => this.addTab({ current: true }));
+                body
+                    .querySelector("#border-search-button")
+                    .addEventListener("click", () => {
+                        body.querySelector(".border-tab.border-current").dataset.url =
+                            body.querySelector("#border-searchbar").value;
+                        this.reloadTab();
+                    });
+
+                if (argv[1])
+                    this.addTab({
+                        url: this.#handleURI(argv[1])[0],
+                        current: true,
+                    });
+                else this.addTab({ current: true });
+
+                body
+                    .querySelector("#border-searchbar")
+                    .addEventListener("keyup", (event) => {
+                        if (event.key === "Enter") {
+                            body.querySelector(".border-tab.border-current").dataset.url =
+                                body.querySelector("#border-searchbar").value;
+                            this.reloadTab();
+                        }
+                    });
+
+                setInterval(() => {
+                    if (
+                        body
+                            .querySelector("#border-tab-container")
+                            .querySelectorAll(".border-tab").length <= 0
+                    )
+                        wnd.close();
+
+                    if (!body.querySelector(".border-tab.border-current")) {
+                        this.setCurrent(browser.cfg.tabId[0]);
+                    }
+                }, 10);
+
+                if (this.#configJSON.browser.enableShortcuts) {
+                    for (const keybind in this.keybinds) {
+                        if (Object.hasOwnProperty.call(this.keybinds, keybind)) {
+                            const cKeybind = this.keybinds[keybind];
+
+                            cKeybind.keys.reverse();
+
+                            let status = [];
+
+                            for (const key in cKeybind.keys) {
+                                if (Object.hasOwnProperty.call(cKeybind.keys, key)) {
+                                    const cKey = cKeybind.keys[key];
+
+                                    status.push(false);
+
+                                    window.addEventListener("keydown", (e) => {
+                                        if (e.key.toLowerCase() === cKey.toLowerCase()) {
+                                            status[key] = true;
+                                        } else status[key] = false;
+
+                                        let i = 0;
+                                        for (let stat in status) {
+                                            if (status[stat]) i++;
+
+                                            if (i >= status.length) {
+                                                e.preventDefault();
+                                                cKeybind.exec();
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+}
+
+w96.shell.mkShortcut(
+    "c:/system/programs/Accessories/Border.link",
+    icon16,
+    "border"
+);
+
+return await WApplication.execAsync(new BorderApp(), this.boxedEnv.args);
