@@ -14,7 +14,6 @@ class BorderApp extends WApplication {
         super.main(argv);
 
         class Border {
-
             // Variable declaration
             #tabNb = 0;
             #tabId = [];
@@ -1449,6 +1448,8 @@ class BorderApp extends WApplication {
                 }
             }
         }
+
+        let browser = new Border();
     }
 }
 
