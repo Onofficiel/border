@@ -25,6 +25,9 @@ class Border extends WApplication {
     const isStyleFileExisting = await w96.FS.exists(
       "c:/user/appdata/Border/style.css"
     );
+    const isWhitelistFileExisting = await w96.FS.exists(
+      "c:/user/appdata/Border/whitelist.json"
+    );
     const isConfigFolderExisting = await w96.FS.exists(
       "c:/user/appdata/Border"
     );
@@ -54,160 +57,206 @@ class Border extends WApplication {
         "c:/user/appdata/Border/themes/default.css",
         `@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
 
-#border-root>* {
-    padding: 0;
-    margin: 0;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-}
+        #border-root>* {
+          padding: 0;
+          margin: 0;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+        
+        #border-root>.w96-menubar {
+          background: var(--border-primary);
+          color: var(--border-secondary);
+        }
+        
+        #border-root {
+          width: 100%;
+          height: 100vh;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+          flex-direction: column;
+          font-family: 'Lexend', sans-serif;
+        }
+        
+        #border-menu,
+        #border-titlebar {
+          width: 100%;
+          height: 60px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          flex-direction: row;
+          background: var(--border-primary);
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+        }
 
-#border-root {
-    width: 100%;
-    height: 100vh;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    font-family: 'Lexend', sans-serif;
-}
-
-#border-menu,
-#border-tab-menu {
-    width: 100%;
-    height: 60px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    background: var(--border-primary);
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-}
-
-#border-tab-menu {
-    background: var(--border-secondary);
-}
-
-#border-tab-container::-webkit-scrollbar {
-  display: none;
-}
-
-#border-tab-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -ms-overflow-style: none; /* IE 11 */
-        overflow-x: auto;
-        overflow-y: hidden;
-    scrollbar-width: none; /* Firefox 64 */
-}
-
-.border-tab {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    color: var(--border-secondary);
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    width: 150px;
-    min-width: 200px;
-    border-radius: 20px;
-    height: 80%;
-    margin: 15px 10px;
-    background: var(--border-primary);
-    -webkit-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-    overflow: hidden;
-}
-.border-view {
-    display: none;
-}
-
-#border-add-button {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    color: var(--border-secondary);
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    border-radius: 50px;
-    min-height: 40px;
-    min-width: 40px;
-    margin: 15px 10px;
-    background: var(--border-primary);
-}
-#border-add-button>h2 {
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-}
-#border-search-button, .border-history-btn {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    color: var(--border-primary);
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    border-radius: 50px;
-    min-height: 35px;
-    min-width: 35px;
-    margin: 15px 10px;
-    background: var(--border-secondary);
-}
-
-.border-tab.border-current {
-    border-radius: 20px 20px 0 0;
-    margin: 11px 10px 0;
-}
-.border-view.border-current {
-    display: block;
-}
-
-#border-searchbar {
-    border: none;
-    margin: 10px;
-    padding: 10px;
-    width: 100%;
-    border-radius: 999px;
-    color: var(--border-primary);
-    background: var(--border-secondary);
-}
-
-#border-view-container, .border-view {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: var(--border-primary);
-}
-.border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn {
-    cursor: pointer;
-}
-.border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, #border-searchbar {
-    font-size: 15px;
-}`
+        #border-titlebar {
+          background: var(--border-secondary);
+        }
+        
+        #border-tab-menu {
+          height: 100%;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          flex: 1;
+          overflow-x: auto;
+        }
+        
+        
+        #border-ctrl-btn-container {
+          width: 100px;
+          height: 100%;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          justify-content: space-evenly;
+          color: var(--border-primary);
+        }
+        
+        #border-tab-container::-webkit-scrollbar {
+          display: none;
+        }
+        
+        #border-tab-container {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          height: 100%;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -ms-overflow-style: none;
+          /* IE 11 */
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          /* Firefox 64 */
+        }
+        
+        .border-tab {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          color: var(--border-secondary);
+          -webkit-box-pack: space-evenly;
+          -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          width: 150px;
+          min-width: 200px;
+          border-radius: 20px;
+          height: 80%;
+          margin: 15px 10px;
+          background: var(--border-primary);
+          -webkit-transition: all 0.2s ease;
+          -o-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+          overflow: hidden;
+        }
+        
+        .border-view {
+          display: none;
+        }
+        
+        #border-add-button {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          color: var(--border-secondary);
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          margin-left: 10px;
+          border-radius: 50px;
+          min-height: 40px;
+          min-width: 40px;
+          background: var(--border-primary);
+        }
+        
+        #border-add-button>h2 {
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+        }
+        
+        #border-search-button, .border-history-btn {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          color: var(--border-primary);
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          border-radius: 50px;
+          min-height: 35px;
+          min-width: 35px;
+          background: var(--border-secondary);
+          margin: 0 8px;
+        }
+        
+        .border-tab.border-current {
+          border-radius: 20px 20px 0 0;
+          transform: translateY(8px);
+        }
+        
+        .border-view.border-current {
+          display: block;
+        }
+        
+        #border-searchbar {
+          border: none;
+          margin: 10px;
+          padding: 10px;
+          width: 100%;
+          border-radius: 999px;
+          color: var(--border-primary);
+          background: var(--border-secondary);
+        }
+        
+        #border-view-container, .border-view {
+          width: 100%;
+          height: 100%;
+          border: none;
+          background: var(--border-primary);
+        }
+        
+        .border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, .border-ctrl-btn {
+          cursor: pointer;
+        }
+        
+        .border-title, .border-close-btn, #border-search-button, #border-add-button, .border-history-btn, #border-searchbar, .border-ctrl-btn {
+          font-size: 15px;
+        }`
+      );
+    }
+    if (!isWhitelistFileExisting) {
+      await w96.FS.writestr(
+        "c:/user/appdata/Border/whitelist.json",
+        JSON.stringify([])
       );
     }
     if (!isConfigFileExisting) {
@@ -220,6 +269,7 @@ class Border extends WApplication {
             secondary: "#ffffff",
           },
           window: {
+            customTitlebar: true,
             height: 550,
             width: 650,
           },
@@ -238,6 +288,9 @@ class Border extends WApplication {
       let bookmarksJSON = JSON.parse(
         await w96.FS.readstr("c:/user/appdata/Border/bookmarks.json")
       );
+      let whitelistJSON = JSON.parse(
+        await w96.FS.readstr("c:/user/appdata/Border/whitelist.json")
+      );
       let styleCSS = await w96.FS.readstr(
         `c:/user/appdata/Border/themes/${configJSON.theme.currentTheme}.css`
       );
@@ -247,31 +300,39 @@ class Border extends WApplication {
         {
           title: "Border",
           body: `
-            <style>
-            ${styleCSS}
-            </style>
-            <div class="appbar"></div>
-            <div id="border-root">
-                <div id="border-tab-menu">
-                    <div id="border-tab-container">
-
-                    </div>
-                    <div id="border-add-button">+</div>
-                </div>
-
-                <div id="border-menu">
-                    <div class="border-history-btn"><</div>
-                    <div class="border-history-btn">></div>
-                    <div class="border-history-btn">↺</div>
-                    <input id="border-searchbar">
-
-                    </input>
-                    <div id="border-search-button">⇾</div>
-                </div>
-                <div id="border-view-container">
-
-                </div>
+          <style>
+          ${styleCSS}
+        </style>
+        <div id="border-root">
+          <div id="border-titlebar">
+            <div id="border-tab-menu">
+              <div id="border-tab-container">
+        
+              </div>
+              <div id="border-add-button" class="nodrag">+</div>
             </div>
+            <div id="border-ctrl-btn-container">
+              <div class="border-minimize border-ctrl-btn nodrag">🗕</div>
+              <div class="border-maximize border-ctrl-btn nodrag">🞐</div>
+              <div class="border-close border-ctrl-btn nodrag">🗙</div>
+            </div>
+          </div>
+
+          <div id="border-menu" class="nodrag">
+            <div class="border-history-btn"><</div>
+            <div class="border-history-btn">></div>
+            <div class="border-history-btn">↺</div>
+        
+            <input id="border-searchbar" placeholder="Enter an URL..."></input>
+        
+            <div id="border-search-button">⇾</div>
+          </div>
+            <div class="appbar"></div>
+        
+            <div id="border-view-container" class="nodrag">
+        
+            </div>
+          </div>
             `,
           initialHeight: configJSON.window.height,
           initialWidth: configJSON.window.width,
@@ -287,7 +348,7 @@ class Border extends WApplication {
         cfg: {
           tabNb: 0,
           tabId: [],
-          version: "1.8",
+          version: "1.9",
         },
         protocols: {
           newtab: `
@@ -310,7 +371,7 @@ class Border extends WApplication {
                 <p>
                     For searching just type it in the search bar and click the arrow button.
                 </p>
-                <input type="text" id="search" placeholder="Search on Bing..." style="padding: 10px 15px; width: 80%; border-radius: 30px; border: none;">
+                <input type="text" id="search" placeholder="Search on Google..." style="padding: 10px 15px; width: 80%; border-radius: 30px; border: none;">
               </div>
             </div>
             <script>
@@ -319,7 +380,7 @@ class Border extends WApplication {
 
               search.addEventListener("keydown", (e) => {
                 if (e.code === "Enter") {
-                  handledValue = encodeURI("https://www.bing.com/search?q=" + search.value.replace(" ", "+"))
+                  handledValue = encodeURI("https://google.com/search?igu=1&q=" + search.value.replace(" ", "+"))
                   location.href = handledValue;
                 }
               })
@@ -341,17 +402,13 @@ class Border extends WApplication {
                 </head>
                 <body style="width: 100vw; height: 100vh; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white;">
                             
-                            <h1>Border v1.8 changelog.</h1>
+                            <h1>Border v1.9 changelog.</h1>
                             <ul>
-                                <li>Theme system added.</li>
-                                <li>The search bar now show correctly "https://" if necessary.</li>
-                                <li>The Home Page has been changed.</li>
-                                <li>Scrollable tab bug fixed. (delete the default.css file in the theme folder.)</li>
-                                <li>Added feature: Start your URL with a ! to search on bing.</li>
-                                <li>Keyboard shorcuts added</li>
+                              <li>Changed search engine from Bing to Google.</li>
+                              <li>You can now reorder tabs by right clicking.</li>
                             </ul>
         
-                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.8 | © Onofficiel - 2022 - All rights reserved</p>
+                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.9 | © Onofficiel - 2022 - All rights reserved</p>
                 </body>
                 </html>
                 `,
@@ -375,7 +432,7 @@ class Border extends WApplication {
                             <br><br>Thanks to <a style="color: white;" href="https://billygoat891.tk">billygoat891</a> for hosting the project on windows96.
                             </p>
         
-                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.8 | © Onofficiel - 2022 - All rights reserved</p>
+                            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v1.9 | © Onofficiel - 2022 - All rights reserved</p>
                 </body>
                 </html>
                 `,
@@ -454,9 +511,10 @@ class Border extends WApplication {
           },
         ],
         verifyProtocol: (url) => {
+          if (url.startsWith("//")) return "https://" + url.substring(2);
           if (url.startsWith("!")) {
             const handledValue = encodeURI(
-              "https://www.bing.com/search?q=" +
+              "https://google.com/search?igu=1&q=" +
                 url.substring(1).replace(" ", "+")
             );
             return [handledValue, false];
@@ -470,7 +528,10 @@ class Border extends WApplication {
                   encodeURI("data:text/html," + browser.protocols[protocol]),
                   protocol,
                 ];
-              } else if (url.startsWith("file://")) {
+              } else if (
+                url.startsWith("file://") ||
+                url.startsWith("https://rel3.windows96.net/_/")
+              ) {
                 return [
                   encodeURI("https://rel3.windows96.net/_/" + url.substring(7)),
                   url.substring(7),
@@ -482,6 +543,42 @@ class Border extends WApplication {
             return ["https://" + url, false];
           }
         },
+        handleScript: (iframe) => {
+          iframe.addEventListener(
+            "load",
+            () => {
+              iframe.contentWindow.postMessage("__FromBorder__", "*");
+
+              window.addEventListener("message", (e) => {
+                if (!e.data.BORDER_EXEC) return;
+
+                if (!whitelistJSON.includes(e.origin)) {
+                  return w96.ui.MsgBoxSimple.confirm(
+                    "This website want to access script system. Authorize ?",
+                    async (ok) => {
+                      if (ok) {
+                        whitelistJSON.push(e.origin);
+                        await w96.FS.writestr(
+                          "c:/user/appdata/Border/whitelist.json",
+                          JSON.stringify(whitelistJSON)
+                        );
+                        execute();
+                      }
+                    }
+                  );
+                } else execute();
+
+                function execute() {
+                  /* iframe.contentWindow.postMessage(
+                    "Border say " + e.data.script,
+                    "*"
+                  ); */
+                }
+              });
+            },
+            { once: true }
+          );
+        },
         addTab: (tab) => {
           if (!tab)
             throw new Error("You have to add an object for creating a tab.");
@@ -489,7 +586,9 @@ class Border extends WApplication {
 
           // Create an html tab div
           let tabElement = document.createElement("div");
+          tabElement.draggable = true;
           tabElement.classList.add("border-tab");
+          tabElement.classList.add("nodrag");
           tabElement.dataset.id = browser.generateId();
           tabElement.dataset.url = tab.url;
           tabElement.innerHTML =
@@ -497,6 +596,50 @@ class Border extends WApplication {
 
           tabElement.addEventListener("click", () => {
             browser.setCurrent(tabElement.dataset.id);
+          });
+
+          tabElement.addEventListener("contextmenu", (e) => {
+            const tabIndex = Array.prototype.indexOf.call(
+              tabElement.parentNode.children,
+              tabElement
+            );
+
+            const ctxm = new w96.ui.ContextMenu([
+              {
+                type: "normal",
+                label: "Move Left",
+                onclick: () => {
+                  if (tabIndex === 0) return;
+
+                  body
+                    .querySelectorAll(".border-tab")
+                    [tabIndex - 1].insertAdjacentElement(
+                      "beforebegin",
+                      tabElement
+                    );
+                },
+              },
+              {
+                type: "normal",
+                label: "Move Right",
+                onclick: () => {
+                  if (
+                    tabIndex ===
+                    body.querySelectorAll(".border-tab").length - 1
+                  )
+                    return;
+
+                  body
+                    .querySelectorAll(".border-tab")
+                    [tabIndex + 1].insertAdjacentElement(
+                      "afterend",
+                      tabElement
+                    );
+                },
+              },
+            ]);
+
+            ctxm.renderMenu(e.clientX, e.clientY);
           });
 
           tabElement
@@ -590,6 +733,12 @@ class Border extends WApplication {
                 .querySelector("#border-tab-container")
                 .querySelector(".border-tab.border-current").dataset.url
             )[0];
+
+          browser.handleScript(
+            body
+              .querySelector("#border-view-container")
+              .querySelector(".border-view.border-current")
+          );
           body.querySelector("#border-searchbar").blur();
 
           if (
@@ -734,6 +883,7 @@ class Border extends WApplication {
       browser.boot();
 
       const appbar = new w96.ui.MenuBar();
+      appbar.menuElement.classList.add("nodrag");
 
       await appbar.addRoot("File", [
         {
@@ -997,6 +1147,32 @@ class Border extends WApplication {
 
       appbar.addRoot("Themes", themeList);
 
+      if (configJSON.window.customTitlebar) {
+        // delete the default titlebar
+        wnd.wndObject
+          .querySelectorAll("[class|='titlebar']")
+          .forEach((elem) => (elem.style.display = "none"));
+        wnd.wndObject
+          .querySelector(".window-html-content")
+          .classList.remove("nodrag");
+
+        // give the behavior to the new titlebar
+        body
+          .querySelector(".border-minimize")
+          .addEventListener("click", () => wnd.toggleMinimize());
+        body
+          .querySelector(".border-maximize")
+          .addEventListener("click", () => wnd.toggleMaximize());
+        body
+          .querySelector(".border-close")
+          .addEventListener("click", () => wnd.close());
+        body
+          .querySelector("#border-titlebar")
+          .addEventListener("dblclick", () => wnd.toggleMaximize());
+      } else {
+        body.querySelector("#border-ctrl-btn-container").style.display = "none";
+      }
+
       body.querySelector(".appbar").replaceWith(appbar.getMenuDiv());
 
       wnd.show();
@@ -1088,7 +1264,8 @@ class Border extends WApplication {
           content: `
             <h1>Size of the window</h1>
             <b>Height : </b><input class="border-setup-height-input" type="number" value="${configJSON.window.height}"></input>px<br>
-            <b>Width : </b><input class="border-setup-width-input" type="number" value="${configJSON.window.width}"></input>px
+            <b>Width : </b><input class="border-setup-width-input" type="number" value="${configJSON.window.width}"></input>px<br>
+            <b>Use the custom titlebar : </b><input class="border-setup-titlebar-input" type="checkbox" checked="${configJSON.window.customTitlebar}"></input>
             `,
           save: [
             {
@@ -1098,6 +1275,10 @@ class Border extends WApplication {
             {
               name: "width",
               value: ".border-setup-width-input",
+            },
+            {
+              name: "customTitlebar",
+              value: ".border-setup-titlebar-input",
             },
           ],
         },
@@ -1160,6 +1341,7 @@ class Border extends WApplication {
               secondary: settings.secondary,
             },
             window: {
+              customTitlebar: settings.customTitlebar,
               height: settings.height,
               width: settings.width,
             },
