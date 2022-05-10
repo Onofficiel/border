@@ -353,8 +353,8 @@ class BorderApp extends WApplication {
                 this.reloadTab();
                 // <
 
-                browser.cfg.tabNb++;
-                browser.cfg.tabId.push(tabElement.dataset.id);
+                this.#tabNb++;
+                this.#tabId.push(tabElement.dataset.id);
             }
 
             setCurrent(id) {
@@ -386,8 +386,8 @@ class BorderApp extends WApplication {
             removeTab(id) {
                 if (!id) throw new Error("Specify a correct ID");
 
-                browser.cfg.tabNb--;
-                browser.cfg.tabId.splice(browser.cfg.tabId.indexOf(id), 1);
+                this.#tabNb--;
+                this.#tabId.splice(this.#tabId.indexOf(id), 1);
 
                 body
                     .querySelector("#border-tab-container")
@@ -460,9 +460,9 @@ class BorderApp extends WApplication {
                     id += Math.floor(Math.random() * 10);
                 }
 
-                if (browser.cfg.tabId.length >= 9999)
+                if (this.#tabId.length >= 9999)
                     throw new Error("Cannot generate ID");
-                for (const tabId in browser.cfg.tabId) {
+                for (const tabId in this.#tabId) {
                     if (tabId === id) return this.generateId();
                 }
                 return parseInt(id);
@@ -1408,7 +1408,7 @@ class BorderApp extends WApplication {
                         wnd.close();
 
                     if (!body.querySelector(".border-tab.border-current")) {
-                        this.setCurrent(browser.cfg.tabId[0]);
+                        this.setCurrent(this.#tabId[0]);
                     }
                 }, 10);
 
