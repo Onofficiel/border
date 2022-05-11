@@ -415,19 +415,7 @@ class BorderApp extends WApplication {
     </head>
     <body style="width: 100vw; height: 100vh; display: flex; justify-content: flex-start; align-items: center; overflow: hidden; font-family: 'Lexend', sans-serif; margin-left: 50px; color: white; background: rgb(247, 37, 58)">
         <div id="centered">
-            <svg xmlns="http://www.w3.org/2000/svg" width="190" height="110" viewBox="0 0 190 110" fill="none" style="background: #000;">
-                <path d="M80 40V50H90V70H100V50H110V40H80Z" fill="white"/>
-                <path d="M0 80H30V90H20V100H10V110H0V80Z" fill="white"/>
-                <path d="M0 40H10L20 49.9585V40H30V70H20V64.0711L10 54.0711V70H0V40Z" fill="white"/>
-                <path d="M120 80H130L140 89.9585V80H150V110H140V104.071L130 94.0711V110H120V80Z" fill="white"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M40 40H70V70H40V40ZM50 60H60V50H50V60Z" fill="#E5C5FF"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M40 0H70V30H40V0ZM50 20H60V10H50V20Z" fill="#E5C5FF"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M40 80H70V110H40V80ZM50 100H60V90H50V100Z" fill="#E5C5FF"/>
-                <path d="M80 80H90V100H100V80H110V110H80V80Z" fill="white"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M180 90V80H160V110H190V90H180ZM170 90H180V100H170V90Z" fill="white"/>
-                <path d="M20 0H30V30H20V20H0V0H10V10H20V0Z" fill="white"/>
-                <path d="M100 0H110V30H100V20H80V0H90V10H100V0Z" fill="white"/>
-            </svg>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL4AAABuCAYAAACZSqmyAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJVSURBVHgB7d1RTttAFIZRu2IXXUoXV3dxXUrXQUMFVQuBjOMR47n/Oc9REOGTFXLHuevjxdJgvWh5XO/n+/Wz7fl6+/ptzO/b+/m47ssCgYRPJOETSfhEEj6RhE8k4RNJ+EQSPpEeWh/YOlEcpXXSOmoSfPbXL40rPpGETyThE0n4RBI+kYRPJOETSfhEEj6RHnrfuzlqQjlqIlvl9Uvjik8k4RNJ+EQSPpGETyThE0n4RBI+kYQPAAAAAAAAAAyw7rjHc1vX9cetB9lz+znsuT1mz1md7fI3/r5AAXsPqYmfEu45nSl+pnfvsWTxM7Uj5/HFz7SO3ogifqbU4w4s8TOdXrceip+pNK/7bLD5vlNm0TP8J9syyKg9t60T1N4TbY7xLQtEEj6RhE+kPeHfPJkJs2gO//I/17aInyJ2vdURP1Xsfo8vfiq4659b8TO7uz/VET8zOzS5fYr/eSA5/JzOqHtzmdPhz/Fd+ZlRlwGW+JlNt8mt+JlJ1yMLz/HD6TmrQyThE0n4RBI+kYQPAAAAAAAAAAywZ89t3x8ctud21Lcqn32Pce/+Wn+uszq8iFruIXz+FRO/8HktIn7hc035+IXPe0rHL3w+UjZ+4XNLyfiFT4ty8fde90ldpfYYdw9/1J7WUXtuw2zLIL0nwd7qEEn4RBI+kYTPi6iveBc+f6TtNxA+fyXFL3z+kxK/8HkjIX7hc1X1+Jsnt6Mmsq3OPpF9nHDef6Y9xr1fP1d8PlT1yi98bqoYv/BpUi1+4dOs0h5j4RNJ+EQSPpGETyThE+k36mLbtl6sKecAAAAASUVORK5CYII=">
         </div>
     </body>
     </html>
