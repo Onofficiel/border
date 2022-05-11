@@ -65,9 +65,9 @@ a {
 
 .hero-image {
   height: 400px;
-  -webkit-transform: translateX(80px) matrix3d(1, 0, 0, -0.0005, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  -ms-transform: translateX(80px) matrix3d(1, 0, 0, -0.0005, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  transform: translateX(80px) matrix3d(1, 0, 0, -0.0005, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  -webkit-transform: translateX(-10px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  -ms-transform: translateX(-10px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  transform: translateX(-10px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
 
 .navbar {
