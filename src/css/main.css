@@ -64,9 +64,10 @@ a {
 }
 
 .hero-image {
-  -webkit-transform: translateX(80px);
-  -ms-transform: translateX(80px);
-  transform: translateX(80px);
+  height: 400px;
+  -webkit-transform: translateX(80px) matrix3d(1, 0, 0, -0.0005, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  -ms-transform: translateX(80px) matrix3d(1, 0, 0, -0.0005, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  transform: translateX(80px) matrix3d(1, 0, 0, -0.0005, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
 
 .navbar {
