@@ -439,6 +439,20 @@ class BorderApp extends WApplication {
     </body>
     </html>
     `,
+                themes: `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Border themes</title>
+    </head>
+    <body style="width: 100vw; height: 100vh; margin: 0;">
+        <iframe width="100%" height="100%" frameborder=0 src="https://onofficiel.github.io/border/themes"></iframe>
+    </body>
+    </html>
+    `,
             }
             keybinds = [
                 {
@@ -730,10 +744,9 @@ class BorderApp extends WApplication {
                 } else
                     this.#browserBody
                         .querySelector(".border-tab.border-current")
-                        .querySelector(".border-title").innerText = browser
-                            .verifyProtocol(
-                                this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                            )[0]
+                        .querySelector(".border-title").innerText = this.#handleURI(
+                            this.#browserBody.querySelector(".border-tab.border-current").dataset.url
+                        )[0]
                             .split("/")[2];
             }
 
@@ -1135,10 +1148,9 @@ class BorderApp extends WApplication {
                         onclick: () => {
                             w96.shell.mkShortcut(
                                 "c:/user/desktop/" +
-                                browser
-                                    .verifyProtocol(
-                                        this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                                    )[0]
+                                this.#handleURI(
+                                    this.#browserBody.querySelector(".border-tab.border-current").dataset.url
+                                )[0]
                                     .split("/")[2] +
                                 ".link",
                                 icon32,
