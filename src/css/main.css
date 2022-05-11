@@ -8,9 +8,9 @@
 }
 
 :root {
-  --text1: #ffffff;
-  --text2: #cfc4d6;
-  --bg: #4b0082;
+  --text1: #ffe5fb;
+  --text2: #ffffff;
+  --bg: #66239a;
 }
 
 body {
@@ -65,9 +65,9 @@ a {
 
 .hero-image {
   height: 400px;
-  -webkit-transform: translateX(-10px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  -ms-transform: translateX(-10px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  transform: translateX(-10px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  -webkit-transform: translateX(-50px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  -ms-transform: translateX(-50px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  transform: translateX(-50px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
 
 .navbar {
