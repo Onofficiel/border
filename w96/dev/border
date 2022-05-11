@@ -63,7 +63,7 @@ class BorderApp extends WApplication {
                     if (!isThemeFolderExisting) {
                         await w96.FS.mkdir("c:/user/appdata/Border/themes");
                     }
-                    if (!isThemeFolderExisting) {
+                    if (!isScriptFolderExisting) {
                         await w96.FS.mkdir("c:/user/appdata/Border/scripts");
                     }
                     if (!isStyleFileExisting) {
