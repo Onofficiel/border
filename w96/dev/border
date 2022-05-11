@@ -413,8 +413,6 @@ class BorderApp extends WApplication {
             <li>"border://themes" added.</li>
             <li>"border://404" removed.</li>
         </ul>
-
-        <p style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%)">Border v${this.version} | © Onofficiel - 2022 - All rights reserved</p>
     </body>
     </html>
     `,
@@ -463,8 +461,6 @@ class BorderApp extends WApplication {
             ${Object.entries(this.keybinds).map(([_key, value]) => `<li>${value.description}: ${value.keys.join("+")}</li>`).join("<br>")
                     }
         </ul>
-        
-        <p style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%)">Border v${this.version} | © Onofficiel - 2022 - All rights reserved</p>
     </body>
     </html>
     `,
@@ -1057,8 +1053,6 @@ class BorderApp extends WApplication {
                             ${Object.entries(this.protocols).map(([key, value]) => `<a style="color: rgb(255, 255, 255);" href="data:text/html,${encodeURI(value)}">border://${key}</a>`).join("<br>")
                     }
                         </ul>
-                        
-                        <p style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%)">Border v${this.version} | © Onofficiel - 2022 - All rights reserved</p>
                     </body>
                 </html>
                 `;
