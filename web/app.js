@@ -510,12 +510,7 @@ Because of the iframe system some website won't work in this browser (like youtu
                 this.reloadTab();
             });
 
-        if (argv[1])
-            this.addTab({
-                url: this.#handleURI(argv[1])[0],
-                current: true,
-            });
-        else this.addTab({ current: true });
+        this.addTab({ current: true });
 
         this.#browserBody
             .querySelector("#border-searchbar")
