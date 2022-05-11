@@ -1414,7 +1414,7 @@ class BorderApp extends WApplication {
                 appbar.addRoot("Themes", themeList);
 
                 // Script menu setup
-                const script = await w96.FS.readdir("/user/appdata/Border/script");
+                const script = await w96.FS.readdir("/user/appdata/Border/scripts");
 
                 const scriptList = [];
                 script.forEach((path) => {
