@@ -1167,14 +1167,14 @@ class BorderApp extends WApplication {
                         type: "normal",
                         label: "Restart",
                         onclick: () => {
-                            wnd.close();
+                            this.closeWindow();
                             this.openWindow();
                         },
                     },
                     {
                         type: "normal",
                         label: "Exit",
-                        onclick: () => wnd.close(),
+                        onclick: () => this.closeWindow(),
                     },
                 ]);
 
@@ -1211,7 +1211,7 @@ class BorderApp extends WApplication {
                         label: "Edit Config",
                         onclick: async () => {
                             await this.#createSetupWnd();
-                            wnd.close();
+                            this.closeWindow();
                         },
                     },
                     {
@@ -1424,7 +1424,7 @@ class BorderApp extends WApplication {
                         .addEventListener("click", () => wnd.toggleMaximize());
                     this.#browserBody
                         .querySelector(".border-close")
-                        .addEventListener("click", () => wnd.close());
+                        .addEventListener("click", () => this.closeWindow());
                     this.#browserBody
                         .querySelector("#border-titlebar")
                         .addEventListener("dblclick", () => wnd.toggleMaximize());
