@@ -8,38 +8,75 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/png;base64,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" type="image/x-icon">
     <title>Border</title>
+
+    <script defer src="app.js"></script>
 </head>
 
 <body>
 
-    <div id="root">
-        <div id="tab-menu">
-            <div id="tab-container">
-
+    <div id="border-root">
+        <div id="border-titlebar">
+            <div id="border-tab-menu">
+            <div id="border-tab-container">
+        
             </div>
-            <div id="add-button" onclick="browser.addTab({current: true})">
-                <h2>+</h2>
+            <div id="border-add-button" class="nodrag">
+                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 44 44" fill="none">
+                    <path class="border-svg-icon-add" d="M27 17V0H17V17H0V27H17V44H27V27H44V17H27Z" fill="#66239A"/>
+                </svg>
+            </div>
+            </div>
+            <div id="border-ctrl-btn-container">
+            <div class="border-minimize border-ctrl-btn nodrag">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 45 45" fill="none">
+                    <path d="M22.5 30L45 7.5L37.5 0L22.5 15L7.49998 1.31134e-06L0 7.5L22.5 30Z" fill="#66239A"/>
+                    <path d="M9.83506e-07 35H45V45H9.83506e-07V35Z" fill="#66239A"/>
+                </svg>
+            </div>
+            <div class="border-maximize border-ctrl-btn nodrag">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 45 45" fill="none">
+                    <path clip-rule="evenodd" d="M35 10H10V35H35V10ZM0 0V45H45V0H0Z" fill="#66239A" fill-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="border-close border-ctrl-btn nodrag">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 43 43" fill="none">
+                    <path d="M28.2843 21.2132L42.4264 7.07107L35.3553 1.19209e-06L21.2132 14.1421L7.07107 0L1.19209e-06 7.07107L14.1421 21.2132L0 35.3553L7.07107 42.4264L21.2132 28.2843L35.3553 42.4264L42.4264 35.3553L28.2843 21.2132Z" fill="#66239A"/>
+                </svg>
+            </div>
             </div>
         </div>
 
-        <div id="menu">
-            <div class="history-btn" onclick="window.history.back();"><</div>
-            <div class="history-btn" onclick="window.history.forward();">></div>
-            <div class="history-btn" onclick="browser.reloadTab()">↺</div>
-            <input id="searchbar">
-
-            </input>
-            <div id="search-button" onclick="document.querySelector('.tab.current').dataset.url = document.querySelector('#searchbar').value; browser.reloadTab()">
-                <h2>⇾</h2>
+        <div id="border-menu" class="nodrag">
+            <div class="border-history-btn border-history-back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="7.25" height="10.75" viewBox="0 0 29 43" fill="none">
+                    <path class="border-svg-icon" d="M0 21.2132L21.2131 42.4264L28.2842 35.3553L14.1421 21.2132L28.2842 7.07104L21.2131 0L0 21.2132Z" fill="#66239A"/>
+                </svg>
+            </div>
+            <div class="border-history-btn border-history-forward">
+                <svg xmlns="http://www.w3.org/2000/svg" width="7.25" height="10.75" viewBox="0 0 29 43" fill="none">
+                    <path class="border-svg-icon" d="M29 21.7868L7.78687 0.573607L0.715823 7.64468L14.8579 21.7868L0.715821 35.929L7.78687 43L29 21.7868Z" fill="#66239A"/>
+                </svg>
+            </div>
+            <div class="border-history-btn border-history-refresh">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11.25" height="11.25" viewBox="0 0 45 45" fill="none">
+                    <path class="border-svg-icon" d="M45 20V0L38.4099 6.59011C35.2632 3.44343 31.2541 1.30051 26.8895 0.432343C22.525 -0.435825 18.001 0.00975001 13.8896 1.71272C9.77828 3.41569 6.26427 6.29957 3.79193 9.99968C1.3196 13.6998 0 18.0499 0 22.5C0 26.9501 1.3196 31.3002 3.79193 35.0003C6.26427 38.7004 9.77828 41.5843 13.8896 43.2873C18.001 44.9903 22.525 45.4358 26.8895 44.5677C31.2541 43.6995 35.2632 41.5566 38.4099 38.4099L31.3388 31.3388C29.5907 33.087 27.3634 34.2775 24.9386 34.7598C22.5139 35.2421 20.0005 34.9946 17.7165 34.0485C15.4324 33.1024 13.4801 31.5003 12.1066 29.4446C10.7331 27.389 10 24.9723 10 22.5C10 20.0277 10.7331 17.611 12.1066 15.5554C13.4801 13.4998 15.4324 11.8976 17.7165 10.9515C20.0005 10.0054 22.5139 9.75788 24.9386 10.2402C27.3634 10.7225 29.5907 11.913 31.3388 13.6612L25 20H45Z" fill="#66239A"/>
+                </svg>
+            </div>
+        
+            <input id="border-searchbar" placeholder="Enter an URL..."></input>
+        
+            <div id="border-search-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10.75" viewBox="0 0 40 43" fill="none">
+                    <path class="border-svg-icon" d="M18.071 0L39.2842 21.2132L18.071 42.4264L11 35.3553L20.3552 26H0V16H19.929L11 7.07108L18.071 0Z" fill="#66239A"/>
+                </svg>
             </div>
         </div>
-        <div id="view-container">
-
+            <div class="appbar"></div>
+        
+            <div id="border-view-container" class="nodrag">
+        
+            </div>
         </div>
-    </div>
-
-    <script src="app.js">
-    </script>
 </body>
 
 </html>

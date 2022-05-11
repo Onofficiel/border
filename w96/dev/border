@@ -1498,7 +1498,7 @@ class BorderApp extends WApplication {
                             .querySelector("#border-tab-container")
                             .querySelectorAll(".border-tab").length <= 0
                     )
-                        wnd.close();
+                        this.closeWindow();
 
                     if (!this.#browserBody.querySelector(".border-tab.border-current")) {
                         this.setCurrent(this.#tabId[0]);
