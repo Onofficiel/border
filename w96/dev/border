@@ -1380,7 +1380,7 @@ class BorderApp extends WApplication {
                 appbar.addRoot("Bookmarks", bookmarkList);
 
                 // Theme menu setup
-                const themes = await w96.FS.readdir("c:/user/appdata/Border/themes");
+                const themes = await w96.FS.readdir("/user/appdata/Border/themes");
 
                 const themeList = [];
                 themes.forEach((name) => {
@@ -1414,11 +1414,11 @@ class BorderApp extends WApplication {
                 appbar.addRoot("Themes", themeList);
 
                 // Script menu setup
-                const script = await w96.FS.readdir("c:/user/appdata/Border/script");
+                const script = await w96.FS.readdir("/user/appdata/Border/script");
 
                 const scriptList = [];
                 script.forEach((path) => {
-                    name = path.split(".")[0].split("/").slice(-1).toString();
+                    let name = path.split(".")[0].split("/").slice(-1).toString();
                     scriptList.push({
                         type: "normal",
                         label: name,
