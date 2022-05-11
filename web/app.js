@@ -399,11 +399,6 @@ Because of the iframe system some website won't work in this browser (like youtu
                     .querySelector(".border-tab.border-current").dataset.url
             )[0];
 
-        this.#handleScript(
-            this.#browserBody
-                .querySelector("#border-view-container")
-                .querySelector(".border-view.border-current")
-        );
         this.#browserBody.querySelector("#border-searchbar").blur();
 
         if (
