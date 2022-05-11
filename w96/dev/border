@@ -30,6 +30,9 @@ class BorderApp extends WApplication {
                     const isThemeFolderExisting = await w96.FS.exists(
                         "c:/user/appdata/Border/themes"
                     )
+                    const isScriptFolderExisting = await w96.FS.exists(
+                        "c:/user/appdata/Border/scripts"
+                    )
                     const isStyleFileExisting = await w96.FS.exists(
                         "c:/user/appdata/Border/themes/default.css"
                     )
@@ -59,6 +62,9 @@ class BorderApp extends WApplication {
                     }
                     if (!isThemeFolderExisting) {
                         await w96.FS.mkdir("c:/user/appdata/Border/themes");
+                    }
+                    if (!isThemeFolderExisting) {
+                        await w96.FS.mkdir("c:/user/appdata/Border/scripts");
                     }
                     if (!isStyleFileExisting) {
                         await w96.FS.writestr(
@@ -1373,6 +1379,7 @@ class BorderApp extends WApplication {
 
                 appbar.addRoot("Bookmarks", bookmarkList);
 
+                // Theme menu setup
                 const themes = await w96.FS.readdir("c:/user/appdata/Border/themes");
 
                 const themeList = [];
@@ -1405,6 +1412,38 @@ class BorderApp extends WApplication {
                 );
 
                 appbar.addRoot("Themes", themeList);
+
+                // Script menu setup
+                const script = await w96.FS.readdir("c:/user/appdata/Border/script");
+
+                const scriptList = [];
+                script.forEach((path) => {
+                    name = path.split(".")[0].split("/").slice(-1).toString();
+                    scriptList.push({
+                        type: "normal",
+                        label: name,
+                        onclick: async () => {
+                            eval(`
+                                const Border = ${this};
+                                ${await w96.FS.readstr(path)}
+                            `);
+                        },
+                    });
+                });
+                scriptList.push(
+                    {
+                        type: "separator",
+                    },
+                    {
+                        type: "normal",
+                        label: "Go To The Script Folder",
+                        onclick: () => {
+                            w96.sys.execCmd("explorer", ["c:/user/appdata/Border/scripts"]);
+                        },
+                    }
+                );
+                appbar.addRoot("Scripts", scriptList);
+
 
                 if (this.#Files.config.window.customTitlebar) {
                     // delete the default titlebar
@@ -1543,7 +1582,7 @@ class BorderApp extends WApplication {
             }
         }
 
-        let browser = new Border();
+        let _browser = new Border();
     }
 }
 
