@@ -42,7 +42,7 @@ fetch("./src/data/themes.json")
       if (!search.value) return;
 
       data.forEach((theme) => {
-        if (!theme.name.toLowerCase().startsWith(search.value.toLowerCase())) {
+        if (!theme.name.toLowerCase().includes(search.value.toLowerCase())) {
           tiles.forEach((tile) => {
             if (
               tile.querySelector(".container>.text-container>.title")
