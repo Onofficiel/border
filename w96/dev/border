@@ -292,7 +292,7 @@ class BorderApp extends WApplication {
                             "c:/user/appdata/Border/config.json",
                             JSON.stringify({
                                 theme: {
-                                    currentTheme: "default",
+                                    currentTheme: "default.css",
                                     primary: "#4e2493",
                                     secondary: "#ffe5fb",
                                 },
