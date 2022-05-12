@@ -1399,6 +1399,7 @@ class BorderApp extends WApplication {
 
                 const themeList = [];
                 themes.forEach((path) => {
+                    if (w96.FSUtil.getExtension(path).toLowerCase() !== ".css") return;
                     const name = w96.FSUtil.fname(path);
                     themeList.push({
                         type: "normal",
