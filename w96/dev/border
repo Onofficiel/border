@@ -315,7 +315,7 @@ class BorderApp extends WApplication {
                         this.#Files.whitelist = JSON.parse(await w96.FS.readstr("c:/user/appdata/Border/whitelist.json"));
                         this.#Files.style = await w96.FS.readstr(
                             `c:/user/appdata/Border/themes/${this.#Files.config.theme.currentTheme}`
-                        );;
+                        );
 
                         await this.#main();
                     };
@@ -395,7 +395,7 @@ class BorderApp extends WApplication {
     </script>
 </body>
 </html>
-    `,
+                    `,
                     changelog: `
         <!DOCTYPE html>
         <html lang="en">
@@ -430,7 +430,7 @@ class BorderApp extends WApplication {
             </ul>
         </body>
         </html>
-        `,
+                    `,
                     about: `
         <!DOCTYPE html>
         <html lang="en">
@@ -455,7 +455,7 @@ class BorderApp extends WApplication {
             <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v${this.version} | © Onofficiel - 2022 - All rights reserved</p>
         </body>
         </html>
-        `,
+                    `,
                     shortcuts: `
         <!DOCTYPE html>
         <html lang="en">
@@ -478,7 +478,7 @@ class BorderApp extends WApplication {
             </ul>
         </body>
         </html>
-        `,
+                    `,
                     offline: `
         <!DOCTYPE html>
         <html lang="en">
@@ -506,7 +506,7 @@ class BorderApp extends WApplication {
                 </div>
             </body> 
         </html>
-        `,
+                    `,
                     woozy: `
         <!DOCTYPE html>
         <html lang="en">
@@ -525,7 +525,7 @@ class BorderApp extends WApplication {
                 </div>
             </body>
         </html>
-        `,
+                    `,
                     themes: `
         <!DOCTYPE html>
         <html lang="en">
@@ -539,7 +539,7 @@ class BorderApp extends WApplication {
             <iframe width="100%" height="100%" frameborder=0 src="https://onofficiel.github.io/border/themes"></iframe>
         </body>
         </html>
-        `,
+                    `,
                 }
 
             };
@@ -1070,9 +1070,8 @@ class BorderApp extends WApplication {
                         <span style="display: inline-block; font-size: 50px;">&nbsp;urls</span>
                         
                         <ul>
-                            ${
-                                Object.entries(this.protocols.border).map(([key, value]) => `<a style="color: rgb(255, 255, 255);" href="data:text/html,${encodeURI(value)}">border://${key}</a>`).join("<br>")
-                            }
+                            ${Object.entries(this.protocols.border).map(([key, value]) => `<a style="color: rgb(255, 255, 255);" href="data:text/html,${encodeURI(value)}">border://${key}</a>`).join("<br>")
+                    }
                         </ul>
                     </body>
                 </html>
@@ -1400,14 +1399,14 @@ class BorderApp extends WApplication {
 
                 const themeList = [];
                 themes.forEach((path) => {
-                    name = w96.FSUtil.fname(path);
+                    const name = w96.FSUtil.fname(path);
                     themeList.push({
                         type: "normal",
                         label: name,
                         onclick: async () => {
                             this.#Files.config.theme.currentTheme = name;
                             await w96.FS.writestr(
-                                "c:/user/appdata/Border/config.json",
+                                "/user/appdata/Border/config.json",
                                 JSON.stringify(this.#Files.config)
                             );
                             alert("Restart to apply the theme.");
