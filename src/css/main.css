@@ -43,11 +43,6 @@ a {
   margin-left: 30px;
 }
 
-.hero-title {
-  font-size: 5em;
-  color: var(--text1);
-}
-
 .hero-subtitle {
   font-size: 2em;
   margin-bottom: 25px;
