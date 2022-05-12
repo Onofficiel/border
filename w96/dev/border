@@ -314,7 +314,7 @@ class BorderApp extends WApplication {
                         this.#Files.bookmarks = JSON.parse(await w96.FS.readstr("c:/user/appdata/Border/bookmarks.json"));
                         this.#Files.whitelist = JSON.parse(await w96.FS.readstr("c:/user/appdata/Border/whitelist.json"));
                         this.#Files.style = await w96.FS.readstr(
-                            `c:/user/appdata/Border/themes/${this.#Files.config.theme.currentTheme}.css`
+                            `c:/user/appdata/Border/themes/${this.#Files.config.theme.currentTheme}`
                         );;
 
                         await this.#main();
