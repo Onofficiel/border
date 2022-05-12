@@ -66,7 +66,7 @@ class BorderApp extends WApplication {
                     if (!isScriptFolderExisting) {
                         await w96.FS.mkdir("c:/user/appdata/Border/scripts");
                         await w96.FS.writestr(
-                            "c:/user/appdata/Border/.meta",
+                            "c:/user/appdata/Border/scripts/.meta",
                             JSON.stringify({
                                 description:
                                     "This is the Border's Script folder.\n\nDo NOT drop any file you don't trust here !\n\nOnly \".bjs\" files will be available in Border.",
