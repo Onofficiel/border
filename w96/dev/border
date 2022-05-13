@@ -334,6 +334,9 @@ fill: var(--border-secondary);
         sync();
       }
 
+      /**
+       * Class for Border tab utilities.
+       */
       Tab = class {
         static current = null;
         static list = [];
@@ -342,7 +345,7 @@ fill: var(--border-secondary);
 
         /**
          * Create a new Tab.
-         * @param params The tab parameters.
+         * @param {Object} params The tab parameters.
          * @returns {Tab}
          */
         constructor(params) {
@@ -413,6 +416,9 @@ fill: var(--border-secondary);
           return this;
         }
 
+        /**
+         * Close the tab.
+         */
         close() {
           this.#context.Tab.list.splice(
             this.#context.Tab.list.indexOf(this),
@@ -426,6 +432,10 @@ fill: var(--border-secondary);
             this.#context.Tab.current = this.#context.Tab.list[0];
         }
 
+
+        /**
+         * Set the tab active.
+         */
         setCurrent() {
           try {
             if (this.#context.Tab.current) {
@@ -446,10 +456,13 @@ fill: var(--border-secondary);
           } catch {}
         }
 
+        /**
+         * Reload the Tab.
+         */
         reload() {
           const searchbar =
             this.#context.window.body.querySelector("#border-searchbar");
-          const handledUri = this.#context.#handleURI(this.url);
+          const handledUri = this.#context.handleURI(this.url);
           if (!handledUri[1]) {
             searchbar.value = handledUri[0];
             this.element.querySelector(".border-title").innerHTML =
@@ -466,19 +479,35 @@ fill: var(--border-secondary);
         }
       };
 
+      /**
+       * The Border window object.
+       */
       window = {
+        /**
+         * Open a new Border Instance.
+         * @param {string} url The URL to open in the new window.
+         */
         create(url) {
-          return w96.sys.execCmd("border", [url]);
+          w96.sys.execCmd("border", [url]);
         },
 
+        /**
+         * Close the tab.
+         */
         close() {
-          if (this.instance.__tabLoop) clearInterval(this.instance.__tabLoop);
-          return this.instance.window.self.close();
+          if (this.instance.#tabLoop) clearInterval(this.instance.#tabLoop);
+          this.instance.window.self.close();
         },
       };
 
+      /**
+       * The current Border version.
+       */
       version = "1.10";
 
+      /**
+       * All active shortcuts.
+       */
       keybinds = [
         {
           keys: ["Alt", "l"],
@@ -510,6 +539,9 @@ fill: var(--border-secondary);
         },
       ];
 
+      /**
+       * All active protocols.
+       */
       protocols = {
         border: {
           newtab: `
@@ -844,7 +876,12 @@ fill: var(--border-secondary);
         },
       };
 
-      #handleURI(url) {
+      /**
+       * Handle URI
+       * @param url The URI to handle.
+       * @returns The handled URI.
+       */
+      handleURI(url) {
         if (
           !window.navigator.onLine &&
           !RegExp(`^(?:${Object.keys(this.protocols).join("|")}|data):/*`).test(
@@ -895,6 +932,10 @@ fill: var(--border-secondary);
         }
       }
 
+      /**
+       * Generate Id.
+       * @returns The generated Id.
+       */
       generateId() {
         let id = "";
         for (let i = 0; i < 4; i++) {
@@ -1139,6 +1180,7 @@ fill: var(--border-secondary);
         wnd.show();
       }
 
+      /* <{[MAIN]}> */
       async #main() {
         // Setup instances
         this.Tab.instance = this;
@@ -1336,7 +1378,7 @@ fill: var(--border-secondary);
             onclick: () => {
               w96.shell.mkShortcut(
                 "c:/user/desktop/" +
-                  this.#handleURI(this.Tab.current.url)[0].split("/")[2] +
+                  this.handleURI(this.Tab.current.url)[0].split("/")[2] +
                   ".link",
                 icon32,
                 "border " + this.Tab.current.url
@@ -1353,11 +1395,11 @@ fill: var(--border-secondary);
               w96.ui.MsgBoxSimple.prompt(
                 "Border Bookmarks",
                 "Name this bookmark",
-                this.#handleURI(this.Tab.current.url)[0],
+                this.handleURI(this.Tab.current.url)[0],
                 async (name) => {
                   this.#Files.bookmarks.push({
                     name,
-                    url: this.#handleURI(this.Tab.current.url)[0],
+                    url: this.handleURI(this.Tab.current.url)[0],
                   });
                   await w96.FS.writestr(
                     "c:/user/appdata/Border/bookmarks.json",
@@ -1373,7 +1415,7 @@ fill: var(--border-secondary);
             label: "Remove This Site To Bookmarks",
             onclick: async () => {
               this.#Files.bookmarks.forEach((bookmark, index) => {
-                if (bookmark.url === this.#handleURI(this.Tab.current.url)[0]) {
+                if (bookmark.url === this.handleURI(this.Tab.current.url)[0]) {
                   return this.#Files.bookmarks.splice(index, 1);
                 }
               });
@@ -1623,7 +1665,7 @@ fill: var(--border-secondary);
 
         if (argv[1])
           new this.Tab({
-            url: this.#handleURI(argv[1])[0],
+            url: this.handleURI(argv[1])[0],
             current: true,
           });
         else new this.Tab({ current: true });
@@ -1638,7 +1680,7 @@ fill: var(--border-secondary);
             }
           });
 
-        this.__tabLoop = setInterval(() => {
+        this.#tabLoop = setInterval(() => {
           if (this.Tab.list.length <= 0) {
             this.window.close();
           } else {
