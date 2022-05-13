@@ -13,7 +13,7 @@ fetch("./src/data/themes.json")
       <div class="container">  
         <div class="text-container">
           <span class="title">${theme.name}</span>
-          <span class="author">By ${theme.author}</span>
+          <span class="author">By ${theme.author} ⋅ For ${theme.version}</span>
           <span class="description">${theme.description}</span>
         </div>
         <a class="download" download="${theme.name.toLowerCase()}.css" href="${
