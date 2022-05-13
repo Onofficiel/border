@@ -1,82 +1,83 @@
 //!wrt $BSPEC:{"icn":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGDSURBVHgBlVNRTsJAEJ3ZBb+5gQ1wAI5QToCewJpAkfhhOEHLCYxf1WIC3oAbwA2s3xJTTyC/hu6Os6WNLVqRlzQ7s9vOvH3zisBwmw8+IHpQAAFsBMDiU6nJPB7FUAFRyggjBFyZJyvinEi5dKzAqipQKyZaJOPH9WiV526bmRF6dSlnnHYPM9hDuB76CMCMwHasWePoAgak6d2sdbH1+1ZgH1XAbU49EHhhYkS4EayH2wyfi5pUFhi0AgeQfA5jTTQmUJfM5wkQOpkmKWpVBZCkxy/HQqlu+D3G+bAVnvJq99uBbQT/lcGVoYhgEeiX+z0PJEB3KXUtOn9eYXcoPn4wU3qThY3KAqarcSI/Z/smklKmomqhV2Yta8C0eFRZd4wIyDZOHLTCCSraoMSecScfx7nhSgUE4i23SGMyRt7BYiPNQOJuhyASWp3nh7WcDouS37JnRmW6APHYSgJAFL4NF+WtAvrtqS2Ilub+ILbd6et1BAdQEjFJaunf+N+PDb4AsJCURrY67Y4AAAAASUVORK5CYII=","cpr":"WeDontCareInc","dsc":"A simple yet customisable multi tab browser !","frn":"Test App","ver":1}
 
 const icon16 =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGDSURBVHgBlVNRTsJAEJ3ZBb+5gQ1wAI5QToCewJpAkfhhOEHLCYxf1WIC3oAbwA2s3xJTTyC/hu6Os6WNLVqRlzQ7s9vOvH3zisBwmw8+IHpQAAFsBMDiU6nJPB7FUAFRyggjBFyZJyvinEi5dKzAqipQKyZaJOPH9WiV526bmRF6dSlnnHYPM9hDuB76CMCMwHasWePoAgak6d2sdbH1+1ZgH1XAbU49EHhhYkS4EayH2wyfi5pUFhi0AgeQfA5jTTQmUJfM5wkQOpkmKWpVBZCkxy/HQqlu+D3G+bAVnvJq99uBbQT/lcGVoYhgEeiX+z0PJEB3KXUtOn9eYXcoPn4wU3qThY3KAqarcSI/Z/smklKmomqhV2Yta8C0eFRZd4wIyDZOHLTCCSraoMSecScfx7nhSgUE4i23SGMyRt7BYiPNQOJuhyASWp3nh7WcDouS37JnRmW6APHYSgJAFL4NF+WtAvrtqS2Ilub+ILbd6et1BAdQEjFJaunf+N+PDb4AsJCURrY67Y4AAAAASUVORK5CYII=";
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGDSURBVHgBlVNRTsJAEJ3ZBb+5gQ1wAI5QToCewJpAkfhhOEHLCYxf1WIC3oAbwA2s3xJTTyC/hu6Os6WNLVqRlzQ7s9vOvH3zisBwmw8+IHpQAAFsBMDiU6nJPB7FUAFRyggjBFyZJyvinEi5dKzAqipQKyZaJOPH9WiV526bmRF6dSlnnHYPM9hDuB76CMCMwHasWePoAgak6d2sdbH1+1ZgH1XAbU49EHhhYkS4EayH2wyfi5pUFhi0AgeQfA5jTTQmUJfM5wkQOpkmKWpVBZCkxy/HQqlu+D3G+bAVnvJq99uBbQT/lcGVoYhgEeiX+z0PJEB3KXUtOn9eYXcoPn4wU3qThY3KAqarcSI/Z/smklKmomqhV2Yta8C0eFRZd4wIyDZOHLTCCSraoMSecScfx7nhSgUE4i23SGMyRt7BYiPNQOJuhyASWp3nh7WcDouS37JnRmW6APHYSgJAFL4NF+WtAvrtqS2Ilub+ILbd6et1BAdQEjFJaunf+N+PDb4AsJCURrY67Y4AAAAASUVORK5CYII=";
 const icon32 =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALYSURBVHgBtVddchJBEO7eySYp8yA3cE3is+YGcIPcIElVQFM+QE4gnEB8sDBLqoAThJxAPIH4bCR7A/HFsiQzbc8iYWY3C+wu+aqo3fntj56vu2cRDFT2fIIVQIADJBj8VXe9bnAWQA44kAEIVASk+qYQt5Xd9jvIgUwEbDZUZxLvISM2EkcIhogwjHdDgX9F5KdBosYkxv6o3ICUQLNhaYCo4Y9e15MWVvYv6kBouZ+cyUH7+9shpEDmI/BvmBzSubWZcquQErk0wCSa7MLBrM3uOzz2OoU0e+QWoQLZM5oFF357kAK5CQg598C0w30FKbABOSFdUUA1b/ORdDgiqqyPgI/kuv2j0l20PpcHyrt+lc/gc2wASXvhMCSz598eey0P1k1AZ0DOE00rHzwML8yYe5dHsC4CYfrlDGj2sbvHYY0A6CI/46tUs/ziY0wfqTUQujNu/MOOdOvN4GQ863vD85QjrlgUM6MFUK5O2SVzbWoPbAlhFx+kBgutZhrX+MRV0h9VDsw8we/F0/1WMRcBFvzh7F27PMyIC4BSnphtQeIoM4FTr2UXIaDesjXaE5FsWcxMgIRjK15OVio8RPTFaHqQlYADyiKwiVs/ISfSacAR1j/+Q/JglWWI+NJoBtaWkAKTiavT63jOB5eWXx22yjh3AvUtM4EuhxovuPeCDqukDDeDDltbuE4/MwENiTJy7VLdyu5FLTpP3wv0XZE9dmx0B9HilHgl4xe+elvq/b/AeUp8B4Q4AiTss4t/8Zk/U9NiZIlWoSxd3pwNzL7EVKzdy+opRvsJEj8dvCkxDGdgbENqRI0vJLAuaNEypRPOmP2Hxh+PAOGQb6nXO3ebzWidSCTgSPk8OkEJh6sZXkW6+zz3HBKwDdvjRUZN4KJBHcOuEF8tMfEHyxPlllY1sAwLw5BjuPOYxpcSCEsp3afOYN3GlxLQpdRRsqTrPp/52o1r/ANXSBfJd38jrAAAAABJRU5ErkJggg==";
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALYSURBVHgBtVddchJBEO7eySYp8yA3cE3is+YGcIPcIElVQFM+QE4gnEB8sDBLqoAThJxAPIH4bCR7A/HFsiQzbc8iYWY3C+wu+aqo3fntj56vu2cRDFT2fIIVQIADJBj8VXe9bnAWQA44kAEIVASk+qYQt5Xd9jvIgUwEbDZUZxLvISM2EkcIhogwjHdDgX9F5KdBosYkxv6o3ICUQLNhaYCo4Y9e15MWVvYv6kBouZ+cyUH7+9shpEDmI/BvmBzSubWZcquQErk0wCSa7MLBrM3uOzz2OoU0e+QWoQLZM5oFF357kAK5CQg598C0w30FKbABOSFdUUA1b/ORdDgiqqyPgI/kuv2j0l20PpcHyrt+lc/gc2wASXvhMCSz598eey0P1k1AZ0DOE00rHzwML8yYe5dHsC4CYfrlDGj2sbvHYY0A6CI/46tUs/ziY0wfqTUQujNu/MOOdOvN4GQ863vD85QjrlgUM6MFUK5O2SVzbWoPbAlhFx+kBgutZhrX+MRV0h9VDsw8we/F0/1WMRcBFvzh7F27PMyIC4BSnphtQeIoM4FTr2UXIaDesjXaE5FsWcxMgIRjK15OVio8RPTFaHqQlYADyiKwiVs/ISfSacAR1j/+Q/JglWWI+NJoBtaWkAKTiavT63jOB5eWXx22yjh3AvUtM4EuhxovuPeCDqukDDeDDltbuE4/MwENiTJy7VLdyu5FLTpP3wv0XZE9dmx0B9HilHgl4xe+elvq/b/AeUp8B4Q4AiTss4t/8Zk/U9NiZIlWoSxd3pwNzL7EVKzdy+opRvsJEj8dvCkxDGdgbENqRI0vJLAuaNEypRPOmP2Hxh+PAOGQb6nXO3ebzWidSCTgSPk8OkEJh6sZXkW6+zz3HBKwDdvjRUZN4KJBHcOuEF8tMfEHyxPlllY1sAwLw5BjuPOYxpcSCEsp3afOYN3GlxLQpdRRsqTrPp/52o1r/ANXSBfJd38jrAAAAABJRU5ErkJggg==";
 
 class BorderApp extends WApplication {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    async main(argv) {
-        super.main(argv);
+  async main(argv) {
+    super.main(argv);
 
-        class Border {
+    class Border {
+      #Files = {};
+      #tabLoop = null;
 
-            #Files = {}
+      /**
+       * The Border Class.
+       */
+      constructor() {
+        const sync = async () => {
+          const isConfigFileExisting = await w96.FS.exists(
+            "c:/user/appdata/Border/config.json"
+          );
+          const isBookmarksFileExisting = await w96.FS.exists(
+            "c:/user/appdata/Border/bookmarks.json"
+          );
+          const isThemeFolderExisting = await w96.FS.exists(
+            "c:/user/appdata/Border/themes"
+          );
+          const isScriptFolderExisting = await w96.FS.exists(
+            "c:/user/appdata/Border/scripts"
+          );
+          const isStyleFileExisting = await w96.FS.exists(
+            "c:/user/appdata/Border/themes/default.css"
+          );
+          const isWhitelistFileExisting = await w96.FS.exists(
+            "c:/user/appdata/Border/whitelist.json"
+          );
+          const isConfigFolderExisting = await w96.FS.exists(
+            "c:/user/appdata/Border"
+          );
 
-            constructor() {
-                const sync = async () => {
-
-
-                    const isConfigFileExisting = await w96.FS.exists(
-                        "c:/user/appdata/Border/config.json"
-                    )
-                    const isBookmarksFileExisting = await w96.FS.exists(
-                        "c:/user/appdata/Border/bookmarks.json"
-                    )
-                    const isThemeFolderExisting = await w96.FS.exists(
-                        "c:/user/appdata/Border/themes"
-                    )
-                    const isScriptFolderExisting = await w96.FS.exists(
-                        "c:/user/appdata/Border/scripts"
-                    )
-                    const isStyleFileExisting = await w96.FS.exists(
-                        "c:/user/appdata/Border/themes/default.css"
-                    )
-                    const isWhitelistFileExisting = await w96.FS.exists(
-                        "c:/user/appdata/Border/whitelist.json"
-                    )
-                    const isConfigFolderExisting = await w96.FS.exists(
-                        "c:/user/appdata/Border"
-                    )
-
-                    // creating default config file
-                    if (!isConfigFolderExisting) {
-                        await w96.FS.mkdir("c:/user/appdata/Border");
-                        await w96.FS.writestr(
-                            "c:/user/appdata/Border/.meta",
-                            JSON.stringify({
-                                description:
-                                    "This is the Border's Data folder.\n\nIt's unsafe to edit files here if you don't know what you do !\n\nUse the Border Setup Program instead !",
-                            })
-                        );
-                    }
-                    if (!isBookmarksFileExisting) {
-                        await w96.FS.writestr(
-                            "c:/user/appdata/Border/bookmarks.json",
-                            JSON.stringify([])
-                        );
-                    }
-                    if (!isThemeFolderExisting) {
-                        await w96.FS.mkdir("c:/user/appdata/Border/themes");
-                    }
-                    if (!isScriptFolderExisting) {
-                        await w96.FS.mkdir("c:/user/appdata/Border/scripts");
-                        await w96.FS.writestr(
-                            "c:/user/appdata/Border/scripts/.meta",
-                            JSON.stringify({
-                                description:
-                                    "This is the Border's Script folder.\n\nDo NOT drop any file you don't trust here !\n\nOnly \".bjs\" files will be available in Border.",
-                            })
-                        );
-                    }
-                    if (!isStyleFileExisting) {
-                        await w96.FS.writestr(
-                            "c:/user/appdata/Border/themes/default.css",
-                            `@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+          // creating default config file
+          if (!isConfigFolderExisting) {
+            await w96.FS.mkdir("c:/user/appdata/Border");
+            await w96.FS.writestr(
+              "c:/user/appdata/Border/.meta",
+              JSON.stringify({
+                description:
+                  "This is the Border's Data folder.\n\nIt's unsafe to edit files here if you don't know what you do !\n\nUse the Border Setup Program instead !",
+              })
+            );
+          }
+          if (!isBookmarksFileExisting) {
+            await w96.FS.writestr(
+              "c:/user/appdata/Border/bookmarks.json",
+              JSON.stringify([])
+            );
+          }
+          if (!isThemeFolderExisting) {
+            await w96.FS.mkdir("c:/user/appdata/Border/themes");
+          }
+          if (!isScriptFolderExisting) {
+            await w96.FS.mkdir("c:/user/appdata/Border/scripts");
+            await w96.FS.writestr(
+              "c:/user/appdata/Border/scripts/.meta",
+              JSON.stringify({
+                description:
+                  "This is the Border's Script folder.\n\nDo NOT drop any file you don't trust here !\n\nOnly \".bjs\" files will be available in Border.",
+              })
+            );
+          }
+          if (!isStyleFileExisting) {
+            await w96.FS.writestr(
+              "c:/user/appdata/Border/themes/default.css",
+              `@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
 
 #border-root>* {
 padding: 0;
@@ -279,94 +280,239 @@ fill: var(--border-primary);
 path.border-svg-icon-close, path.border-svg-icon-add {
 fill: var(--border-secondary);
 }`
-                        );
-                    }
-                    if (!isWhitelistFileExisting) {
-                        await w96.FS.writestr(
-                            "c:/user/appdata/Border/whitelist.json",
-                            JSON.stringify([])
-                        );
-                    }
-                    if (!isConfigFileExisting) {
-                        await w96.FS.writestr(
-                            "c:/user/appdata/Border/config.json",
-                            JSON.stringify({
-                                theme: {
-                                    currentTheme: "default.css",
-                                    primary: "#4e2493",
-                                    secondary: "#ffe5fb",
-                                },
-                                window: {
-                                    customTitlebar: true,
-                                    height: 550,
-                                    width: 650,
-                                },
-                                browser: {
-                                    defaultPage: "border://newtab",
-                                    enableShortcuts: true,
-                                },
-                            })
-                        )
-                        this.#Files.config = JSON.parse(await w96.FS.readstr("c:/user/appdata/Border/config.json"));
-                        await this.#createSetupWnd();
-                    } else {
-                        this.#Files.config = JSON.parse(await w96.FS.readstr("c:/user/appdata/Border/config.json"));
-                        this.#Files.bookmarks = JSON.parse(await w96.FS.readstr("c:/user/appdata/Border/bookmarks.json"));
-                        this.#Files.whitelist = JSON.parse(await w96.FS.readstr("c:/user/appdata/Border/whitelist.json"));
-                        this.#Files.style = await w96.FS.readstr(
-                            `c:/user/appdata/Border/themes/${this.#Files.config.theme.currentTheme}`
-                        );
+            );
+          }
+          if (!isWhitelistFileExisting) {
+            await w96.FS.writestr(
+              "c:/user/appdata/Border/whitelist.json",
+              JSON.stringify([])
+            );
+          }
+          if (!isConfigFileExisting) {
+            await w96.FS.writestr(
+              "c:/user/appdata/Border/config.json",
+              JSON.stringify({
+                theme: {
+                  currentTheme: "default.css",
+                  primary: "#4e2493",
+                  secondary: "#ffe5fb",
+                },
+                window: {
+                  customTitlebar: true,
+                  height: 550,
+                  width: 650,
+                },
+                browser: {
+                  defaultPage: "border://newtab",
+                  enableShortcuts: true,
+                },
+              })
+            );
+            this.#Files.config = JSON.parse(
+              await w96.FS.readstr("c:/user/appdata/Border/config.json")
+            );
+            await this.#createSetupWnd();
+          } else {
+            this.#Files.config = JSON.parse(
+              await w96.FS.readstr("c:/user/appdata/Border/config.json")
+            );
+            this.#Files.bookmarks = JSON.parse(
+              await w96.FS.readstr("c:/user/appdata/Border/bookmarks.json")
+            );
+            this.#Files.whitelist = JSON.parse(
+              await w96.FS.readstr("c:/user/appdata/Border/whitelist.json")
+            );
+            this.#Files.style = await w96.FS.readstr(
+              `c:/user/appdata/Border/themes/${
+                this.#Files.config.theme.currentTheme
+              }`
+            );
 
-                        await this.#main();
-                    };
-                }
-                sync();
+            await this.#main();
+          }
+        };
+        sync();
+      }
+
+      Tab = class {
+        static current = null;
+        static list = [];
+
+        #context = this.constructor.instance;
+
+        /**
+         * Create a new Tab.
+         * @param params The tab parameters.
+         * @returns {Tab}
+         */
+        constructor(params) {
+          if (!params)
+            throw new Error("You have to add an object for creating a tab.");
+          if (!params.url)
+            params.url = this.#context.#Files.config.browser.defaultPage;
+
+          this.id = this.#context.generateId();
+          this.url = params.url;
+
+          // Create an html tab div
+          let tabElement = document.createElement("div");
+          tabElement.draggable = true;
+          tabElement.classList.add("border-tab");
+          tabElement.classList.add("nodrag");
+
+          tabElement.innerHTML = `
+            <div class='border-title'>Name Undefined</div>
+
+            <div class='border-close-btn'>
+              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 43 43" fill="none">
+                <path class="border-svg-icon-close" d="M28.2843 21.2132L42.4264 7.07107L35.3553 1.19209e-06L21.2132 14.1421L7.07107 0L1.19209e-06 7.07107L14.1421 21.2132L0 35.3553L7.07107 42.4264L21.2132 28.2843L35.3553 42.4264L42.4264 35.3553L28.2843 21.2132Z" fill="#66239A"/>
+              </svg>
+            </div>
+          `;
+
+          tabElement.addEventListener("click", () => {
+            this.setCurrent();
+          });
+
+          tabElement.addEventListener("contextmenu", (e) => {
+            const tabIndex = Array.prototype.indexOf.call(
+              tabElement.parentNode.children,
+              tabElement
+            );
+          });
+
+          tabElement
+            .querySelector(".border-close-btn")
+            .addEventListener("click", () => {
+              this.close();
+            });
+
+          this.#context.window.body
+            .querySelector("#border-tab-container")
+            .appendChild(tabElement);
+          this.element = tabElement;
+          // <
+
+          // Create an html view tab
+          let viewElement = document.createElement("iframe");
+          viewElement.classList.add("border-view");
+
+          this.#context.window.body
+            .querySelector("#border-view-container")
+            .appendChild(viewElement);
+          this.webview = viewElement;
+          // <
+
+          // After Created Action
+          if (params.current) this.setCurrent();
+          this.reload();
+          // <
+
+          this.#context.Tab.list.push(this);
+
+          return this;
+        }
+
+        close() {
+          this.#context.Tab.list.splice(
+            this.#context.Tab.list.indexOf(this),
+            1
+          );
+
+          this.element.remove();
+          this.webview.remove();
+
+          if (this.#context.Tab.current === this)
+            this.#context.Tab.current = this.#context.Tab.list[0];
+        }
+
+        setCurrent() {
+          try {
+            if (this.#context.Tab.current) {
+              this.#context.Tab.current.element.classList.remove(
+                "border-current"
+              );
+              this.#context.Tab.current.webview.classList.remove(
+                "border-current"
+              );
             }
+            this.#context.Tab.current = this;
 
-            // Variable declaration
-            #tabNb = 0;
-            #tabId = [];
-            #browserWnd;
-            #browserBody;
+            this.element.classList.add("border-current");
+            this.webview.classList.add("border-current");
 
-            version = "1.10";
+            this.#context.window.body.querySelector("#border-searchbar").value =
+              this.url;
+          } catch {}
+        }
 
-            keybinds = [
-                {
-                    keys: ["Alt", "l"],
-                    description: "Focus the searchbar",
-                    exec: () => {
-                        this.#browserBody.querySelector("#border-searchbar").focus();
-                    },
-                },
-                {
-                    keys: ["Alt", "t"],
-                    description: "Open a new tab",
-                    exec: () => {
-                        this.addTab({ current: true });
-                    },
-                },
-                {
-                    keys: ["Alt", "w"],
-                    description: "Close the current tab",
-                    exec: () => {
-                        this.removeTab(
-                            this.#browserBody.querySelector(".border-tab.border-current").dataset.id
-                        );
-                    },
-                },
-                {
-                    keys: ["Alt", "a"],
-                    description: "Open an about tab",
-                    exec: () => {
-                        this.addTab({ current: true, url: "border://about" });
-                    },
-                },
-            ];
+        reload() {
+          const searchbar =
+            this.#context.window.body.querySelector("#border-searchbar");
+          const handledUri = this.#context.#handleURI(this.url);
+          if (!handledUri[1]) {
+            searchbar.value = handledUri[0];
+            this.element.querySelector(".border-title").innerHTML =
+              handledUri[0].split("/")[2];
+          } else {
+            searchbar.value = this.url;
+            this.element.querySelector(".border-title").innerHTML =
+              handledUri[1];
+          }
 
-            protocols = {
-                border: {
-                    newtab: `
+          this.webview.src = handledUri[0];
+
+          searchbar.blur();
+        }
+      };
+
+      window = {
+        create(url) {
+          return w96.sys.execCmd("border", [url]);
+        },
+
+        close() {
+          if (this.instance.__tabLoop) clearInterval(this.instance.__tabLoop);
+          return this.instance.window.self.close();
+        },
+      };
+
+      version = "1.10";
+
+      keybinds = [
+        {
+          keys: ["Alt", "l"],
+          description: "Focus the searchbar",
+          exec: () => {
+            this.window.body.querySelector("#border-searchbar").focus();
+          },
+        },
+        {
+          keys: ["Alt", "t"],
+          description: "Open a new tab",
+          exec: () => {
+            new this.Tab({ current: true });
+          },
+        },
+        {
+          keys: ["Alt", "w"],
+          description: "Close the current tab",
+          exec: () => {
+            this.Tab.current.close();
+          },
+        },
+        {
+          keys: ["Alt", "a"],
+          description: "Open an about tab",
+          exec: () => {
+            new this.Tab({ current: true, url: "border://about" });
+          },
+        },
+      ];
+
+      protocols = {
+        border: {
+          newtab: `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -396,7 +542,7 @@ fill: var(--border-secondary);
 </body>
 </html>
                     `,
-                    changelog: `
+          changelog: `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -427,11 +573,12 @@ fill: var(--border-secondary);
                 <li>"border://404" removed.</li>
                 <li>Script system added.</li>
                 <li>Changed protocol system.</li>
+                <li>Removed the possibility to move tabs (too buggy).</li>
             </ul>
         </body>
         </html>
                     `,
-                    about: `
+          about: `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -456,7 +603,7 @@ fill: var(--border-secondary);
         </body>
         </html>
                     `,
-                    shortcuts: `
+          shortcuts: `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -473,13 +620,17 @@ fill: var(--border-secondary);
             <span style="display: inline-block; font-size: 50px;">&nbsp;shortcuts</span>
             
             <ul>
-                ${Object.entries(this.keybinds).map(([_key, value]) => `<li>${value.description}: ${value.keys.join("+")}</li>`).join("<br>")
-                        }
+                ${Object.entries(this.keybinds)
+                  .map(
+                    ([_key, value]) =>
+                      `<li>${value.description}: ${value.keys.join("+")}</li>`
+                  )
+                  .join("<br>")}
             </ul>
         </body>
         </html>
                     `,
-                    offline: `
+          offline: `
         <!DOCTYPE html>
         <html lang="en">
             <head>
@@ -507,7 +658,7 @@ fill: var(--border-secondary);
             </body> 
         </html>
                     `,
-                    woozy: `
+          woozy: `
         <!DOCTYPE html>
         <html lang="en">
             <head>
@@ -526,328 +677,251 @@ fill: var(--border-secondary);
             </body>
         </html>
                     `,
-                    themes: `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Border themes</title>
-        </head>
-        <body style="width: 100vw; height: 100vh; margin: 0;">
-            <iframe width="100%" height="100%" frameborder=0 src="https://onofficiel.github.io/border/themes"></iframe>
-        </body>
-        </html>
-                    `,
-                }
-
-            };
-
-            #handleURI(url) {
-                if (!window.navigator.onLine && !RegExp(`^(?:${Object.keys(this.protocols).join("|")}|data):/*`).test(url)) return ["data:text/html," + encodeURI(this.protocols.offline), "Not Connected"];
-                if (url.startsWith("//")) return ["https://" + url.substring(2), false];
-
-                if (/^\S*:/i.test(url)) {
-                    if (
-                        url.startsWith("file://") ||
-                        url.startsWith("https://rel3.windows96.net/_/")
-                    ) {
-                        return [
-                            encodeURI("https://rel3.windows96.net/_/" + url.substring(7)),
-                            url.substring(7),
-                        ];
-                    }
-                    for (let [pName, pValue] of Object.entries(this.protocols)) {
-                        if (url.startsWith(pName)) {
-                            for (let [path, html] of Object.entries(pValue)) {
-                                if (RegExp(`^${pName}:/*${path}$`).test(url)) {
-                                    return ([
-                                        encodeURI("data:text/html," + html),
-                                        path,
-                                    ]);
-                                }
-                            }
-                        }
-                    };
-                    return [url, false];
-                } else {
-                    if (/^([-a-zA-Z0-9^\p{L}\p{C}\u00a1-\uffff@:%_\+.~#?&//=]{2,256}){1}(\.[a-z]{2,4}){1}(\:[0-9]*)?(\/[-a-zA-Z0-9\u00a1-\uffff\(\)@:%,_\+.~#?&//=]*)?([-a-zA-Z0-9\(\)@:%,_\+.~#?&//=]*)?$/i.test(url)) {
-                        return ["https://" + url, false];
-                    }
-                    else {
-                        return [encodeURI("https://google.com/search?igu=1&q=" + url.replace(" ", "+")), false];
-                    }
-                }
-            }
-            #handleScript(iframe) {
-                iframe.addEventListener(
-                    "load",
-                    () => {
-                        iframe.contentWindow.postMessage("__FromBorder__", "*");
-
-                        window.addEventListener("message", (e) => {
-                            if (!e.data.BORDER_EXEC) return;
-
-                            if (!this.#Files.whitelist.includes(e.origin)) {
-                                return w96.ui.MsgBoxSimple.confirm(
-                                    "This website want to access script system. Authorize ?",
-                                    async (ok) => {
-                                        if (ok) {
-                                            this.#Files.whitelist.push(e.origin);
-                                            await w96.FS.writestr(
-                                                "c:/user/appdata/Border/whitelist.json",
-                                                JSON.stringify(this.#Files.whitelist)
-                                            );
-                                            execute();
-                                        }
+          themes: `
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    
+                    <head>
+                      <meta charset="UTF-8" />
+                      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                      
+                      <title>Themes</title>
+                    </head>
+                    
+                    <body style="margin: 0; -webkit-box-sizing: border-box; box-sizing: border-box; color: rgb(255, 229, 251);
+                      font-family: 'Lexend', Arial, Helvetica, sans-serif; padding: 50px;">
+                      <h1 style="font-size: 5em;">Themes</h1>
+                      <h2 style="font-size: 1.5em; margin-bottom: 25px; color: rgb(255, 255, 255);">
+                        Here you can download themes for Border:
+                      </h2>
+                    
+                      <div style="display: flex;  flex-wrap: wrap;" id="tile-container"></div>
+                    
+                      <input
+                        style="position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%); font-family: 'Lexend', Arial, Helvetica, sans-serif; color: rgb(102, 35, 154); font-size: 1em; padding: 15px 20px; width: calc(100% - (50px * 2)); border-radius: 30px; border: none;"
+                        type="text" id="search" autocomplete="off" placeholder="Search in themes..." />
+                        
+                        <script>
+                        const container = document.getElementById("tile-container");
+                        const search = document.getElementById("search");
+                        const serverUrl = "https://onofficiel.github.io/border/";
+                    
+                        fetch(serverUrl + "./src/data/themes.json")
+                          .then((r) => {
+                            return r.json();
+                          })
+                          .then((data) => {
+                            data.forEach((theme) => {
+                              const tile = document.createElement("div");
+                              tile.classList.add("tile");
+                              tile.style = \`
+                                min-height: 240px;
+                                min-width: 250px;
+                                max-height: 350px;
+                                max-width: 500px;
+                    
+                                margin: 10px;
+                                padding: 20px;
+                    
+                                flex: 1;
+                    
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: wrap;
+                    
+                                background-color: rgb(255, 255, 255);
+                                border-radius: 20px;
+                              \`;
+                              tile.innerHTML = \`
+                              <div
+                              style="
+                                color: rgb(102, 35, 154);
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                                flex: 1.5;
+                                padding-right: 20px;
+                              "
+                              class="container"
+                              >
+                              <div style="display: flex; flex-direction: column" class="text-container">
+                                <span
+                                  style="display: block; font-size: 1.8em; font-weight: bold"
+                                  class="title"
+                                >
+                                  \${theme.name}
+                                </span>
+                                <span
+                                  style="
+                                    display: block;
+                                    font-size: 0.8em;
+                                    font-style: italic;
+                                    margin-bottom: 10px;
+                                  "
+                                  class="author"
+                                >
+                                  By \${theme.author}
+                                </span>
+                                <span style="font-size: 1em" class="description">\${theme.description}</span>
+                              </div>
+                              <a
+                                style="
+                                  display: inline-block;
+                                  color: rgb(102, 35, 154);
+                                  text-decoration: none;
+                                  text-align: center;
+                                  background-color: rgb(255, 229, 251);
+                                  padding: 10px;
+                                  margin-top: 10px;
+                                  border-radius: 30px;
+                                  border: solid 0 rgb(255, 229, 251);
+                                  transition: all 0.2s ease;
+                                "
+                                class="download">
+                                  Download
+                                </a>
+                              </div>
+                              <div
+                              style="
+                                flex: 1;
+                    
+                                background-repeat: no-repeat;
+                                background-size: cover;
+                                background-position: center center;
+                    
+                                border-radius: 10px;
+                    
+                                width: auto;
+                                height: auto;
+                                aspect-ratio: auto;
+                              "
+                              class="image"
+                              style="background-image: url('\${serverUrl + theme.image}')"
+                              ></div>
+                    
+                          \`;
+                    
+                              tile.getElementsByClassName("download")[0].addEventListener("click", () => {
+                                parent.window.w96.FS.writestr("/user/appdata/Border/themes/" + theme.name + ".css");
+                              });
+                    
+                              console.log(container, tile);
+                              container.appendChild(tile);
+                            });
+                    
+                            search.addEventListener("keyup", () => {
+                              const tiles = document.getElementsByClassName("tile");
+                    
+                              document.getElementByTagName("h1").innerText = search.value || "Themes";
+                    
+                              tiles.forEach((tile) => {
+                                tile.style.display = "flex";
+                              });
+                    
+                              if (!search.value) return;
+                    
+                              data.forEach((theme) => {
+                                if (!theme.name.toLowerCase().includes(search.value.toLowerCase())) {
+                                  tiles.forEach((tile) => {
+                                    if (
+                                      tile.getElementsByClassName("title")[0]
+                                        .innerText === theme.name
+                                    ) {
+                                      tile.style.display = "none";
                                     }
-                                );
-                            } else execute();
+                                  });
+                                }
+                              });
+                            });
+                          });
+                      </script>
+                    
+                        </body>
+                    
+                    </html>
+                    `,
+        },
+      };
 
-                            function execute() {
-                                /* iframe.contentWindow.postMessage(
-                                  "Border say " + e.data.script,
-                                  "*"
-                                ); */
-                            }
-                        });
-                    },
-                    { once: true }
-                );
-            }
+      #handleURI(url) {
+        if (
+          !window.navigator.onLine &&
+          !RegExp(`^(?:${Object.keys(this.protocols).join("|")}|data):/*`).test(
+            url
+          )
+        )
+          return [
+            "data:text/html," + encodeURI(this.protocols.offline),
+            "Not Connected",
+          ];
+        if (url.startsWith("//")) return ["https://" + url.substring(2), false];
 
-            // BORDER API
-            addTab(tab) {
-                if (!tab)
-                    throw new Error("You have to add an object for creating a tab.");
-                if (!tab.url) tab.url = this.#Files.config.browser.defaultPage;
-
-                // Create an html tab div
-                let tabElement = document.createElement("div");
-                tabElement.draggable = true;
-                tabElement.classList.add("border-tab");
-                tabElement.classList.add("nodrag");
-                tabElement.dataset.id = this.generateId();
-                tabElement.dataset.url = tab.url;
-                tabElement.innerHTML =
-                    `
-<div class='border-title'>Name Undefined</div>
-<div class='border-close-btn'>
-    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 43 43" fill="none">
-        <path class="border-svg-icon-close" d="M28.2843 21.2132L42.4264 7.07107L35.3553 1.19209e-06L21.2132 14.1421L7.07107 0L1.19209e-06 7.07107L14.1421 21.2132L0 35.3553L7.07107 42.4264L21.2132 28.2843L35.3553 42.4264L42.4264 35.3553L28.2843 21.2132Z" fill="#66239A"/>
-    </svg>
-</div>
-`;
-
-                tabElement.addEventListener("click", () => {
-                    this.setCurrent(tabElement.dataset.id);
-                });
-
-                tabElement.addEventListener("contextmenu", (e) => {
-                    const tabIndex = Array.prototype.indexOf.call(
-                        tabElement.parentNode.children,
-                        tabElement
-                    );
-
-                    const ctxm = new w96.ui.ContextMenu([
-                        {
-                            type: "normal",
-                            label: "Move Left",
-                            onclick: () => {
-                                if (tabIndex === 0) return;
-
-                                this.#browserBody
-                                    .querySelectorAll(".border-tab")
-                                [tabIndex - 1].insertAdjacentElement(
-                                    "beforebegin",
-                                    tabElement
-                                );
-                            },
-                        },
-                        {
-                            type: "normal",
-                            label: "Move Right",
-                            onclick: () => {
-                                if (
-                                    tabIndex ===
-                                    this.#browserBody.querySelectorAll(".border-tab").length - 1
-                                )
-                                    return;
-
-                                this.#browserBody
-                                    .querySelectorAll(".border-tab")
-                                [tabIndex + 1].insertAdjacentElement(
-                                    "afterend",
-                                    tabElement
-                                );
-                            },
-                        },
-                    ]);
-
-                    ctxm.renderMenu(e.clientX, e.clientY);
-                });
-
-                tabElement
-                    .querySelector(".border-close-btn")
-                    .addEventListener("click", () => {
-                        this.removeTab(tabElement.dataset.id);
-                    });
-
-                this.#browserBody.querySelector("#border-tab-container").appendChild(tabElement);
-                // <
-
-                // Create an html view tab
-                let viewElement = document.createElement("iframe");
-                viewElement.classList.add("border-view");
-                viewElement.dataset.id = tabElement.dataset.id;
-
-                this.#browserBody.querySelector("#border-view-container").appendChild(viewElement);
-                // <
-
-                // After Created Action
-                if (tab.current) this.setCurrent(tabElement.dataset.id);
-                this.reloadTab();
-                // <
-
-                this.#tabNb++;
-                this.#tabId.push(tabElement.dataset.id);
-            }
-
-            setCurrent(id) {
-                try {
-                    for (let tab of this.#browserBody
-                        .querySelector("#border-tab-container")
-                        .querySelectorAll(".border-tab")) {
-                        tab.classList.remove("border-current");
-                    }
-                    this.#browserBody
-                        .querySelector('.border-tab[data-id~="' + id + '"]')
-                        .classList.add("border-current");
-
-                    for (let view of this.#browserBody
-                        .querySelector("#border-view-container")
-                        .querySelectorAll(".border-view")) {
-                        view.classList.remove("border-current");
-                    }
-                    this.#browserBody
-                        .querySelector('.border-view[data-id~="' + id + '"]')
-                        .classList.add("border-current");
-
-                    this.#browserBody.querySelector("#border-searchbar").value = this.#browserBody.querySelector(
-                        ".border-tab.border-current"
-                    ).dataset.url;
-                } catch { }
-            }
-
-            removeTab(id) {
-                if (!id) throw new Error("Specify a correct ID");
-
-                this.#tabNb--;
-                this.#tabId.splice(this.#tabId.indexOf(id), 1);
-
-                this.#browserBody
-                    .querySelector("#border-tab-container")
-                    .removeChild(
-                        this.#browserBody.querySelector('.border-tab[data-id~="' + id + '"]')
-                    );
-                this.#browserBody
-                    .querySelector("#border-view-container")
-                    .removeChild(
-                        this.#browserBody.querySelector('.border-view[data-id~="' + id + '"]')
-                    );
-            }
-
-            reloadTab() {
-                if (
-                    !this.#handleURI(
-                        this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                    )[1]
-                ) {
-                    this.#browserBody.querySelector("#border-searchbar").value =
-                        this.#handleURI(
-                            this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                        )[0];
-                } else {
-                    this.#browserBody.querySelector("#border-searchbar").value = this.#browserBody.querySelector(
-                        ".border-tab.border-current"
-                    ).dataset.url;
+        if (/^\S*:/i.test(url)) {
+          if (
+            url.startsWith("file://") ||
+            url.startsWith("https://rel3.windows96.net/_/")
+          ) {
+            return [
+              encodeURI("https://rel3.windows96.net/_/" + url.substring(7)),
+              url.substring(7),
+            ];
+          }
+          for (let [pName, pValue] of Object.entries(this.protocols)) {
+            if (url.startsWith(pName)) {
+              for (let [path, html] of Object.entries(pValue)) {
+                if (RegExp(`^${pName}:/*${path}$`).test(url)) {
+                  return [encodeURI("data:text/html," + html), path];
                 }
-
-                this.#browserBody
-                    .querySelector("#border-view-container")
-                    .querySelector(".border-view.border-current").src =
-                    this.#handleURI(
-                        this.#browserBody
-                            .querySelector("#border-tab-container")
-                            .querySelector(".border-tab.border-current").dataset.url
-                    )[0];
-
-                this.#handleScript(
-                    this.#browserBody
-                        .querySelector("#border-view-container")
-                        .querySelector(".border-view.border-current")
-                );
-                this.#browserBody.querySelector("#border-searchbar").blur();
-
-                if (
-                    this.#handleURI(
-                        this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                    )[1]
-                ) {
-                    this.#browserBody
-                        .querySelector(".border-tab.border-current")
-                        .querySelector(".border-title").innerText =
-                        this.#handleURI(
-                            this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                        )[1];
-                } else
-                    this.#browserBody
-                        .querySelector(".border-tab.border-current")
-                        .querySelector(".border-title").innerText = this.#handleURI(
-                            this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                        )[0]
-                            .split("/")[2];
+              }
             }
+          }
+          return [url, false];
+        } else {
+          if (
+            /^([-a-zA-Z0-9^\p{L}\p{C}\u00a1-\uffff@:%_\+.~#?&//=]{2,256}){1}(\.[a-z]{2,4}){1}(\:[0-9]*)?(\/[-a-zA-Z0-9\u00a1-\uffff\(\)@:%,_\+.~#?&//=]*)?([-a-zA-Z0-9\(\)@:%,_\+.~#?&//=]*)?$/i.test(
+              url
+            )
+          ) {
+            return ["https://" + url, false];
+          } else {
+            return [
+              encodeURI(
+                "https://google.com/search?igu=1&q=" + url.replace(" ", "+")
+              ),
+              false,
+            ];
+          }
+        }
+      }
 
-            closeWindow() {
-                return this.#browserWnd.close();
-            }
+      generateId() {
+        let id = "";
+        for (let i = 0; i < 4; i++) {
+          id += Math.floor(Math.random() * 10);
+        }
 
-            openWindow() {
-                return w96.sys.execCmd("border");
-            }
+        if (this.Tab.list.length >= 9999) throw new Error("Cannot generate ID");
+        for (const tab in this.Tab.list) {
+          if (tab.id === id) return this.generateId();
+        }
+        return parseInt(id);
+      }
 
-            generateId() {
-                let id = "";
-                for (let i = 0; i < 4; i++) {
-                    id += Math.floor(Math.random() * 10);
-                }
+      /* Creating the Border Setup Program */
+      async #createSetupWnd() {
+        let wnd = new w96.StandardWindow({
+          title: "Setup Border",
+          icon: icon16,
+          bodyClass: "border-setup-wnd",
+          taskbar: true,
+          initialHeight: 400,
+          initialWidth: 600,
+        });
 
-                if (this.#tabId.length >= 9999)
-                    throw new Error("Cannot generate ID");
-                for (const tabId in this.#tabId) {
-                    if (tabId === id) return this.generateId();
-                }
-                return parseInt(id);
-            }
+        let setupBody = wnd.getBodyContainer();
 
-
-
-            /* Creating the Border Setup Program */
-            async #createSetupWnd() {
-                let wnd = new w96.StandardWindow({
-                    title: "Setup Border",
-                    icon: icon16,
-                    bodyClass: "border-setup-wnd",
-                    taskbar: true,
-                    initialHeight: 400,
-                    initialWidth: 600,
-                });
-
-                let setupBody = wnd.getBodyContainer();
-
-                setupBody.innerHTML = `
+        setupBody.innerHTML = `
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
 
@@ -891,169 +965,187 @@ fill: var(--border-secondary);
 </div>
 `;
 
-                let currentPage = 0;
-                let settings = {};
+        let currentPage = 0;
+        let settings = {};
 
-                let page = [
-                    {
-                        content: `
+        let page = [
+          {
+            content: `
             <h1>Welcome to the Border Setup Program !</h1>
             Click next to start the configuration of Border or back to use the default one.
             `,
-                    },
-                    {
-                        content: `
+          },
+          {
+            content: `
             <h1>Theme of Border</h1>
-            <b>Primary : </b><input class="border-setup-primary-input" type="color" value="${this.#Files.config.theme.primary}"></input><br>
-            <b>Secondary : </b><input class="border-setup-secondary-input" type="color" value="${this.#Files.config.theme.secondary}"></input>
+            <b>Primary : </b><input class="border-setup-primary-input" type="color" value="${
+              this.#Files.config.theme.primary
+            }"></input><br>
+            <b>Secondary : </b><input class="border-setup-secondary-input" type="color" value="${
+              this.#Files.config.theme.secondary
+            }"></input>
             `,
-                        save: [
-                            {
-                                name: "primary",
-                                value: ".border-setup-primary-input",
-                            },
-                            {
-                                name: "secondary",
-                                value: ".border-setup-secondary-input",
-                            },
-                        ],
-                    },
-                    {
-                        content: `
+            save: [
+              {
+                name: "primary",
+                value: ".border-setup-primary-input",
+              },
+              {
+                name: "secondary",
+                value: ".border-setup-secondary-input",
+              },
+            ],
+          },
+          {
+            content: `
             <h1>Size of the window</h1>
-            <b>Height : </b><input class="border-setup-height-input" type="number" value="${this.#Files.config.window.height}"></input>px<br>
-            <b>Width : </b><input class="border-setup-width-input" type="number" value="${this.#Files.config.window.width}"></input>px<br>
-            <b>Use the custom titlebar : </b><input class="border-setup-titlebar-input" type="checkbox" checked="${this.#Files.config.window.customTitlebar}"></input>
+            <b>Height : </b><input class="border-setup-height-input" type="number" value="${
+              this.#Files.config.window.height
+            }"></input>px<br>
+            <b>Width : </b><input class="border-setup-width-input" type="number" value="${
+              this.#Files.config.window.width
+            }"></input>px<br>
+            <b>Use the custom titlebar : </b><input class="border-setup-titlebar-input" type="checkbox" checked="${
+              this.#Files.config.window.customTitlebar
+            }"></input>
             `,
-                        save: [
-                            {
-                                name: "height",
-                                value: ".border-setup-height-input",
-                            },
-                            {
-                                name: "width",
-                                value: ".border-setup-width-input",
-                            },
-                            {
-                                name: "customTitlebar",
-                                value: ".border-setup-titlebar-input",
-                            },
-                        ],
-                    },
-                    {
-                        content: `
+            save: [
+              {
+                name: "height",
+                value: ".border-setup-height-input",
+              },
+              {
+                name: "width",
+                value: ".border-setup-width-input",
+              },
+              {
+                name: "customTitlebar",
+                value: ".border-setup-titlebar-input",
+              },
+            ],
+          },
+          {
+            content: `
             <h1>Others</h1>
-            <b>Default page : </b><input class="border-setup-default-input" type="url" value="${this.#Files.config.browser.defaultPage}"></input><br>
-            <b>Enable shortcuts ? </b><input class="border-setup-shortcuts-input" type="checkbox" checked="${this.#Files.config.browser.enableShortcuts}"></input><br>
+            <b>Default page : </b><input class="border-setup-default-input" type="url" value="${
+              this.#Files.config.browser.defaultPage
+            }"></input><br>
+            <b>Enable shortcuts ? </b><input class="border-setup-shortcuts-input" type="checkbox" checked="${
+              this.#Files.config.browser.enableShortcuts
+            }"></input><br>
             <b>Create a Border shortcut on your desktop ? </b><input class="border-setup-desktop-input" type="checkbox" checked="true"></input>
             `,
-                        save: [
-                            {
-                                name: "defaultPage",
-                                value: ".border-setup-default-input",
-                            },
-                            {
-                                name: "enableShortcuts",
-                                value: ".border-setup-shortcuts-input",
-                            },
-                            {
-                                name: "createDesktopShortcut",
-                                value: ".border-setup-desktop-input",
-                            },
-                        ],
-                    },
-                    {
-                        content: `
+            save: [
+              {
+                name: "defaultPage",
+                value: ".border-setup-default-input",
+              },
+              {
+                name: "enableShortcuts",
+                value: ".border-setup-shortcuts-input",
+              },
+              {
+                name: "createDesktopShortcut",
+                value: ".border-setup-desktop-input",
+              },
+            ],
+          },
+          {
+            content: `
             <h1>So here we are !</h1>
             <div class="border-setup-get-settings"></div>
             `,
-                    },
-                ];
+          },
+        ];
 
-                setupBody
-                    .querySelector(".border-setup-back")
-                    .addEventListener("click", () => {
-                        goto(--currentPage);
-                    });
+        setupBody
+          .querySelector(".border-setup-back")
+          .addEventListener("click", () => {
+            goto(--currentPage);
+          });
 
-                setupBody
-                    .querySelector(".border-setup-next")
-                    .addEventListener("click", () => {
-                        if (!!page[currentPage].save) {
-                            for (let data of page[currentPage].save) {
-                                settings[data.name] =
-                                    setupBody.querySelector(data.value).type === "checkbox"
-                                        ? setupBody.querySelector(data.value).checked
-                                        : setupBody.querySelector(data.value).value;
-                            }
-                        }
-                        goto(++currentPage);
-                    });
+        setupBody
+          .querySelector(".border-setup-next")
+          .addEventListener("click", () => {
+            if (!!page[currentPage].save) {
+              for (let data of page[currentPage].save) {
+                settings[data.name] =
+                  setupBody.querySelector(data.value).type === "checkbox"
+                    ? setupBody.querySelector(data.value).checked
+                    : setupBody.querySelector(data.value).value;
+              }
+            }
+            goto(++currentPage);
+          });
 
-                const goto = (n) => {
-                    if (n >= page.length) {
-                        let json = JSON.stringify({
-                            theme: {
-                                currentTheme: this.#Files.config.theme.currentTheme,
-                                primary: settings.primary,
-                                secondary: settings.secondary,
-                            },
-                            window: {
-                                customTitlebar: settings.customTitlebar,
-                                height: settings.height,
-                                width: settings.width,
-                            },
-                            browser: {
-                                defaultPage: settings.defaultPage,
-                                enableShortcuts: settings.enableShortcuts,
-                            },
-                        });
+        const goto = (n) => {
+          if (n >= page.length) {
+            let json = JSON.stringify({
+              theme: {
+                currentTheme: this.#Files.config.theme.currentTheme,
+                primary: settings.primary,
+                secondary: settings.secondary,
+              },
+              window: {
+                customTitlebar: settings.customTitlebar,
+                height: settings.height,
+                width: settings.width,
+              },
+              browser: {
+                defaultPage: settings.defaultPage,
+                enableShortcuts: settings.enableShortcuts,
+              },
+            });
 
-                        if (settings.createDesktopShortcut) {
-                            w96.shell.mkShortcut(
-                                "c:/user/desktop/Border.link",
-                                icon32,
-                                "border"
-                            );
-                        }
-
-                        w96.FS.writestr("c:/user/appdata/Border/config.json", json).then(
-                            () => {
-                                alert("Configuration done !");
-                                this.openWindow();
-                                return wnd.close();
-                            }
-                        );
-                    }
-
-                    if (n < 0) {
-                        this.openWindow();
-                        return wnd.close();
-                    }
-
-                    setupBody.querySelector(".border-setup-panel").innerHTML =
-                        page[n].content;
-
-                    document
-                        .querySelectorAll(".border-setup-get-settings")
-                        .forEach((item) => {
-                            let settingsData = "";
-                            for (let key of Object.keys(settings)) {
-                                settingsData += key + ": " + settings[key] + "<br/>";
-                            }
-                            item.innerHTML = settingsData;
-                        });
-
-                    currentPage = n;
-                };
-                goto(0);
-
-                wnd.show();
+            if (settings.createDesktopShortcut) {
+              w96.shell.mkShortcut(
+                "c:/user/desktop/Border.link",
+                icon32,
+                "border"
+              );
             }
 
-            async #main() {
-                // Create "border://urls" protocol
-                this.protocols.border.urls = `
+            w96.FS.writestr("c:/user/appdata/Border/config.json", json).then(
+              () => {
+                alert("Configuration done !");
+                this.window.create();
+                return wnd.close();
+              }
+            );
+          }
+
+          if (n < 0) {
+            this.window.create();
+            return wnd.close();
+          }
+
+          setupBody.querySelector(".border-setup-panel").innerHTML =
+            page[n].content;
+
+          document
+            .querySelectorAll(".border-setup-get-settings")
+            .forEach((item) => {
+              let settingsData = "";
+              for (let key of Object.keys(settings)) {
+                settingsData += key + ": " + settings[key] + "<br/>";
+              }
+              item.innerHTML = settingsData;
+            });
+
+          currentPage = n;
+        };
+        goto(0);
+
+        wnd.show();
+      }
+
+      async #main() {
+        // Setup instances
+        this.Tab.instance = this;
+        this.window.instance = this;
+
+        // Create "border://urls" protocol
+        this.protocols.border.urls = `
                 <!DOCTYPE html>
                     <html lang="en">
                     <head>
@@ -1070,19 +1162,24 @@ fill: var(--border-secondary);
                         <span style="display: inline-block; font-size: 50px;">&nbsp;urls</span>
                         
                         <ul>
-                            ${Object.entries(this.protocols.border).map(([key, value]) => `<a style="color: rgb(255, 255, 255);" href="data:text/html,${encodeURI(value)}">border://${key}</a>`).join("<br>")
-                    }
+                            ${Object.entries(this.protocols.border)
+                              .map(
+                                ([key, value]) =>
+                                  `<a style="color: rgb(255, 255, 255);" href="data:text/html,${encodeURI(
+                                    value
+                                  )}">border://${key}</a>`
+                              )
+                              .join("<br>")}
                         </ul>
                     </body>
                 </html>
                 `;
 
-                // Create Border main window
-                const wnd = new w96.StandardWindow(
-                    {
-                        title: "Border",
-                        body:
-                            `
+        // Create Border main window
+        const wnd = new w96.StandardWindow(
+          {
+            title: "Border",
+            body: `
                     <style>
                         ${this.#Files.style}
                     </style>
@@ -1150,464 +1247,453 @@ fill: var(--border-secondary);
                         </div>
                     </div>
                     `,
-                        initialHeight: this.#Files.config.window.height,
-                        initialWidth: this.#Files.config.window.width,
-                        taskbar: true,
-                        icon: icon16,
-                    },
-                    true
-                );
+            initialHeight: this.#Files.config.window.height,
+            initialWidth: this.#Files.config.window.width,
+            taskbar: true,
+            icon: icon16,
+          },
+          true
+        );
 
-                this.#browserWnd = wnd;
-                this.#browserBody = this.#browserWnd.getBodyContainer();
+        this.window.self = wnd;
+        this.window.body = this.window.self.getBodyContainer();
 
-                const appbar = new w96.ui.MenuBar();
-                appbar.menuElement.classList.add("nodrag");
+        const appbar = new w96.ui.MenuBar();
+        appbar.menuElement.classList.add("nodrag");
 
-                await appbar.addRoot("File", [
-                    {
-                        type: "normal",
-                        label: "New Tab",
-                        onclick: () => {
-                            this.addTab({ current: true });
-                        },
-                    },
-                    {
-                        type: "normal",
-                        label: "Close Current Tab",
-                        onclick: () => {
-                            this.removeTab(
-                                this.#browserBody.querySelector(".border-tab.border-current").dataset.id
-                            );
-                        },
-                    },
-                    {
-                        type: "separator",
-                    },
-                    {
-                        type: "normal",
-                        label: "Restart",
-                        onclick: () => {
-                            this.closeWindow();
-                            this.openWindow();
-                        },
-                    },
-                    {
-                        type: "normal",
-                        label: "Exit",
-                        onclick: () => this.closeWindow(),
-                    },
-                ]);
+        await appbar.addRoot("File", [
+          {
+            type: "normal",
+            label: "New Tab",
+            onclick: () => {
+              new this.Tab({ current: true });
+            },
+          },
+          {
+            type: "normal",
+            label: "Close Current Tab",
+            onclick: () => {
+              this.Tab.current.close();
+            },
+          },
+          {
+            type: "separator",
+          },
+          {
+            type: "normal",
+            label: "Restart",
+            onclick: () => {
+              this.window.close();
+              this.window.create();
+            },
+          },
+          {
+            type: "normal",
+            label: "Exit",
+            onclick: () => this.window.close(),
+          },
+        ]);
 
-                appbar.addRoot("View", [
-                    {
-                        type: "normal",
-                        label: "Reload",
-                        onclick: () => {
-                            this.reloadTab();
-                        },
-                    },
-                    {
-                        type: "separator",
-                    },
-                    {
-                        type: "normal",
-                        label: "Back",
-                        onclick: () => {
-                            window.history.back();
-                        },
-                    },
-                    {
-                        type: "normal",
-                        label: "Forward",
-                        onclick: () => {
-                            window.history.forward();
-                        },
-                    },
-                ]);
+        appbar.addRoot("View", [
+          {
+            type: "normal",
+            label: "Reload",
+            onclick: () => {
+              this.Tab.current.reload();
+            },
+          },
+          {
+            type: "separator",
+          },
+          {
+            type: "normal",
+            label: "Back",
+            onclick: () => {
+              window.history.back();
+            },
+          },
+          {
+            type: "normal",
+            label: "Forward",
+            onclick: () => {
+              window.history.forward();
+            },
+          },
+        ]);
 
-                appbar.addRoot("Tools", [
-                    {
-                        type: "normal",
-                        label: "Edit Config",
-                        onclick: async () => {
-                            await this.#createSetupWnd();
-                            this.closeWindow();
-                        },
-                    },
-                    {
-                        type: "normal",
-                        label: "Create Shortcut",
-                        onclick: () => {
-                            w96.shell.mkShortcut(
-                                "c:/user/desktop/" +
-                                this.#handleURI(
-                                    this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                                )[0]
-                                    .split("/")[2] +
-                                ".link",
-                                icon32,
-                                "border " +
-                                this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                            );
-                        },
-                    },
-                    {
-                        type: "separator",
-                    },
-                    {
-                        type: "normal",
-                        label: "Add This Site To Bookmarks",
-                        onclick: async () => {
-                            w96.ui.MsgBoxSimple.prompt(
-                                "Border Bookmarks",
-                                "Name this bookmark",
-                                this.#handleURI(
-                                    this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                                )[0],
-                                async name => {
-                                    this.#Files.bookmarks.push({
-                                        name,
-                                        url: this.#handleURI(
-                                            this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                                        )[0],
-                                    });
-                                    await w96.FS.writestr(
-                                        "c:/user/appdata/Border/bookmarks.json",
-                                        JSON.stringify(this.#Files.bookmarks)
-                                    );
-                                    alert("Restart Border to access the bookmark");
-                                })
+        appbar.addRoot("Tools", [
+          {
+            type: "normal",
+            label: "Edit Config",
+            onclick: async () => {
+              await this.#createSetupWnd();
+              this.window.close();
+            },
+          },
+          {
+            type: "normal",
+            label: "Create Shortcut",
+            onclick: () => {
+              w96.shell.mkShortcut(
+                "c:/user/desktop/" +
+                  this.#handleURI(this.Tab.current.url)[0].split("/")[2] +
+                  ".link",
+                icon32,
+                "border " + this.Tab.current.url
+              );
+            },
+          },
+          {
+            type: "separator",
+          },
+          {
+            type: "normal",
+            label: "Add This Site To Bookmarks",
+            onclick: async () => {
+              w96.ui.MsgBoxSimple.prompt(
+                "Border Bookmarks",
+                "Name this bookmark",
+                this.#handleURI(this.Tab.current.url)[0],
+                async (name) => {
+                  this.#Files.bookmarks.push({
+                    name,
+                    url: this.#handleURI(this.Tab.current.url)[0],
+                  });
+                  await w96.FS.writestr(
+                    "c:/user/appdata/Border/bookmarks.json",
+                    JSON.stringify(this.#Files.bookmarks)
+                  );
+                  alert("Restart Border to access the bookmark");
+                }
+              );
+            },
+          },
+          {
+            type: "normal",
+            label: "Remove This Site To Bookmarks",
+            onclick: async () => {
+              this.#Files.bookmarks.forEach((bookmark, index) => {
+                if (bookmark.url === this.#handleURI(this.Tab.current.url)[0]) {
+                  return this.#Files.bookmarks.splice(index, 1);
+                }
+              });
+              await w96.FS.writestr(
+                "c:/user/appdata/Border/bookmarks.json",
+                JSON.stringify(this.#Files.bookmarks)
+              );
+              alert("Restart Border to see changes");
+            },
+          },
+        ]);
 
-                        },
-                    },
-                    {
-                        type: "normal",
-                        label: "Remove This Site To Bookmarks",
-                        onclick: async () => {
-                            this.#Files.bookmarks.forEach((bookmark, index) => {
-                                if (bookmark.url === this.#handleURI(
-                                    this.#browserBody.querySelector(".border-tab.border-current").dataset.url
-                                )[0]) {
-                                    return this.#Files.bookmarks.splice(index, 1);
-                                }
-                            })
-                            await w96.FS.writestr(
-                                "c:/user/appdata/Border/bookmarks.json",
-                                JSON.stringify(this.#Files.bookmarks)
-                            );
-                            alert("Restart Border to see changes");
-                        },
-                    },
-                ]);
+        appbar.addRoot("Help", [
+          {
+            type: "normal",
+            label: "About",
+            onclick: () =>
+              new this.Tab({ current: true, url: "border://about" }),
+          },
+          {
+            type: "normal",
+            label: "Send Feedback",
+            onclick: async () => {
+              let loader = w96.ui.MsgBoxSimple.idleProgress(
+                "Border Feedback",
+                "Connecting to the feedback server..."
+              );
 
-                appbar.addRoot("Help", [
-                    {
-                        type: "normal",
-                        label: "About",
-                        onclick: () =>
-                            this.addTab({ current: true, url: "border://about" })
-                    },
-                    {
-                        type: "normal",
-                        label: "Send Feedback",
-                        onclick: async () => {
-                            let loader = w96.ui.MsgBoxSimple.idleProgress(
-                                "Border Feedback",
-                                "Connecting to the feedback server..."
-                            );
+              if (!w96.net.p3.connected) await w96.net.p3.connect();
 
-                            if (!w96.net.p3.connected) await w96.net.p3.connect();
+              let socket = w96.net.p3.createConnection(
+                "onofficiel.l51drui0hb.ppp:1234"
+              );
 
-                            let socket = w96.net.p3.createConnection(
-                                "onofficiel.l51drui0hb.ppp:1234"
-                            );
-
-                            const tryConnect = () => {
-                                socket.connect().catch((err) => {
-                                    loader.closeDialog();
-                                    w96.ui.MsgBoxSimple.confirm(
-                                        "Cannot connect to the feedback server : " +
-                                        err +
-                                        ".\nRetry ?",
-                                        (ok) => {
-                                            if (ok) {
-                                                tryConnect();
-                                                loader = w96.ui.MsgBoxSimple.idleProgress(
-                                                    "Border Feedback",
-                                                    "Connecting to the feedback server..."
-                                                );
-                                            }
-                                        }
-                                    );
-                                });
-                            };
-
-                            socket.on("connect", () => {
-                                loader.closeDialog();
-                                w96.ui.MsgBoxSimple.prompt(
-                                    "Border Feedback",
-                                    'Write here to us : ( the message can\'t contain ">>" )',
-                                    "",
-                                    (msg) => {
-                                        if (msg) socket.send(["text", "feedback>>" + msg]);
-                                    }
-                                );
-                            });
-
-                            socket.on("message", (msg) => {
-                                alert(msg[1]);
-                            });
-
-                            tryConnect();
-                        },
-                    },
-                    {
-                        type: "separator",
-                    },
-                    {
-                        type: "normal",
-                        label: "See Keyboard Shortcuts",
-                        onclick: () => {
-                            this.addTab({ current: true, url: "border://shortcuts" })
-                        },
-                    },
-                    {
-                        type: "normal",
-                        label: "Open A Changelog Tab",
-                        onclick: () => {
-                            this.addTab({ current: true, url: "border://changelog" });
-                        },
-                    },
-                ]);
-
-                const bookmarkList = [];
-                this.#Files.bookmarks.forEach(({ name, url }) => {
-                    bookmarkList.push({
-                        type: "normal",
-                        label: name,
-                        onclick: () => {
-                            this.addTab({ current: true, url });
-                        },
-                    });
-                });
-
-                appbar.addRoot("Bookmarks", bookmarkList);
-
-                // Theme menu setup
-                const themes = await w96.FS.readdir("/user/appdata/Border/themes");
-
-                const themeList = [];
-                themes.forEach((path) => {
-                    if (w96.FSUtil.getExtension(path).toLowerCase() !== ".css") return;
-                    const name = w96.FSUtil.fname(path);
-                    themeList.push({
-                        type: "normal",
-                        label: name,
-                        onclick: async () => {
-                            this.#Files.config.theme.currentTheme = name;
-                            await w96.FS.writestr(
-                                "/user/appdata/Border/config.json",
-                                JSON.stringify(this.#Files.config)
-                            );
-                            alert("Restart to apply the theme.");
-                        },
-                    });
-                });
-                themeList.push(
-                    {
-                        type: "separator",
-                    },
-                    {
-                        type: "normal",
-                        label: "Go To The Theme Folder",
-                        onclick: () => {
-                            w96.sys.execCmd("explorer", ["c:/user/appdata/Border/themes"]);
-                        },
+              const tryConnect = () => {
+                socket.connect().catch((err) => {
+                  loader.closeDialog();
+                  w96.ui.MsgBoxSimple.confirm(
+                    "Cannot connect to the feedback server : " +
+                      err +
+                      ".\nRetry ?",
+                    (ok) => {
+                      if (ok) {
+                        tryConnect();
+                        loader = w96.ui.MsgBoxSimple.idleProgress(
+                          "Border Feedback",
+                          "Connecting to the feedback server..."
+                        );
+                      }
                     }
+                  );
+                });
+              };
+
+              socket.on("connect", () => {
+                loader.closeDialog();
+                w96.ui.MsgBoxSimple.prompt(
+                  "Border Feedback",
+                  'Write here to us : ( the message can\'t contain ">>" )',
+                  "",
+                  (msg) => {
+                    if (msg) socket.send(["text", "feedback>>" + msg]);
+                  }
                 );
+              });
 
-                appbar.addRoot("Themes", themeList);
+              socket.on("message", (msg) => {
+                alert(msg[1]);
+              });
 
-                // Script menu setup
-                const script = await w96.FS.readdir("/user/appdata/Border/scripts");
+              tryConnect();
+            },
+          },
+          {
+            type: "separator",
+          },
+          {
+            type: "normal",
+            label: "See Keyboard Shortcuts",
+            onclick: () => {
+              new this.Tab({ current: true, url: "border://shortcuts" });
+            },
+          },
+          {
+            type: "normal",
+            label: "Open A Changelog Tab",
+            onclick: () => {
+              new this.Tab({ current: true, url: "border://changelog" });
+            },
+          },
+        ]);
 
-                const scriptList = [];
-                script.forEach((path) => {
-                    if (w96.FSUtil.getExtension(path).toLowerCase() !== ".bjs") return;
-                    let name = w96.FSUtil.fname(path);
-                    scriptList.push({
-                        type: "normal",
-                        label: name,
-                        onclick: async () => {
-                            const that = this;
-                            new Function(`
+        const bookmarkList = [];
+        this.#Files.bookmarks.forEach(({ name, url }) => {
+          bookmarkList.push({
+            type: "normal",
+            label: name,
+            onclick: () => {
+              new this.Tab({ current: true, url });
+            },
+          });
+        });
+
+        appbar.addRoot("Bookmarks", bookmarkList);
+
+        // Theme menu setup
+        const themes = await w96.FS.readdir("/user/appdata/Border/themes");
+
+        const themeList = [];
+        themes.forEach((path) => {
+          if (w96.FSUtil.getExtension(path).toLowerCase() !== ".css") return;
+          const name = w96.FSUtil.fname(path);
+          themeList.push({
+            type: "normal",
+            label: name,
+            onclick: async () => {
+              this.#Files.config.theme.currentTheme = name;
+              await w96.FS.writestr(
+                "/user/appdata/Border/config.json",
+                JSON.stringify(this.#Files.config)
+              );
+              alert("Restart to apply the theme.");
+            },
+          });
+        });
+        themeList.push(
+          {
+            type: "separator",
+          },
+          {
+            type: "normal",
+            label: "Go To The Theme Folder",
+            onclick: () => {
+              w96.sys.execCmd("explorer", ["c:/user/appdata/Border/themes"]);
+            },
+          }
+        );
+
+        appbar.addRoot("Themes", themeList);
+
+        // Script menu setup
+        const script = await w96.FS.readdir("/user/appdata/Border/scripts");
+
+        const scriptList = [];
+        script.forEach((path) => {
+          if (w96.FSUtil.getExtension(path).toLowerCase() !== ".bjs") return;
+          let name = w96.FSUtil.fname(path);
+          scriptList.push({
+            type: "normal",
+            label: name,
+            onclick: async () => {
+              const that = this;
+              new Function(`
                                 const Border = this;
                                 ${await w96.FS.readstr(path)}
                             `).call(that);
-                        },
-                    });
-                });
-                scriptList.push(
-                    {
-                        type: "separator",
-                    },
-                    {
-                        type: "normal",
-                        label: "Go To The Script Folder",
-                        onclick: () => {
-                            w96.sys.execCmd("explorer", ["c:/user/appdata/Border/scripts"]);
-                        },
-                    }
-                );
-                appbar.addRoot("Scripts", scriptList);
+            },
+          });
+        });
+        scriptList.push(
+          {
+            type: "separator",
+          },
+          {
+            type: "normal",
+            label: "Go To The Script Folder",
+            onclick: () => {
+              w96.sys.execCmd("explorer", ["c:/user/appdata/Border/scripts"]);
+            },
+          }
+        );
+        appbar.addRoot("Scripts", scriptList);
 
+        if (this.#Files.config.window.customTitlebar) {
+          // delete the default titlebar
+          wnd.wndObject
+            .querySelectorAll("[class|='titlebar']")
+            .forEach((elem) => (elem.style.display = "none"));
+          wnd.wndObject
+            .querySelector(".window-html-content")
+            .classList.remove("nodrag");
 
-                if (this.#Files.config.window.customTitlebar) {
-                    // delete the default titlebar
-                    wnd.wndObject
-                        .querySelectorAll("[class|='titlebar']")
-                        .forEach((elem) => (elem.style.display = "none"));
-                    wnd.wndObject
-                        .querySelector(".window-html-content")
-                        .classList.remove("nodrag");
-
-                    // give the behavior to the new titlebar
-                    this.#browserBody
-                        .querySelector(".border-minimize")
-                        .addEventListener("click", () => wnd.toggleMinimize());
-                    this.#browserBody
-                        .querySelector(".border-maximize")
-                        .addEventListener("click", () => wnd.toggleMaximize());
-                    this.#browserBody
-                        .querySelector(".border-close")
-                        .addEventListener("click", () => this.closeWindow());
-                    this.#browserBody
-                        .querySelector("#border-titlebar")
-                        .addEventListener("dblclick", () => wnd.toggleMaximize());
-                } else {
-                    this.#browserBody.querySelector("#border-ctrl-btn-container").style.display = "none";
-                }
-
-                this.#browserBody.querySelector(".appbar").replaceWith(appbar.getMenuDiv());
-
-                wnd.show();
-
-                // boot
-                document
-                    .querySelector(":root")
-                    .style.setProperty("--border-primary", this.#Files.config.theme.primary);
-                document
-                    .querySelector(":root")
-                    .style.setProperty(
-                        "--border-secondary",
-                        this.#Files.config.theme.secondary
-                    );
-
-                let h = this.#browserBody.querySelectorAll(".border-history-btn");
-
-                h[0].addEventListener("click", () => {
-                    window.history.back();
-                    this.reloadTab();
-                });
-                h[1].addEventListener("click", () => {
-                    window.history.forward();
-                    this.reloadTab();
-                });
-                h[2].addEventListener(
-                    "click",
-                    () =>
-                    (this.#browserBody.querySelector(".border-view.border-current").src =
-                        this.#browserBody.querySelector(".border-view.border-current").src)
-                );
-
-                this.#browserBody
-                    .querySelector("#border-add-button")
-                    .addEventListener("click", () => this.addTab({ current: true }));
-                this.#browserBody
-                    .querySelector("#border-search-button")
-                    .addEventListener("click", () => {
-                        this.#browserBody.querySelector(".border-tab.border-current").dataset.url =
-                            this.#browserBody.querySelector("#border-searchbar").value;
-                        this.reloadTab();
-                    });
-
-                if (argv[1])
-                    this.addTab({
-                        url: this.#handleURI(argv[1])[0],
-                        current: true,
-                    });
-                else this.addTab({ current: true });
-
-                this.#browserBody
-                    .querySelector("#border-searchbar")
-                    .addEventListener("keyup", (event) => {
-                        if (event.key === "Enter") {
-                            this.#browserBody.querySelector(".border-tab.border-current").dataset.url =
-                                this.#browserBody.querySelector("#border-searchbar").value;
-                            this.reloadTab();
-                        }
-                    });
-
-                setInterval(() => {
-                    if (
-                        this.#browserBody
-                            .querySelector("#border-tab-container")
-                            .querySelectorAll(".border-tab").length <= 0
-                    )
-                        this.closeWindow();
-
-                    if (!this.#browserBody.querySelector(".border-tab.border-current")) {
-                        this.setCurrent(this.#tabId[0]);
-                    }
-                }, 10);
-
-                if (this.#Files.config.browser.enableShortcuts) {
-                    for (const keybind in this.keybinds) {
-                        if (Object.hasOwnProperty.call(this.keybinds, keybind)) {
-                            const cKeybind = this.keybinds[keybind];
-
-                            cKeybind.keys.reverse();
-
-                            let status = [];
-
-                            for (const key in cKeybind.keys) {
-                                if (Object.hasOwnProperty.call(cKeybind.keys, key)) {
-                                    const cKey = cKeybind.keys[key];
-
-                                    status.push(false);
-
-                                    window.addEventListener("keydown", (e) => {
-                                        if (e.key.toLowerCase() === cKey.toLowerCase()) {
-                                            status[key] = true;
-                                        } else status[key] = false;
-
-                                        let i = 0;
-                                        for (let stat in status) {
-                                            if (status[stat]) i++;
-
-                                            if (i >= status.length) {
-                                                e.preventDefault();
-                                                cKeybind.exec();
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+          // give the behavior to the new titlebar
+          this.window.body
+            .querySelector(".border-minimize")
+            .addEventListener("click", () => wnd.toggleMinimize());
+          this.window.body
+            .querySelector(".border-maximize")
+            .addEventListener("click", () => wnd.toggleMaximize());
+          this.window.body
+            .querySelector(".border-close")
+            .addEventListener("click", () => this.window.close());
+          this.window.body
+            .querySelector("#border-titlebar")
+            .addEventListener("dblclick", () => wnd.toggleMaximize());
+        } else {
+          this.window.body.querySelector(
+            "#border-ctrl-btn-container"
+          ).style.display = "none";
         }
 
-        const _browser = new Border();
+        this.window.body
+          .querySelector(".appbar")
+          .replaceWith(appbar.getMenuDiv());
+
+        wnd.show();
+
+        // boot
+        document
+          .querySelector(":root")
+          .style.setProperty(
+            "--border-primary",
+            this.#Files.config.theme.primary
+          );
+        document
+          .querySelector(":root")
+          .style.setProperty(
+            "--border-secondary",
+            this.#Files.config.theme.secondary
+          );
+
+        let h = this.window.body.querySelectorAll(".border-history-btn");
+
+        h[0].addEventListener("click", () => {
+          window.history.back();
+          this.Tab.current.reload();
+        });
+        h[1].addEventListener("click", () => {
+          window.history.forward();
+          this.Tab.current.reload();
+        });
+        h[2].addEventListener(
+          "click",
+          () => (this.Tab.current.webview.src = this.Tab.current.webview.src)
+        );
+
+        this.window.body
+          .querySelector("#border-add-button")
+          .addEventListener("click", () => new this.Tab({ current: true }));
+        this.window.body
+          .querySelector("#border-search-button")
+          .addEventListener("click", () => {
+            this.Tab.current.url =
+              this.window.body.querySelector("#border-searchbar").value;
+            this.Tab.current.reload();
+          });
+
+        if (argv[1])
+          new this.Tab({
+            url: this.#handleURI(argv[1])[0],
+            current: true,
+          });
+        else new this.Tab({ current: true });
+
+        this.window.body
+          .querySelector("#border-searchbar")
+          .addEventListener("keyup", (event) => {
+            if (event.key === "Enter") {
+              this.Tab.current.url =
+                this.window.body.querySelector("#border-searchbar").value;
+              this.Tab.current.reload();
+            }
+          });
+
+        this.__tabLoop = setInterval(() => {
+          if (this.Tab.list.length <= 0) {
+            this.window.close();
+          } else {
+            if (!this.window.body.querySelector(".border-tab.border-current")) {
+              this.Tab.list[0].setCurrent();
+            }
+          }
+        }, 10);
+
+        if (this.#Files.config.browser.enableShortcuts) {
+          for (const keybind in this.keybinds) {
+            if (Object.hasOwnProperty.call(this.keybinds, keybind)) {
+              const cKeybind = this.keybinds[keybind];
+
+              cKeybind.keys.reverse();
+
+              let status = [];
+
+              for (const key in cKeybind.keys) {
+                if (Object.hasOwnProperty.call(cKeybind.keys, key)) {
+                  const cKey = cKeybind.keys[key];
+
+                  status.push(false);
+
+                  window.addEventListener("keydown", (e) => {
+                    if (e.key.toLowerCase() === cKey.toLowerCase()) {
+                      status[key] = true;
+                    } else status[key] = false;
+
+                    let i = 0;
+                    for (let stat in status) {
+                      if (status[stat]) i++;
+
+                      if (i >= status.length) {
+                        e.preventDefault();
+                        cKeybind.exec();
+                      }
+                    }
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
     }
+
+    const _browser = new Border();
+  }
 }
 
 w96.shell.mkShortcut(
-    "c:/system/programs/Accessories/Border.link",
-    icon16,
-    "border"
+  "c:/system/programs/Accessories/Border.link",
+  icon16,
+  "border"
 );
 
 return await WApplication.execAsync(new BorderApp(), this.boxedEnv.args);
