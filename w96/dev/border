@@ -31,8 +31,8 @@ class BorderApp extends WApplication {
           const isThemeFolderExisting = await w96.FS.exists(
             "c:/user/appdata/Border/themes"
           );
-          const isScriptFolderExisting = await w96.FS.exists(
-            "c:/user/appdata/Border/scripts"
+          const isBluginFolderExisting = await w96.FS.exists(
+            "c:/user/appdata/Border/blugins"
           );
           const isStyleFileExisting = await w96.FS.exists(
             "c:/user/appdata/Border/themes/default.css"
@@ -64,13 +64,13 @@ class BorderApp extends WApplication {
           if (!isThemeFolderExisting) {
             await w96.FS.mkdir("c:/user/appdata/Border/themes");
           }
-          if (!isScriptFolderExisting) {
-            await w96.FS.mkdir("c:/user/appdata/Border/scripts");
+          if (!isBluginFolderExisting) {
+            await w96.FS.mkdir("c:/user/appdata/Border/blugins");
             await w96.FS.writestr(
-              "c:/user/appdata/Border/scripts/.meta",
+              "c:/user/appdata/Border/blugins/.meta",
               JSON.stringify({
                 description:
-                  "This is the Border's Script folder.\n\nDo NOT drop any file you don't trust here !\n\nOnly \".bjs\" files will be available in Border.",
+                  "This is the Border's Plugin folder.\n\nDo NOT drop any file you don't trust here !\n\nOnly \".bjs\" files will be available in Border.",
               })
             );
           }
@@ -334,6 +334,8 @@ fill: var(--border-secondary);
         sync();
       }
 
+      blugins = new Map();
+
       /**
        * Class for Border tab utilities.
        */
@@ -432,7 +434,6 @@ fill: var(--border-secondary);
             this.#context.Tab.current = this.#context.Tab.list[0];
         }
 
-
         /**
          * Set the tab active.
          */
@@ -488,7 +489,7 @@ fill: var(--border-secondary);
          * @param {string} url The URL to open in the new window.
          */
         create(url) {
-          w96.sys.execCmd("border", [url]);
+          w96.sys.execCmd("border", url ? [url] : []);
         },
 
         /**
@@ -603,9 +604,10 @@ fill: var(--border-secondary);
                 <li>"border://shortcuts" added.</li>
                 <li>"border://themes" added.</li>
                 <li>"border://404" removed.</li>
-                <li>Script system added.</li>
+                <li>Blugin system added.</li>
                 <li>Changed protocol system.</li>
                 <li>Removed the possibility to move tabs (too buggy).</li>
+                <li>Removed the Scripts tab.</li>
             </ul>
         </body>
         </html>
@@ -1300,6 +1302,23 @@ fill: var(--border-secondary);
         this.window.self = wnd;
         this.window.body = this.window.self.getBodyContainer();
 
+        // Handle blugins
+        const blugins = await w96.FS.readdir("/user/appdata/Border/blugins");
+        await blugins.forEach(async (path) => {
+          if (w96.FSUtil.getExtension(path).toLowerCase() !== ".bjs") return;
+          let name = w96.FSUtil.fname(path);
+          const that = this;
+          await new Function(`
+            const Border = this;
+            const Blugin = new class Blugin {
+              name = ${JSON.stringify(name)};
+            };
+            Border.blugins.set(Blugin.name, Blugin);
+            ${await w96.FS.readstr(path)}
+          `).call(that);
+        });
+
+        // Configurate appbar
         const appbar = new w96.ui.MenuBar();
         appbar.menuElement.classList.add("nodrag");
 
@@ -1555,39 +1574,6 @@ fill: var(--border-secondary);
         );
 
         appbar.addRoot("Themes", themeList);
-
-        // Script menu setup
-        const script = await w96.FS.readdir("/user/appdata/Border/scripts");
-
-        const scriptList = [];
-        script.forEach((path) => {
-          if (w96.FSUtil.getExtension(path).toLowerCase() !== ".bjs") return;
-          let name = w96.FSUtil.fname(path);
-          scriptList.push({
-            type: "normal",
-            label: name,
-            onclick: async () => {
-              const that = this;
-              new Function(`
-                                const Border = this;
-                                ${await w96.FS.readstr(path)}
-                            `).call(that);
-            },
-          });
-        });
-        scriptList.push(
-          {
-            type: "separator",
-          },
-          {
-            type: "normal",
-            label: "Go To The Script Folder",
-            onclick: () => {
-              w96.sys.execCmd("explorer", ["c:/user/appdata/Border/scripts"]);
-            },
-          }
-        );
-        appbar.addRoot("Scripts", scriptList);
 
         if (this.#Files.config.window.customTitlebar) {
           // delete the default titlebar
