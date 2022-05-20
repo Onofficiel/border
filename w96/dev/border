@@ -1314,7 +1314,7 @@ fill: var(--border-secondary);
             ${await w96.FS.readstr(path)}
           `).call(that);
 
-          if (this.blugins.size >= index) {
+          if (index >= blugins.length - 1) {
             return this.event.emit(
               "bluginload",
               new this.event.BorderEvent({
