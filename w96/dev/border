@@ -344,7 +344,8 @@ fill: var(--border-secondary);
               await w96.FS.readstr("c:/user/appdata/Border/whitelist.json")
             );
             this.#Files.style = await w96.FS.readstr(
-              `c:/user/appdata/Border/themes/${this.#Files.config.theme.currentTheme
+              `c:/user/appdata/Border/themes/${
+                this.#Files.config.theme.currentTheme
               }`
             );
 
@@ -379,7 +380,9 @@ fill: var(--border-secondary);
 
         removeListener(name, listenerToRemove) {
           if (!this._events[name]) {
-            throw new Error(`Can't remove a listener. Event "${name}" doesn't exits.`);
+            throw new Error(
+              `Can't remove a listener. Event "${name}" doesn't exits.`
+            );
           }
 
           const filterListeners = (listener) => listener !== listenerToRemove;
@@ -388,9 +391,7 @@ fill: var(--border-secondary);
         },
 
         emit(name, data) {
-          if (!this._events[name]) {
-            throw new Error(`Can't emit an event. Event "${name}" doesn't exits.`);
-          }
+          if (!this._events[name]) return;
 
           const fireCallbacks = (callback) => {
             callback(data);
@@ -398,7 +399,7 @@ fill: var(--border-secondary);
 
           this._events[name].forEach(fireCallbacks);
         },
-      }
+      };
 
       blugins = new Map();
 
@@ -481,10 +482,13 @@ fill: var(--border-secondary);
 
           this.#context.Tab.list.push(this);
 
-          this.#context.event.emit("tabcreate", new this.#context.event.BorderEvent({
-            target: this,
-            type: "tabcreate",
-          }));
+          this.#context.event.emit(
+            "tabcreate",
+            new this.#context.event.BorderEvent({
+              target: this,
+              type: "tabcreate",
+            })
+          );
           return this;
         }
 
@@ -503,10 +507,13 @@ fill: var(--border-secondary);
           if (this.#context.Tab.current === this)
             this.#context.Tab.current = this.#context.Tab.list[0];
 
-            this.#context.event.emit("tabclose", new this.#context.event.BorderEvent({
+          this.#context.event.emit(
+            "tabclose",
+            new this.#context.event.BorderEvent({
               target: this,
               type: "tabclose",
-            }));
+            })
+          );
         }
 
         /**
@@ -530,11 +537,14 @@ fill: var(--border-secondary);
             this.#context.window.body.querySelector("#border-searchbar").value =
               this.url;
 
-              this.#context.event.emit("tabcurrent", new this.#context.event.BorderEvent({
+            this.#context.event.emit(
+              "tabcurrent",
+              new this.#context.event.BorderEvent({
                 target: this,
                 type: "tabcurrent",
-              }));
-          } catch { }
+              })
+            );
+          } catch {}
         }
 
         /**
@@ -558,10 +568,13 @@ fill: var(--border-secondary);
 
           searchbar.blur();
 
-          this.#context.event.emit("tabreload", new this.#context.event.BorderEvent({
-            target: this,
-            type: "tabreload",
-          }));
+          this.#context.event.emit(
+            "tabreload",
+            new this.#context.event.BorderEvent({
+              target: this,
+              type: "tabreload",
+            })
+          );
         }
       };
 
@@ -576,10 +589,13 @@ fill: var(--border-secondary);
         create(url) {
           w96.sys.execCmd("border", url ? [url] : []);
 
-          this.instance.event.emit("windowcreation", new this.#context.event.BorderEvent({
-            target: this,
-            type: "windowcreation",
-          }));
+          this.instance.event.emit(
+            "windowcreation",
+            new this.instance.event.BorderEvent({
+              target: this.instance,
+              type: "windowcreation",
+            })
+          );
         },
 
         /**
@@ -589,10 +605,13 @@ fill: var(--border-secondary);
           if (this.instance.#tabLoop) clearInterval(this.instance.#tabLoop);
           this.instance.window.self.close();
 
-          this.instance.event.emit("windowclose", new this.#context.event.BorderEvent({
-            target: this,
-            type: "windowclose",
-          }));
+          this.instance.event.emit(
+            "windowclose",
+            new this.instance.event.BorderEvent({
+              target: this.instance,
+              type: "windowclose",
+            })
+          );
         },
       };
 
@@ -671,11 +690,13 @@ fill: var(--border-secondary);
       handleURI(url) {
         if (
           !window.navigator.onLine &&
-          !RegExp(`^(?:${Array.from(this.protocols.keys()).join("|")}|data):/*`).test(url)
+          !RegExp(
+            `^(?:${Array.from(this.protocols.keys()).join("|")}|data):/*`
+          ).test(url)
         )
           return [
             "data:text/html," +
-            encodeURI(this.protocols.get("border").get("offline")),
+              encodeURI(this.protocols.get("border").get("offline")),
             "Not Connected",
           ];
         if (url.startsWith("//")) return ["https://" + url.substring(2), false];
@@ -805,10 +826,12 @@ fill: var(--border-secondary);
           {
             content: `
             <h1>Theme of Border</h1>
-            <b>Primary : </b><input class="border-setup-primary-input" type="color" value="${this.#Files.config.theme.primary
-              }"></input><br>
-            <b>Secondary : </b><input class="border-setup-secondary-input" type="color" value="${this.#Files.config.theme.secondary
-              }"></input>
+            <b>Primary : </b><input class="border-setup-primary-input" type="color" value="${
+              this.#Files.config.theme.primary
+            }"></input><br>
+            <b>Secondary : </b><input class="border-setup-secondary-input" type="color" value="${
+              this.#Files.config.theme.secondary
+            }"></input>
             `,
             save: [
               {
@@ -824,12 +847,15 @@ fill: var(--border-secondary);
           {
             content: `
             <h1>Size of the window</h1>
-            <b>Height : </b><input class="border-setup-height-input" type="number" value="${this.#Files.config.window.height
-              }"></input>px<br>
-            <b>Width : </b><input class="border-setup-width-input" type="number" value="${this.#Files.config.window.width
-              }"></input>px<br>
-            <b>Use the custom titlebar : </b><input class="border-setup-titlebar-input" type="checkbox" checked="${this.#Files.config.window.customTitlebar
-              }"></input>
+            <b>Height : </b><input class="border-setup-height-input" type="number" value="${
+              this.#Files.config.window.height
+            }"></input>px<br>
+            <b>Width : </b><input class="border-setup-width-input" type="number" value="${
+              this.#Files.config.window.width
+            }"></input>px<br>
+            <b>Use the custom titlebar : </b><input class="border-setup-titlebar-input" type="checkbox" checked="${
+              this.#Files.config.window.customTitlebar
+            }"></input>
             `,
             save: [
               {
@@ -849,10 +875,12 @@ fill: var(--border-secondary);
           {
             content: `
             <h1>Others</h1>
-            <b>Default page : </b><input class="border-setup-default-input" type="url" value="${this.#Files.config.browser.defaultPage
-              }"></input><br>
-            <b>Enable shortcuts ? </b><input class="border-setup-shortcuts-input" type="checkbox" checked="${this.#Files.config.browser.enableShortcuts
-              }"></input><br>
+            <b>Default page : </b><input class="border-setup-default-input" type="url" value="${
+              this.#Files.config.browser.defaultPage
+            }"></input><br>
+            <b>Enable shortcuts ? </b><input class="border-setup-shortcuts-input" type="checkbox" checked="${
+              this.#Files.config.browser.enableShortcuts
+            }"></input><br>
             <b>Create a Border shortcut on your desktop ? </b><input class="border-setup-desktop-input" type="checkbox" checked="true"></input>
             `,
             save: [
@@ -958,8 +986,6 @@ fill: var(--border-secondary);
 
         wnd.show();
       }
-
-
 
       /* <{[MAIN]}> */
       async #main() {
@@ -1089,11 +1115,11 @@ fill: var(--border-secondary);
             
             <ul>
                 ${Object.entries(this.keybinds)
-            .map(
-              ([_key, value]) =>
-                `<li>${value.description}: ${value.keys.join("+")}</li>`
-            )
-            .join("<br>")}
+                  .map(
+                    ([_key, value]) =>
+                      `<li>${value.description}: ${value.keys.join("+")}</li>`
+                  )
+                  .join("<br>")}
             </ul>
         </body>
         </html>
@@ -1172,12 +1198,12 @@ fill: var(--border-secondary);
                         
                         <ul>
                             ${Array.from(
-            this.protocols.get("border"),
-            ([key, value]) =>
-              `<a style="color: rgb(255, 255, 255);" href="data:text/html,${encodeURI(
-                value
-              )}">border://${key}</a>`
-          ).join("<br>")}
+                              this.protocols.get("border"),
+                              ([key, value]) =>
+                                `<a style="color: rgb(255, 255, 255);" href="data:text/html,${encodeURI(
+                                  value
+                                )}">border://${key}</a>`
+                            ).join("<br>")}
                         </ul>
                     </body>
                 </html>
@@ -1269,7 +1295,7 @@ fill: var(--border-secondary);
 
         // Handle blugins
         const blugins = await w96.FS.readdir("/user/appdata/Border/blugins");
-        await blugins.forEach(async (path) => {
+        await blugins.forEach(async (path, index) => {
           if (w96.FSUtil.getExtension(path).toLowerCase() !== ".bjs") return;
           let name = w96.FSUtil.fname(path);
           const that = this;
@@ -1277,21 +1303,26 @@ fill: var(--border-secondary);
             const Border = this;
             const Blugin = new class Blugin {
               name = ${JSON.stringify(
-            name.slice(
-              0,
-              name.length - w96.FSUtil.getExtension(name).length
-            )
-          )};
+                name.slice(
+                  0,
+                  name.length - w96.FSUtil.getExtension(name).length
+                )
+              )};
             };
             Border.blugins.set(Blugin.name, Blugin);
             Border.protocols.addScheme(Blugin.name);
             ${await w96.FS.readstr(path)}
           `).call(that);
-        }).then(() => {
-          this.event.emit("bluginload", new this.#context.event.BorderEvent({
-            target: this,
-            type: "bluginload",
-          }));
+
+          if (this.blugins.size >= index) {
+            return this.event.emit(
+              "bluginload",
+              new this.event.BorderEvent({
+                target: this.blugins,
+                type: "bluginload",
+              })
+            );
+          }
         });
 
         // Configurate appbar
@@ -1373,8 +1404,8 @@ fill: var(--border-secondary);
             onclick: () => {
               w96.shell.mkShortcut(
                 "c:/user/desktop/" +
-                this.handleURI(this.Tab.current.url)[0].split("/")[2] +
-                ".link",
+                  this.handleURI(this.Tab.current.url)[0].split("/")[2] +
+                  ".link",
                 icon32,
                 "border " + this.Tab.current.url
               );
@@ -1450,8 +1481,8 @@ fill: var(--border-secondary);
                   loader.closeDialog();
                   w96.ui.MsgBoxSimple.confirm(
                     "Cannot connect to the feedback server : " +
-                    err +
-                    ".\nRetry ?",
+                      err +
+                      ".\nRetry ?",
                     (ok) => {
                       if (ok) {
                         tryConnect();
