@@ -353,12 +353,21 @@ fill: var(--border-secondary);
         };
         sync();
       }
-      
+
       /**
        * The Border event system API.
        */
       event = {
-        _events = [],
+        _events: [],
+
+        BorderEvent: class {
+          constructor(params) {
+            this.target = null;
+            this.type = null;
+
+            Object.assign(this, params);
+          }
+        },
 
         on(name, listener) {
           if (!this._events[name]) {
@@ -472,6 +481,10 @@ fill: var(--border-secondary);
 
           this.#context.Tab.list.push(this);
 
+          this.#context.event.emit("tabcreate", new this.#context.event.BorderEvent({
+            target: this,
+            type: "tabcreate",
+          }));
           return this;
         }
 
@@ -489,6 +502,11 @@ fill: var(--border-secondary);
 
           if (this.#context.Tab.current === this)
             this.#context.Tab.current = this.#context.Tab.list[0];
+
+            this.#context.event.emit("tabclose", new this.#context.event.BorderEvent({
+              target: this,
+              type: "tabclose",
+            }));
         }
 
         /**
@@ -511,6 +529,11 @@ fill: var(--border-secondary);
 
             this.#context.window.body.querySelector("#border-searchbar").value =
               this.url;
+
+              this.#context.event.emit("tabcurrent", new this.#context.event.BorderEvent({
+                target: this,
+                type: "tabcurrent",
+              }));
           } catch { }
         }
 
@@ -534,6 +557,11 @@ fill: var(--border-secondary);
           this.webview.src = handledUri[0];
 
           searchbar.blur();
+
+          this.#context.event.emit("tabreload", new this.#context.event.BorderEvent({
+            target: this,
+            type: "tabreload",
+          }));
         }
       };
 
@@ -547,6 +575,11 @@ fill: var(--border-secondary);
          */
         create(url) {
           w96.sys.execCmd("border", url ? [url] : []);
+
+          this.instance.event.emit("windowcreation", new this.#context.event.BorderEvent({
+            target: this,
+            type: "windowcreation",
+          }));
         },
 
         /**
@@ -555,6 +588,11 @@ fill: var(--border-secondary);
         close() {
           if (this.instance.#tabLoop) clearInterval(this.instance.#tabLoop);
           this.instance.window.self.close();
+
+          this.instance.event.emit("windowclose", new this.#context.event.BorderEvent({
+            target: this,
+            type: "windowclose",
+          }));
         },
       };
 
@@ -921,7 +959,7 @@ fill: var(--border-secondary);
         wnd.show();
       }
 
-      
+
 
       /* <{[MAIN]}> */
       async #main() {
@@ -997,6 +1035,7 @@ fill: var(--border-secondary);
                 <li>Changed protocol system.</li>
                 <li>Removed the possibility to move tabs (too buggy).</li>
                 <li>Removed the Scripts tab.</li>
+                <li>Event system added.</li>
             </ul>
         </body>
         </html>
@@ -1248,6 +1287,11 @@ fill: var(--border-secondary);
             Border.protocols.addScheme(Blugin.name);
             ${await w96.FS.readstr(path)}
           `).call(that);
+        }).then(() => {
+          this.event.emit("bluginload", new this.#context.event.BorderEvent({
+            target: this,
+            type: "bluginload",
+          }));
         });
 
         // Configurate appbar
@@ -1565,10 +1609,9 @@ fill: var(--border-secondary);
           window.history.forward();
           this.Tab.current.reload();
         });
-        h[2].addEventListener(
-          "click",
-          () => (this.Tab.current.webview.src = this.Tab.current.webview.src)
-        );
+        h[2].addEventListener("click", () => {
+          this.Tab.current.reload();
+        });
 
         this.window.body
           .querySelector("#border-add-button")
