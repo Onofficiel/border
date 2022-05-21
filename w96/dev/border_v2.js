@@ -72,8 +72,12 @@ class BorderApp extends WApplication {
               })
             );
             await w96.FS.writestr(
-              "c:/user/appdata/Border/blugins/.meta",
-              `Border.protocols.get("test").set("blugin", \`
+              "c:/user/appdata/Border/blugins/test.bjs",
+              `// Blugin infos
+Blugin.name = "testBlugin";
+
+// Here's your code !
+Border.protocols.addScheme("test").set("blugin", \`
     <!DOCTYPE html>
     <html>
         <head>
@@ -676,7 +680,7 @@ fill: var(--border-secondary);
           return this._map.has(scheme);
         },
         addScheme(name) {
-          return this._map.set(name, new Map());
+          return this._map.set(name, new Map()).get(name);
         },
       };
 
@@ -1308,7 +1312,6 @@ fill: var(--border-secondary);
               )};
             };
             Border.blugins.set(Blugin.name, Blugin);
-            Border.protocols.addScheme(Blugin.name);
             ${await w96.FS.readstr(path)}
           `).call(that);
 
@@ -1751,7 +1754,7 @@ w96.app.register({
   type: "gui",
   cls: BorderApp,
   meta: {
-    icon: icon32, // You may specify a custom icon URL here.
+    icon: icon32,
     friendlyName: "Border",
   },
 });
