@@ -1088,7 +1088,7 @@ fill: var(--border-secondary);
             Because of the iframe system some website won't work in this browser (like youtube.com).
             </p>
 
-            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v${this.version} | Â© Onofficiel - 2022 - All rights reserved</p>
+            <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%)">Border v${this.version} | © Onofficiel - 2022 - All rights reserved</p>
         </body>
         </html>
         `
