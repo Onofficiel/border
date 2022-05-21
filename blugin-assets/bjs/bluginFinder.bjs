@@ -1,0 +1,13 @@
+Blugin.name = "bluginFinder";
+
+Blugin.search = function (bluginName) {
+    let index = 0;
+    Border.blugins.forEach((blugin) => {
+        index++;
+        if (blugin.name === bluginName) {
+            return blugin;
+        } else if (index >= e.target.size) {
+            return false;
+        }
+    });
+}
