@@ -16,7 +16,7 @@ fetch("./src/data/blugins.json")
           <span class="author">By ${blugin.author} ⋅ For ${blugin.version}</span>
           <span class="description">${blugin.description}</span>
         </div>
-        <a class="download" download="${blugin.name.toLowerCase()}.bjs" href="${
+        <a class="download" download="${blugin.name.toLowerCase().replace(" ", "_")}.bjs" href="${
         blugin.url
       }">Download</a>
       </div>
