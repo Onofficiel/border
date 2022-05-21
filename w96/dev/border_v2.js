@@ -363,6 +363,9 @@ fill: var(--border-secondary);
       event = {
         _events: [],
 
+        /**
+         * The Border Event template.
+         */
         BorderEvent: class {
           constructor(params) {
             this.target = null;
@@ -372,6 +375,11 @@ fill: var(--border-secondary);
           }
         },
 
+        /**
+         * The Border event listener function.
+         * @param {string} name The event name.
+         * @param {Function} listener The callback function.
+         */
         on(name, listener) {
           if (!this._events[name]) {
             this._events[name] = [];
@@ -380,6 +388,11 @@ fill: var(--border-secondary);
           this._events[name].push(listener);
         },
 
+        /**
+         * The Border event remover function.
+         * @param {string} name The event name to remove.
+         * @param {Function} listenerToRemove The Fuction associated to the event to remove.
+         */
         removeListener(name, listenerToRemove) {
           if (!this._events[name]) {
             throw new Error(
@@ -392,6 +405,11 @@ fill: var(--border-secondary);
           this._events[name] = this._events[name].filter(filterListeners);
         },
 
+        /**
+         * The Border event emmiter function.
+         * @param {string} name The event to emit.
+         * @param {any} data The data to send with the event.
+         */
         emit(name, data) {
           if (!this._events[name]) return;
 
