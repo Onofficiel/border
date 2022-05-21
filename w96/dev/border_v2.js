@@ -1746,7 +1746,7 @@ w96.shell.mkShortcut(
   "border"
 );
 
-register({
+w96.app.register({
   command: "border",
   type: "gui",
   cls: BorderApp,
