@@ -633,10 +633,10 @@ fill: var(--border-secondary);
           w96.sys.execCmd("border", url ? [url] : []);
 
           this.instance.event.emit(
-            "windowcreation",
+            "windowcreate",
             new this.instance.event.BorderEvent({
               target: this.instance,
-              type: "windowcreation",
+              type: "windowcreate",
             })
           );
         },
