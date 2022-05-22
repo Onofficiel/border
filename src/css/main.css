@@ -61,6 +61,7 @@ a {
 }
 
 .hero-image {
+  max-height: 450px;
   margin-right: 50px;
   width: 50%;
   -webkit-transform: matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
