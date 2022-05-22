@@ -138,7 +138,6 @@ body>h2 {
 
 .tile>.container>.download:hover {
   padding: 5px;
-  color: var(--text1);
   background-color: #fff0;
   border: solid 5px var(--text1);
 }
