@@ -18,7 +18,7 @@ body {
   color: var(--text1);
   font-family: "Lexend", Arial, Helvetica, sans-serif;
 
-  padding: 50px;
+  padding: 50px 50px 100px 50px;
 }
 
 body>h1 {
