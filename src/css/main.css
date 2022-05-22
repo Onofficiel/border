@@ -90,6 +90,7 @@ a {
 .navbar>ul {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .navbar>ul>li {
