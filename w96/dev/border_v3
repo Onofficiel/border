@@ -1360,7 +1360,7 @@ fill: var(--border-secondary);
             return this.event.emit(
               "bluginload",
               new this.event.BorderEvent({
-                target: this.blugins,
+                target: this.blugin.list,
                 type: "bluginload",
               })
             );
