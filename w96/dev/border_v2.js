@@ -8,6 +8,8 @@ class BorderApp extends WApplication {
     super();
   }
 
+  taskName = "Border"; // Task recognition in TaskManager.
+
   async main(argv) {
     super.main(argv);
 
@@ -421,7 +423,26 @@ fill: var(--border-secondary);
         },
       };
 
-      blugins = new Map();
+      blugin = {
+        list: new Set(),
+
+        /**
+         * The Border function to find a blugin by its name.
+         * @param {string} name The Blugin name to find.
+         * @returns {Blugin | null} The Blugin or null.
+         */
+        find(name) {
+          let index = 0;
+          let result = null;
+          this.list.forEach((blugin) => {
+            index++;
+          
+            if (blugin.name === name)
+              return result = blugin;
+          });
+          return result;
+        },
+      };
 
       /**
        * Class for Border tab utilities.
@@ -1329,7 +1350,7 @@ fill: var(--border-secondary);
                 )
               )};
             };
-            Border.blugins.set(Blugin.name, Blugin);
+            Border.blugin.list.add(Blugin);
             ${await w96.FS.readstr(path)}
           `).call(that);
 
