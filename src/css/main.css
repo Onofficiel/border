@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   padding: 0;
   margin: 0;
   -webkit-box-sizing: border-box;
@@ -103,4 +105,10 @@ a {
 
 .navbar>ul>li>a:hover {
   color: var(--text1);
+}
+
+@media (max-width: 375px) {
+  .hero-image {
+    display: none;
+  }
 }
