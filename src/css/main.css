@@ -61,7 +61,7 @@ a {
 }
 
 .hero-image {
-  height: 400px;
+  width: 50%;
   -webkit-transform: translateX(-50px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
   -ms-transform: translateX(-50px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
   transform: translateX(-50px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
@@ -107,7 +107,7 @@ a {
   color: var(--text1);
 }
 
-@media (max-width: 375px) {
+@media (max-width: 600px) {
   .hero-image {
     display: none;
   }
