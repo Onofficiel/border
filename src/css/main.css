@@ -61,10 +61,11 @@ a {
 }
 
 .hero-image {
+  margin-right: 50px;
   width: 50%;
-  -webkit-transform: translateX(-50px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  -ms-transform: translateX(-50px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-  transform: translateX(-50px) matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  -webkit-transform: matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  -ms-transform: matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  transform: matrix3d(1, 0, 0, -0.0003, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 }
 
 .navbar {
