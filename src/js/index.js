@@ -1,4 +1,4 @@
-let darkTheme = false;
+let darkTheme = !window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 function switchTheme() {
   const root = document.querySelector(":root");
