@@ -1,4 +1,8 @@
-let darkTheme = !window.matchMedia("(prefers-color-scheme: dark)").matches;
+const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+
+let darkTheme = !darkThemeMq.matches;
+
+if (darkTheme) switchTheme();
 
 function switchTheme() {
   const root = document.querySelector(":root");
@@ -18,4 +22,6 @@ function switchTheme() {
   darkTheme = !darkTheme;
 }
 
-document.querySelector("nav>.links>.switch-theme").addEventListener("click", switchTheme);
+document
+  .querySelector("nav>.links>.switch-theme")
+  .addEventListener("click", switchTheme);
