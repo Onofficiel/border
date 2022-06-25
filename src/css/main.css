@@ -1,260 +1,256 @@
 @font-face {
-    src: url("../font/Lexend-VariableFont_wght.ttf");
-    font-family: "Lexend";
-  }
-  
+  src: url("../font/Lexend-VariableFont_wght.ttf");
+  font-family: "Lexend";
+}
+
+:root {
+  scroll-behavior: smooth;
+
+  --light: #ffe5fb;
+  --dark: #66239a;
+
+  --primary: var(--dark);
+  --secondary: var(--light);
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    scroll-behavior: smooth;
-  
-    --dark: #ffe5fb;
-    --light: #66239a;
-  
-    --primary: var(--dark);
-    --secondary: var(--light);
+    --primary: var(--light);
+    --secondary: var(--dark);
   }
-  
-  body {
-    margin: 0;
-    box-sizing: border-box;
-  
-    min-height: 100vh;
-    background-color: var(--secondary);
-    color: var(--primary);
-  
-    display: flex;
-    align-items: center;
-    justify-content: stretch;
-    flex-direction: column;
-  
-    font-family: "Lexend";
-  
-    transition: all 0.2s ease;
-  }
-  
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+
+  min-height: 100vh;
+  background-color: var(--secondary);
+  color: var(--primary);
+
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  flex-direction: column;
+
+  font-family: "Lexend";
+
+  transition: all 0.2s ease;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  width: calc(100vw - 100px * 2);
+}
+
+/* Navbar */
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+
+nav>.links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+nav>.logo {
+  height: 35px;
+}
+
+nav>.logo *,
+nav>.links>svg * {
+  fill: var(--primary);
+}
+
+nav>.links>* {
+  color: var(--primary);
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+/* Tiles */
+
+.tile {
+  padding: 40px;
+  margin-bottom: 40px;
+
+  border-radius: 20px;
+  background-color: var(--primary);
+  color: var(--secondary);
+  flex-wrap: wrap;
+}
+
+.tile+.tile {
+  margin-left: 40px;
+}
+
+#main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  background-color: var(--dark);
+
+  overflow: hidden;
+  min-height: max-content;
+  height: calc(100vh - 300px);
+  border: 5px solid var(--primary);
+  color: var(--light)
+}
+
+#main> :not(iframe) {
+  z-index: 1;
+}
+
+#main>iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  filter: opacity(0.5) blur(15px);
+  transition: all .5s ease;
+}
+
+#main>iframe:hover {
+  filter: opacity(1) blur(0);
+  z-index: 1;
+}
+
+#main>img {
+  height: 50px;
+  margin-right: 30px;
+}
+
+#main>div>.title {
+  font-size: 2.5rem;
+  font-variation-settings: "wght" 500;
+}
+
+#main>div>.subtitle {
+  font-size: 1.5rem;
+}
+
+#about {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#about>.tile.img {
+  flex: 1;
+  background: url("../img/tumbnail.png") top center no-repeat, center, #4e2493;
+  background-size: cover;
+  min-height: 200px;
+
+  border: 5px solid var(--primary);
+}
+
+#about>.tile.text {
+  display: flex;
+  align-items: center;
+  flex: 2;
+}
+
+#about>.tile.text>h1 {
+  margin-top: 0;
+}
+
+#projects>.project-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+#projects>.project-container .tile {
+  max-width: max-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: var(--secondary);
+
+  flex: 1;
+  margin: 20px;
+}
+
+#footer {
+  background-color: var(--primary);
+  color: var(--secondary);
+
+  padding: 20px;
+
+  min-height: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#footer>div {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#footer>div>button {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+.stand-out,
+nav>.links>*,
+nav>.logo,
+button {
+  transition: all 0.2s cubic-bezier(0.18, 0.89, 0.37, 1.59);
+}
+
+.stand-out:hover,
+nav>.links>*:hover,
+nav>.logo:hover,
+button:hover {
+  transform: rotate(4deg) scale(1.1);
+}
+
+button {
+  padding: 10px;
+  border: none;
+
+  font-family: "Lexend";
+  background-color: var(--primary);
+  color: var(--secondary);
+  border-radius: 10px;
+
+  transition: all 0.2s ease;
+}
+
+a {
+  color: inherit;
+}
+
+@media screen and (max-width: 845px) {
   .container {
-    display: flex;
-    flex-direction: column;
-  
-    width: calc(100vw - 100px * 2);
+    width: calc(100vw - 40px * 2);
   }
-  
-  /* Navbar */
-  
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 40px 0;
-  }
-  
-  nav>.links {
-    display: flex;
-    align-items: center;
-    list-style: none;
-  }
-  
-  nav>.logo {
-    height: 35px;
-  }
-  
-  nav>.logo *,
-  nav>.links>svg * {
-    fill: var(--primary);
-  }
-  
-  nav>.links>* {
-    color: var(--primary);
-    text-decoration: none;
-    display: inline-block;
-    margin-left: 20px;
-  }
-  
-  /* Tiles */
-  
-  .tile {
-    padding: 40px;
-    margin-bottom: 40px;
-  
-    border-radius: 20px;
-    background-color: var(--primary);
-    color: var(--secondary);
-    flex-wrap: wrap;
-  }
-  
+
   .tile+.tile {
-    margin-left: 40px;
+    margin: 0 0 40px 0;
   }
-  
-  #main {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    background-color: var(--light);
-  
-    overflow: hidden;
-    min-height: max-content;
-    height: calc(100vh - 300px);
-    border: 5px solid var(--primary);
-    color: var(--dark)
-  }
-  
-  #main> :not(iframe) {
-    z-index: 1;
-  }
-  
-  #main>iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    filter: opacity(0.5) blur(5px);
-    transition: all .2s ease;
-  }
-  
-  #main>iframe:hover {
-    filter: opacity(1) blur(0);
-    z-index: 1;
-  }
-  
-  #main>img {
-    height: 50px;
-    margin-right: 30px;
-  }
-  
-  #main>div>.title {
-    font-size: 2.5rem;
-    font-variation-settings: "wght" 500;
-  }
-  
-  #main>div>.subtitle {
-    font-size: 1.5rem;
-  }
-  
-  #about {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
+
   #about>.tile.img {
-    flex: 1;
-    background: url("../img/tumbnail.png") top center no-repeat, center, #4e2493;
-    background-size: cover;
-    min-height: 200px;
-  
-    border: 5px solid var(--primary);
+    display: none;
   }
-  
-  #about>.tile.text {
-    display: flex;
-    align-items: center;
-    flex: 2;
-  }
-  
-  #about>.tile.text>h1 {
-    margin-top: 0;
-  }
-  
-  #projects>.project-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  
-  #projects>.project-container .tile {
-    max-width: max-content;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--primary);
-    color: var(--secondary);
-  
-    flex: 1;
-    margin: 20px;
-  }
-  
-  #footer {
-    background-color: var(--primary);
-    color: var(--secondary);
-  
-    padding: 20px;
-  
-    min-height: 200px;
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  #footer>div {
-    width: 100%;
-  
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-  
-  #footer>div>button {
-    background-color: var(--secondary);
-    color: var(--primary);
-  }
-  
-  .stand-out,
-  nav>.links>*,
-  nav>.logo,
-  button {
-    transition: all 0.2s cubic-bezier(0.18, 0.89, 0.37, 1.59);
-  }
-  
-  .stand-out:hover,
-  nav>.links>*:hover,
-  nav>.logo:hover,
-  button:hover {
-    transform: rotate(4deg) scale(1.1);
-  }
-  
-  button {
-    padding: 10px;
-    border: none;
-  
-    font-family: "Lexend";
-    background-color: var(--primary);
-    color: var(--secondary);
-    border-radius: 10px;
-  
-    transition: all 0.2s ease;
-  }
-  
-  a {
-    color: inherit;
-  }
-  
-  @media screen and (max-width: 845px) {
-    .container {
-      width: calc(100vw - 40px * 2);
-    }
-  
-    .tile+.tile {
-      margin: 0 0 40px 0;
-    }
-  
-    #about>.tile.img {
-      display: none;
-    }
-  }
-  
-  @media screen and (max-width: 445px) {
-    #footer button {
-      display: none;
-    }
-  
-    #projects>.project-container {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
+}

@@ -1,25 +1,12 @@
-const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-
-let darkTheme = darkThemeMq.matches;
-
-if (!darkTheme) switchTheme();
-
 function switchTheme() {
   const root = document.querySelector(":root");
   const rootStyle = getComputedStyle(root);
 
-  const dark = rootStyle.getPropertyValue("--dark").trim();
-  const light = rootStyle.getPropertyValue("--light").trim();
+  const primary = rootStyle.getPropertyValue("--primary").trim();
+  const secondary = rootStyle.getPropertyValue("--secondary").trim();
 
-  if (darkTheme) {
-    root.style.setProperty("--primary", dark);
-    root.style.setProperty("--secondary", light);
-  } else {
-    root.style.setProperty("--primary", light);
-    root.style.setProperty("--secondary", dark);
-  }
-
-  darkTheme = !darkTheme;
+  root.style.setProperty("--primary", secondary);
+  root.style.setProperty("--secondary", primary);
 }
 
 document
