@@ -10,8 +10,6 @@ class BorderApp extends WApplication {
     super();
   }
 
-  taskName = "Border"; // Task recognition in TaskManager.
-
   async main(argv) {
     super.main(argv);
 
@@ -425,26 +423,7 @@ fill: var(--border-secondary);
         },
       };
 
-      blugin = {
-        list: new Set(),
-
-        /**
-         * The Border function to find a blugin by its name.
-         * @param {string} name The Blugin name to find.
-         * @returns {Blugin | null} The Blugin or null.
-         */
-        find(name) {
-          let index = 0;
-          let result = null;
-          this.list.forEach((blugin) => {
-            index++;
-          
-            if (blugin.name === name)
-              return result = blugin;
-          });
-          return result;
-        },
-      };
+      blugins = new Map();
 
       /**
        * Class for Border tab utilities.
@@ -633,10 +612,10 @@ fill: var(--border-secondary);
           w96.sys.execCmd("border", url ? [url] : []);
 
           this.instance.event.emit(
-            "windowcreate",
+            "windowcreation",
             new this.instance.event.BorderEvent({
               target: this.instance,
-              type: "windowcreate",
+              type: "windowcreation",
             })
           );
         },
@@ -1352,7 +1331,7 @@ fill: var(--border-secondary);
                 )
               )};
             };
-            Border.blugin.list.add(Blugin);
+            Border.blugins.set(Blugin.name, Blugin);
             ${await w96.FS.readstr(path)}
           `).call(that);
 
@@ -1360,7 +1339,7 @@ fill: var(--border-secondary);
             return this.event.emit(
               "bluginload",
               new this.event.BorderEvent({
-                target: this.blugin.list,
+                target: this.blugins,
                 type: "bluginload",
               })
             );
