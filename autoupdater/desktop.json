@@ -1,0 +1,17 @@
+{
+    "stable": {
+        "version": "1.10.0",
+        "core": "1.10",
+        "build": 0
+    },
+    "canary": {
+        "version": "1.10.0",
+        "core": "1.10",
+        "build": 0
+    },
+    "beta": {
+        "version": "1.10.0",
+        "core": "1.10",
+        "build": 0
+    }
+}
