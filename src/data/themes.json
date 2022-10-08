@@ -14,5 +14,13 @@
     "version": 1.8,
     "image": "./theme-assets/img/chrobe.png",
     "url": "./theme-assets/css/chrobe.css"
+  },
+  {
+    "name": "Old Chrome",
+    "author": "Plopilpy (github.com/plopilpy)",
+    "description": " A theme for Windows 96's Border browser that aims to recreate the look of Google Chrome version 1.0.154.",
+    "version": 1.0,
+    "image": "https://plopilpy.github.io/borderChrome/website/thumb.png",
+    "url": "https://github.com/plopilpy/borderChrome/releases/download/1.0.0/chromePatcher.bjs"
   }
 ]
