@@ -26,9 +26,9 @@
   {
    "name": "fireScript",
    "author": "tiwice (github.com/tiwice)",
-   "description": "A theme that tries to recreate the look of Firefox 4.",
-   "version": 1.10,
+   "description": "A theme that tries to make border look like Firefox 4.0.",
+   "version": 1.1,
    "image": "https://raw.githubusercontent.com/Cats-Exist/fireScript/git/preview.png",
-   "url": "https://github.com/Cats-Exist/fireScript/releases/download/latest"
+   "url": "https://raw.githubusercontent.com/Cats-Exist/fireScript/git/fScript.css"
   }
 ]
