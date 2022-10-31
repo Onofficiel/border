@@ -24,11 +24,11 @@
     "url": "https://github.com/plopilpy/borderChrome/releases/download/1.0.0/chromePatcher.bjs"
   },
   {
-   "name": "FireScript",
+   "name": "fireScript",
    "author": "tiwice (github.com/tiwice)",
-   "description": "A theme that tries to recreate the look of Firefox 4.",
-   "version": 1.0,
-   "image": "https://raw.githubusercontent.com/tiwice/FireScript/git/preview.png",
-   "url": "https://raw.githubusercontent.com/tiwice/FireScript/git/fScript.css"
+   "description": "A theme that tries to make border look like Firefox 4.0.",
+   "version": 1.1,
+   "image": "https://raw.githubusercontent.com/Cats-Exist/fireScript/git/preview.png",
+   "url": "https://raw.githubusercontent.com/Cats-Exist/fireScript/git/fScript.css"
   }
 ]
