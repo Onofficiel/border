@@ -58,7 +58,7 @@ body>h2 {
 
 .tile {
   min-height: 450px;
-  min-width: 250px;
+  min-width: 450px;
   /* max-height: 350px; */
   max-width: 500px;
 
