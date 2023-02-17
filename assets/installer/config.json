@@ -1,0 +1,16 @@
+{
+  "theme": {
+      "currentTheme": "default.css",
+      "primary": "#4e2493",
+      "secondary": "#ffe5fb"
+  },
+  "window": {
+      "customTitlebar": true,
+      "height": 550,
+      "width": 650
+  },
+  "browser": {
+      "defaultPage": "border://newtab",
+      "enableShortcuts": true
+  }
+}

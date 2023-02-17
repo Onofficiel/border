@@ -1,0 +1,35 @@
+[
+    {
+        "path": "C:/user/appdata/Border",
+        "fs_type": 1
+    },
+    {
+        "path": "C:/user/appdata/Border/blugins",
+        "fs_type": 1
+    },
+    {
+        "path": "C:/user/appdata/Border/themes",
+        "fs_type": 1
+    },
+
+    {
+        "path": "C:/user/appdata/Border/config.json",
+        "fs_type": 0,
+        "link": "./assets/installer/config.json"
+    },
+    {
+        "path": "C:/user/appdata/Border/bookmarks.json",
+        "fs_type": 0,
+        "link": "./assets/installer/empty_array.json"
+    },
+    {
+        "path": "C:/user/appdata/Border/whitelist.json",
+        "fs_type": 0,
+        "link": "./assets/installer/empty_array.json"
+    },
+    {
+        "path": "C:/user/appdata/Border/blugins/.meta",
+        "fs_type": 0,
+        "link": "./assets/installer/meta.json"
+    }
+]

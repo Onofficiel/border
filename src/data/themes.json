@@ -4,16 +4,16 @@
     "author": "The Border Team",
     "description": "This theme is the default one without the rounded corners.",
     "version": 1.8,
-    "image": "./theme-assets/img/sharpic.png",
-    "url": "./theme-assets/css/sharpic.css"
+    "image": "./assets/themes/img/sharpic.png",
+    "url": "./assets/themes/css/sharpic.css"
   },
   {
     "name": "Chrobe",
     "author": "The Border Team",
     "description": "A retro chrome theme.",
     "version": 1.8,
-    "image": "./theme-assets/img/chrobe.png",
-    "url": "./theme-assets/css/chrobe.css"
+    "image": "./assets/themes/img/chrobe.png",
+    "url": "./assets/themes/css/chrobe.css"
   },
   {
     "name": "Old Chrome",

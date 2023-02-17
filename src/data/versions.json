@@ -1,0 +1,18 @@
+[
+  {
+    "ver": "1.10",
+    "tags": [],
+    "path": {
+      "rel2": "./w96/stable/1.10/border_v2.js",
+      "rel3": "./w96/stable/1.10/border_v3"
+    }
+  },
+  {
+    "ver": "1.11",
+    "tags": ["dev"],
+    "path": {
+      "rel2": "./w96/dev/border_v2.js",
+      "rel3": "./w96/dev/border_v3"
+    }
+  }
+]

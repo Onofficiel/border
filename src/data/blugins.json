@@ -4,6 +4,6 @@
     "author": "The Border Team",
     "description": "This blugin let you find a specific blugin by it's name.",
     "version": 1.10,
-    "url": "./blugin-assets/bjs/bluginFinder.bjs"
+    "url": "./assets/blugins/bjs/bluginFinder.bjs"
   }
 ]

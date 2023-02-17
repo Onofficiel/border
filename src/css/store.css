@@ -43,7 +43,7 @@ body>h2 {
   padding: 15px 20px;
   width: calc(100% - (50px * 2));
   border-radius: 30px;
-  border: none;
+  border: 5px solid var(--bg);
 }
 
 #search::placeholder {

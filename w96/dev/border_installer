@@ -1,0 +1,178 @@
+//!wrt $BSPEC:{"icn":"exec","cpr":"Onofficiel","ssy":"gui","dsc":"The Border Installation Program","frn":"BorderInstall","ver":1.0}
+
+const { MsgBoxSimple, Theme } = w96.ui;
+const { RadioBox } = w96.ui.components;
+const { WizardBaseApplication } = w96.app.templates;
+
+class BorderInstaller extends WizardBaseApplication {
+  constructor() {
+    super();
+  }
+  async main(argv) {
+    await super.main(argv);
+
+    const introPage = this.findPage("intro");
+    introPage.titleText = "Welcome to the Border Installer Program";
+    introPage.graphic =
+      "data:image/png;base64,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";
+    introPage.body = `
+      This wizard will help you to properly install Border.
+      <br>
+      <br>
+      You will be able to install Border from several version and configure some settings.
+      <br>
+      <br>
+      <span class="bold-noaa">
+        Be aware that some Border files will eventually be replaced if you installed it before.
+      </span>
+    `;
+
+    introPage.buttons[1].onclick = () => {
+      this.openPage("version-select", []);
+    };
+
+    let selectedVer = null;
+
+    this.pages.push({
+      id: "version-select",
+      type: "page",
+      body: `
+        Select a version:
+        <div class="w96-radiobox"></div>
+      `,
+      graphic: "/system/resource/app/resetwiz/graphic-top.png",
+      titleText: "Which verison would you like to install?",
+      description: "Be aware that dev versions are instable!",
+      buttons: [
+        {
+          class: "back",
+          onclick: () => this.openPage("intro", []),
+          enabled: true,
+          text: "Back",
+        },
+        {
+          class: "next",
+          onclick: () => this.openPage("confirm", []),
+          enabled: true,
+          text: "Next",
+        },
+        {
+          class: "cancel",
+          onclick: () => this.quit(),
+          enabled: true,
+          text: "Cancel",
+        },
+      ],
+      onopen: async (el) => {
+        let verArr = [];
+
+        const versions = await (
+          await fetch("http://localhost:8000/src/data/versions.json")
+        )
+          .json()
+          .catch(() =>
+            alert("Error while fetching versions!", {
+              icon: "error",
+              title: "Border Installer",
+            })
+          );
+
+        selectedVer = versions[0];
+
+        await versions.forEach((verSpec, index) => {
+          verArr.push({
+            label:
+              verSpec.ver +
+              (verSpec.tags && verSpec.tags.length > 0
+                ? ` (${verSpec.tags.join(", ")})`
+                : ""),
+            onselect: () => {
+              selectedVer = verSpec;
+            },
+            selected: index == 0,
+          });
+        });
+
+        const radioBox = new RadioBox(verArr);
+
+        await el
+          .querySelector(".w96-radiobox")
+          .replaceWith(radioBox.getElement());
+      },
+    });
+
+    this.pages.push({
+      id: "confirm",
+      type: "page",
+      body: `
+        <div>
+          <span
+            data-border-dev-msg
+            style="
+              color: orange;
+            "
+          >
+            <b> You are about to install a dev version of Border! </b>
+            <br>
+            <br>
+          </span>
+
+          To begin the installation of Border <span data-ver-spec="ver"></span>,
+          you may press Install.
+          <br>
+          <br>
+          <b>
+            This process will eventually replace existing Border files if you already
+            had installed Border in the past. This include the configuration, the bookmarks,
+            the blugins and the themes. So make sure you saved the files you don't want to
+            be replaced.
+          </b>
+        </div>
+      `,
+      graphic: "/system/resource/app/resetwiz/graphic-top.png",
+      titleText: "Start the installation",
+      description: "Read the information below carefully.",
+      buttons: [
+        {
+          class: "back",
+          onclick: () => this.openPage("version-select", []),
+          enabled: true,
+          text: "Back",
+        },
+        {
+          class: "next",
+          onclick: async () => {
+            alert("duh");
+          },
+          enabled: true,
+          text: "Install",
+        },
+        {
+          class: "cancel",
+          onclick: () => this.quit(),
+          enabled: true,
+          text: "Cancel",
+        },
+      ],
+      onopen: (el) => {
+        if (!selectedVer.tags.includes("dev"))
+          el.querySelector("span[data-border-dev-msg]").style.display = "none";
+
+        el.querySelectorAll("span").forEach((e) => {
+          if (e.dataset.verSpec) e.innerText = selectedVer[e.dataset.verSpec];
+        });
+      },
+    });
+
+    this.openPage("intro", []);
+    this.mainwnd.setTitle("Border Installer");
+    this.mainwnd.setWindowIcon(await Theme.getIconUrl("exec", "16x16"));
+    this.mainwnd.center();
+  }
+}
+
+return await WApplication.execAsync(
+  new BorderInstaller(),
+  this.boxedEnv.args,
+  this
+);
